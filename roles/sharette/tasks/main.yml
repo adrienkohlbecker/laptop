@@ -1,0 +1,31 @@
+---
+
+- name: Ensure sharette directory is present
+  file:
+    path: ~/Desktop/sharette
+    state: directory
+  tags:
+    - sharette
+
+- name: Ensure secure_files directory is present
+  file:
+    path: ~/Desktop/sharette
+    state: directory
+  tags:
+    - sharette
+
+- name: Ensure sublime project is present
+  copy:
+    src: sharette.sublime-project
+    dest: ~/Desktop/sharette/sharette.sublime-project
+  tags:
+    - sharette
+
+- name: Link sharette to GOPATH
+  file:
+    src: ~/Desktop/sharette
+    path: "{{ gopath }}/src/github.com/sharette"
+    state: link
+  tags:
+    - sharette
+

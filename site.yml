@@ -9,6 +9,7 @@
     - apps
     - vagrant
     - settings
+    - sharette
 
   tasks:
 
