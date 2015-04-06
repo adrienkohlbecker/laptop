@@ -17,6 +17,7 @@
 - name: python | Install boto
   pip:
     name: boto
+  sudo: true
   tags:
     - packages
     - python
