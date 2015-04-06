@@ -3,7 +3,7 @@
 LAPTOP_PATH = ENV.fetch("LAPTOP_PATH", "/opt/laptop")
 LAPTOP_REPO = ENV.fetch("LAPTOP_REPO", "https://github.com/sharette/laptop.git")
 LAPTOP_REPO_BRANCH = ENV.fetch("LAPTOP_REPO_BRANCH", "master")
-DOTFILES_PATH = ENV.fetch("LAPTOP_PATH", "~/.dotfiles")
+DOTFILES_PATH = ENV.fetch("LAPTOP_PATH", "#{Dir.home}/.dotfiles")
 DOTFILES_REPO = ENV.fetch("LAPTOP_REPO", "https://github.com/sharette/dotfiles.git")
 DOTFILES_REPO_BRANCH = ENV.fetch("LAPTOP_REPO_BRANCH", "master")
 
