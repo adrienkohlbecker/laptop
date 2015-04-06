@@ -3,6 +3,9 @@
 LAPTOP_PATH = ENV.fetch("LAPTOP_PATH", "/opt/laptop")
 LAPTOP_REPO = ENV.fetch("LAPTOP_REPO", "https://github.com/sharette/laptop.git")
 LAPTOP_REPO_BRANCH = ENV.fetch("LAPTOP_REPO_BRANCH", "master")
+DOTFILES_PATH = ENV.fetch("LAPTOP_PATH", "~/.dotfiles")
+DOTFILES_REPO = ENV.fetch("LAPTOP_REPO", "https://github.com/sharette/dotfiles.git")
+DOTFILES_REPO_BRANCH = ENV.fetch("LAPTOP_REPO_BRANCH", "master")
 
 module Tty extend self
   def blue; bold 34; end
@@ -121,6 +124,19 @@ else
   Dir.chdir LAPTOP_PATH
 end
 
+if File.directory?(DOTFILES_PATH) && File.directory?("#{DOTFILES_PATH}/.git")
+  ohai "Updating existing dotfiles installation..."
+  Dir.chdir DOTFILES_PATH
+  normaldo "git pull"
+  normaldo "git checkout #{DOTFILES_REPO_BRANCH}"
+else
+  ohai "Setting up the dotfiles installation..."
+  sudo "mkdir -p #{DOTFILES_PATH}"
+  sudo "chown -R #{ENV["USER"]} #{DOTFILES_PATH}"
+  normaldo "git clone -q #{DOTFILES_REPO} #{DOTFILES_PATH} -b #{DOTFILES_REPO_BRANCH}"
+  Dir.chdir DOTFILES_PATH
+end
+
 Dir.chdir(LAPTOP_PATH)
 
 if has_command "pip"
@@ -154,7 +170,7 @@ else
       end
     end
 
-    normaldo "git config -f #{Dir.home}/.gitconfig.local --add user.name #{git_user_name}"
+    normaldo "git config -f #{Dir.home}/.gitconfig.local --add user.name '#{git_user_name}'"
 
   end
 
@@ -167,7 +183,7 @@ else
       end
     end
 
-    normaldo "git config -f #{Dir.home}/.gitconfig.local --add user.email #{git_user_email}"
+    normaldo "git config -f #{Dir.home}/.gitconfig.local --add user.email '#{git_user_email}'"
 
   end
 end
