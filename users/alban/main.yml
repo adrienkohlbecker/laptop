@@ -29,7 +29,7 @@
     - alban
 
 - name: alban | Install rowanj-gitx
-  homebrew:
+  homebrew_cask:
     name: rowanj-gitx
   tags:
     - users
