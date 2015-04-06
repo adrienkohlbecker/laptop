@@ -38,7 +38,7 @@
     - go
 
 - name: go | Install gin
-  shell: go get github.com/codegangsta/gin
+  shell: "GOPATH={{ gopath }} go get github.com/codegangsta/gin"
   args:
     creates: "{{ gopath }}/src/github.com/codegangsta/gin"
   tags:
@@ -46,7 +46,7 @@
     - go
 
 - name: go | Install godep
-  shell: go get github.com/tools/godep
+  shell: "GOPATH={{ gopath }} go get github.com/tools/godep"
   args:
     creates: "{{ gopath }}/src/github.com/tools/godep"
   tags:
