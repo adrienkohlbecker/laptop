@@ -16,15 +16,8 @@
   tags:
     - base
 
-- name: Fetch Oh-My-Zsh installer
-  get_url:
-    url: http://install.ohmyz.sh
-    dest: /tmp/oh-my-zsh-install.sh
-  tags:
-    - base
-
 - name: Install Oh-My-Zsh
-  shell: /tmp/oh-my-zsh-install.sh
+  shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
   args:
     creates: "~/.oh-my-zsh"
   tags:
