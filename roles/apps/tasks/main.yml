@@ -1,5 +1,11 @@
 ---
 
+- name: Tap caskroom/versions
+  homebrew_tap:
+    tap: caskroom/versions
+  tags:
+    - apps
+
 - name: Install java7
   homebrew_cask:
     name: java7
