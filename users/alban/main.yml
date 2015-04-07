@@ -35,6 +35,27 @@
     - users
     - alban
 
+- name: alban | Install Dropbox
+  homebrew_cask:
+    name: dropbox
+  tags:
+    - users
+    - alban
+
+- name: alban | Install 1Password
+  homebrew_cask:
+    name: 1password
+  tags:
+    - users
+    - alban
+
+- name: alban | Install Hyperdock
+  homebrew_cask:
+    name: hyperdock
+  tags:
+    - users
+    - alban
+
 - name: alban | Enable lion-style scrolling
   shell: defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
   changed_when: false
@@ -59,6 +80,24 @@
 - name: alban | Disable tap to click for this user and for the login screen (3)
   shell: defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 0
   changed_when: false
+  tags:
+    - users
+    - alban
+
+- name: alban | Setup EDITOR
+  lineinfile:
+    dest: ~/.zshrc.local
+    line: 'export EDITOR="subl -w"'
+    regexp: '^export EDITOR'
+  tags:
+    - users
+    - alban
+
+- name: alban | Surcharge git with hub
+  lineinfile:
+    dest: ~/.zshrc.local
+    line: 'alias git="hub"'
+    regexp: '^alias git'
   tags:
     - users
     - alban
