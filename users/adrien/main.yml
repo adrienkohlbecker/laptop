@@ -125,3 +125,10 @@
   tags:
     - users
     - adrien
+
+- name: adrien | Put dock to the right
+  shell: defaults write com.apple.Dock orientation right
+  changed_when: false
+  tags:
+    - users
+    - adrien
