@@ -31,6 +31,12 @@
   tags:
     - apps
 
+- name: Open Sublime Text
+  shell: "open -a '{{ brew_cask_install_directory }}/Sublime Text.app'"
+  changed_when: false
+  tags:
+    - apps
+
 - name: Install diffmerge
   homebrew_cask:
     name: diffmerge
@@ -40,6 +46,12 @@
 - name: Install google-drive
   homebrew_cask:
     name: google-drive
+  tags:
+    - apps
+
+- name: Open Google Drive
+  shell: "open -a '{{ brew_cask_install_directory }}/Google Drive.app'"
+  changed_when: false
   tags:
     - apps
 
@@ -81,6 +93,19 @@
   tags:
     - apps
 
+- name: Start slack at login
+  shell: >
+    osascript -e 'tell application "System Events" to make new login item at end with properties {path:"{{ brew_cask_install_directory }}/Slack.app", name:"Slack", hidden:true}'
+  changed_when: false
+  tags:
+    - apps
+
+- name: Open Slack
+  shell: "open -a {{ brew_cask_install_directory }}/Slack.app"
+  changed_when: false
+  tags:
+    - apps
+
 - name: Install imagealpha
   homebrew_cask:
     name: imagealpha
@@ -100,7 +125,7 @@
     - apps
 
 - name: Open the-unarchiver
-  shell: open -a /Applications/The\ Unarchiver.app
+  shell: "open -a '{{ brew_cask_install_directory }}/The Unarchiver.app'"
   changed_when: false
   tags:
     - apps
@@ -148,7 +173,7 @@
     - apps
 
 - name: Open Google Chrome and set default browser
-  shell: open -a /Applications/Google\ Chrome.app --args --make-default-browser
+  shell: "open -a '{{ brew_cask_install_directory }}/Google Chrome.app' --args --make-default-browser"
   changed_when: false
   tags:
     - apps
