@@ -56,6 +56,20 @@
     - users
     - alban
 
+- name: alban | Install Bartender
+  homebrew_cask:
+    name: bartender
+  tags:
+    - users
+    - alban
+
+- name: alban | Install Alfred
+  homebrew_cask:
+    name: alfred
+  tags:
+    - users
+    - alban
+
 - name: alban | Enable lion-style scrolling
   shell: defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
   changed_when: false
@@ -79,6 +93,20 @@
 
 - name: alban | Disable tap to click for this user and for the login screen (3)
   shell: defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 0
+  changed_when: false
+  tags:
+    - users
+    - alban
+
+- name: alban | Show scrollbars when scrolling
+  shell: defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
+  changed_when: false
+  tags:
+    - users
+    - alban
+
+- name: alban | Enable swipe in Chrome
+  shell: defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool TRUE
   changed_when: false
   tags:
     - users
