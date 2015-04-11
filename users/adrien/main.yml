@@ -213,3 +213,13 @@
   tags:
     - users
     - adrien
+
+- name: adrien | Set force-touch track pad to firm
+  shell: "defaults write com.apple.AppleMultitouchTrackpad {{ item }} -int 2"
+  with_items:
+    - FirstClickThreshold
+    - SecondClickThreshold
+  changed_when: false
+  tags:
+    - users
+    - adrien
