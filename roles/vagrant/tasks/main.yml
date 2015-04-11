@@ -24,6 +24,7 @@
     - vagrant-cachier
     - vagrant-bindfs
     - vagrant-parallels
+    - vagrant-fsnotify
   register: _vagrant_plugin
   changed_when: "'Installing' in _vagrant_plugin.stdout"
   tags:
