@@ -7,4 +7,9 @@
     - packages
     - redis
 
-# XXX todo launchctl
+- name: redis | Launch at login
+  shell: ln -sfv /usr/local/opt/redis/*.plist ~/Library/LaunchAgents
+  changed_when: false
+  tags:
+    - packages
+    - redis

@@ -14,4 +14,9 @@
     - packages
     - postgres
 
-# XXX todo launchctl
+- name: postgres | Launch at login
+  shell: ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+  changed_when: false
+  tags:
+    - packages
+    - postgres
