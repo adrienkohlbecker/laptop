@@ -6,4 +6,4 @@ ruby_version: 2.2.2
 ruby_directory: /opt/rubies
 ruby_gem_executable: "{{ ruby_directory }}/ruby-{{ruby_version}}/bin/gem"
 ruby_bundle_executable: "{{ home }}/.gem/ruby/2.2.0/bin/bundle"
-brew_cask_install_directrory: "{{ home }}/Applications"
+brew_cask_install_directory: "{{ home }}/Applications"
