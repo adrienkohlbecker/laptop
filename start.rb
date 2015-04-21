@@ -193,7 +193,7 @@ if File.exists?("#{Dir.home}/.ssh/id_rsa")
 else
   ohai "Generating SSH key"
   normaldo "ssh-keygen -t rsa -f #{Dir.home}/.ssh/id_rsa -C #{git_user_email}"
-  normaldo "ssh-add #{Dir.home}/.ssh/id_rsa"
+  normaldo "ssh-add -K #{Dir.home}/.ssh/id_rsa"
 end
 
 ohai "Running ansible playbook"
