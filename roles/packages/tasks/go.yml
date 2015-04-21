@@ -37,14 +37,6 @@
     - packages
     - go
 
-- name: go | Setup GOROOT
-  lineinfile:
-    dest: ~/.zshrc.local
-    line: 'export GOROOT="/usr/local/opt/go/libexec/bin"'
-  tags:
-    - packages
-    - go
-
 - name: go | Install gin
   shell: "GOPATH={{ gopath }} go get github.com/codegangsta/gin"
   args:
