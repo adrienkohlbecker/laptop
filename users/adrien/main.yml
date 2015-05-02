@@ -14,24 +14,9 @@
     - users
     - adrien
 
-- name: adrien | Install mailbox
+- name: adrien | Install steam
   homebrew_cask:
-    name: mailbox
-  tags:
-    - users
-    - adrien
-
-- name: adrien | Start mailbox at login
-  shell: >
-    osascript -e 'tell application "System Events" to make new login item at end with properties {path:"{{ brew_cask_install_directory }}/Mailbox.app", name:"Mailbox", hidden:true}'
-  changed_when: false
-  tags:
-    - users
-    - adrien
-
-- name: Open mailbox
-  shell: "open -a {{ brew_cask_install_directory }}/Mailbox.app"
-  changed_when: false
+    name: steam
   tags:
     - users
     - adrien
