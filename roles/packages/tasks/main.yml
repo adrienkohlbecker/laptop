@@ -44,6 +44,12 @@
   tags:
     - packages
 
+- name: Install htop
+  homebrew:
+    name: htop
+  tags:
+    - packages
+
 - name: Install moreutils
   homebrew:
     name: moreutils
