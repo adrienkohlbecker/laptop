@@ -22,7 +22,6 @@
   shell: "/usr/bin/vagrant plugin list | grep -q {{ item }} || /usr/bin/vagrant plugin install {{ item }}"
   with_items:
     - vagrant-cachier
-    - vagrant-bindfs
     - vagrant-parallels
     - vagrant-fsnotify
   register: _vagrant_plugin
