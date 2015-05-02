@@ -82,8 +82,11 @@
 
 - name: ruby | Install awesome_print
   gem:
-    name: awesome_print
+    name: "{{ item }}"
     executable: "{{ ruby_gem_executable }}"
+  with_items:
+    - awesome_print
+    - foreman
   tags:
     - packages
     - ruby
