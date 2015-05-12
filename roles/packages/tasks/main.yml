@@ -28,6 +28,12 @@
   tags:
     - packages
 
+- name: Install hub
+  homebrew:
+    name: hub
+  tags:
+    - packages
+
 - name: Install vim
   homebrew:
     name: vim

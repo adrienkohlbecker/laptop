@@ -21,13 +21,6 @@
     - users
     - alban
 
-- name: alban | Install hub
-  homebrew:
-    name: hub
-  tags:
-    - users
-    - alban
-
 - name: alban | Install rowanj-gitx
   homebrew_cask:
     name: rowanj-gitx
