@@ -40,7 +40,7 @@
     - sourcetree
 
 - name: Open sourcetree
-  shell: open -a /Applications/SourceTree.app
+  shell: "open -a '{{ brew_cask_install_directory }}/SourceTree.app'"
   changed_when: false
   tags:
     - apps

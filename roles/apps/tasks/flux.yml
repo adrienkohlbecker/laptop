@@ -28,7 +28,7 @@
     - flux
 
 - name: Open flux
-  shell: open -a /Applications/Flux.app
+  shell: "open -a '{{ brew_cask_install_directory }}/Flux.app'"
   changed_when: false
   tags:
     - apps

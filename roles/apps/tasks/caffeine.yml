@@ -18,7 +18,7 @@
     - caffeine
 
 - name: caffeine | Open caffeine
-  shell: open -a /Applications/Caffeine.app
+  shell: "open -a '{{ brew_cask_install_directory }}/Caffeine.app'"
   changed_when: false
   tags:
     - apps

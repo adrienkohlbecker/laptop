@@ -23,7 +23,7 @@
     - iterm
 
 - name: iterm | Open iterm
-  shell: open -a /Applications/iTerm.app
+  shell: "open -a '{{ brew_cask_install_directory }}/iTerm.app'"
   changed_when: false
   tags:
     - apps
