@@ -37,27 +37,16 @@
     - packages
     - go
 
-- name: go | Install gin
-  shell: "GOPATH={{ gopath }} go get github.com/codegangsta/gin"
-  args:
-    creates: "{{ gopath }}/src/github.com/codegangsta/gin"
+- name: go | Install packages
+  shell: "GOPATH={{ gopath }} go get -u {{ item }}"
+  with_items:
+    - github.com/codegangsta/gin
+    - golang.org/x/tools/cmd/vet
+    - golang.org/x/tools/cmd/oracle
+    - golang.org/x/tools/cmd/godoc
+    - github.com/golang/lint/golint
+    - github.com/nsf/gocode
+    - golang.org/x/tools/cmd/goimports
   tags:
     - packages
     - go
-
-- name: go | Install godep
-  shell: "GOPATH={{ gopath }} go get github.com/tools/godep"
-  args:
-    creates: "{{ gopath }}/src/github.com/tools/godep"
-  tags:
-    - packages
-    - go
-
-- name: go | Install goimports
-  shell: "GOPATH={{ gopath }} go get go golang.org/x/tools/cmd/goimports"
-  args:
-    creates: "{{ gopath }}/src/golang.org/x/tools/cmd/goimports"
-  tags:
-    - packages
-    - go
-
