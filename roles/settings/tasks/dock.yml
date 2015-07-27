@@ -15,15 +15,17 @@
     - "/Applications/Mail.app"
     - "/Applications/Calendar.app"
     - "/Applications/Notes.app"
+    - "/Applications/iTunes.app"
+    - "/Applications/Reminders.app"
     - "{{ brew_cask_install_directory }}/Google Chrome.app"
     - "{{ brew_cask_install_directory }}/Slack.app"
     - "/Applications/Wunderlist.app"
     - "{{ brew_cask_install_directory }}/Evernote.app"
 
     # Office
-    - "/Applications/Microsoft Office 2011/Microsoft Excel.app"
-    - "/Applications/Microsoft Office 2011/Microsoft Powerpoint.app"
-    - "/Applications/Microsoft Office 2011/Microsoft Word.app"
+    - "/Applications/Microsoft Excel.app"
+    - "/Applications/Microsoft Powerpoint.app"
+    - "/Applications/Microsoft Word.app"
 
     # Design
     - "/Applications/Adobe InDesign CC 2014/Adobe InDesign CC 2014.app"
