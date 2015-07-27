@@ -232,7 +232,7 @@
     - hacker
 
 - name: "hacker | Set screen saver"
-  shell: defaults -currentHost write moduleDict -dict moduleName "Flurry" path "/System/Library/Screen Savers/Flurry.saver" type 0
+  shell: defaults -currentHost write com.apple.screensaver moduleDict -dict moduleName "Flurry" path "/System/Library/Screen Savers/Flurry.saver" type 0
   changed_when: false
   tags:
     - settings
