@@ -39,23 +39,23 @@
   homebrew_tap:
     tap: sharette/tap
   tags:
-    - apps
+    - sharette
 
 - name: Install shr-menu
   homebrew_cask:
     name: shr-menu
   tags:
-    - apps
+    - sharette
 
 - name: Start shr-menu at login
   shell: >
     osascript -e 'tell application "System Events" to make new login item at end with properties {path:"{{ brew_cask_install_directory }}/shr.app", name:"shr", hidden:true}'
   changed_when: false
   tags:
-    - apps
+    - sharette
 
 - name: Open shr-menu
   shell: "open -a {{ brew_cask_install_directory }}/shr.app"
   changed_when: false
   tags:
-    - apps
+    - sharette
