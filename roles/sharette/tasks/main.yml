@@ -64,7 +64,7 @@
   file:
     path: $HOME/.ejson/keys
     state: directory
-    recursive: true
+    recurse: true
   tags:
     - sharette
 
