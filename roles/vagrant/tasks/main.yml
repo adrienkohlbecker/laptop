@@ -19,7 +19,7 @@
     - vagrant
 
 - name: Install vagrant plugins
-  shell: "/usr/bin/vagrant plugin list | grep -q {{ item }} || /usr/bin/vagrant plugin install {{ item }}"
+  shell: "/usr/local/bin/vagrant plugin list | grep -q {{ item }} || /usr/local/bin/vagrant plugin install {{ item }}"
   with_items:
     - vagrant-cachier
     - vagrant-parallels
