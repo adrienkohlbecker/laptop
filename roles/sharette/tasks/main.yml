@@ -29,3 +29,9 @@
   tags:
     - sharette
 
+- name: Install dev box
+  shell: "/usr/local/bin/vagrant box list | grep -q sharette || /usr/local/bin/vagrant box add http://box.shr.st --provider parallels"
+  changed_when: false
+  tags:
+    - sharette
+
