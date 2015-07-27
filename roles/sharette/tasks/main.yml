@@ -74,3 +74,10 @@
     line: 'export EJSON_KEYDIR="$HOME/.ejson/keys"'
   tags:
     - sharette
+
+- name: Setup docker host
+  lineinfile:
+    dest: ~/.zshrc.local
+    line: 'export DOCKER_HOST="tcp://dev.shr.st:2375"'
+  tags:
+    - sharette
