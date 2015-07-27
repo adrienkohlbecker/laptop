@@ -74,7 +74,7 @@
     - ruby
 
 - name: ruby | Configure bundler parallelism
-  shell: "{{ ruby_bundle_executable }} config --global jobs {{ ansible_processor_cores }}"
+  shell: "mkdir -p $HOME/.bundle && echo \"---\\nBUNDLE_JOBS: '{{ ansible_processor_cores }}'\" > $HOME/.bundle/config"
   changed_when: false
   tags:
     - packages
