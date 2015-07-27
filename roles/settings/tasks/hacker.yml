@@ -217,15 +217,22 @@
 # Screen
 ###############################################################################
 
-- name: "hacker | Requiring password immediately after sleep or screen saver begins (1)"
+- name: "hacker | Requiring password 5 seconds after sleep or screen saver begins (1)"
   shell: defaults write com.apple.screensaver askForPassword -int 1
   changed_when: false
   tags:
     - settings
     - hacker
 
-- name: "hacker | Requiring password immediately after sleep or screen saver begins (2)"
-  shell: defaults write com.apple.screensaver askForPasswordDelay -int 0
+- name: "hacker | Requiring password 5 seconds after sleep or screen saver begins (2)"
+  shell: defaults write com.apple.screensaver askForPasswordDelay -int 5
+  changed_when: false
+  tags:
+    - settings
+    - hacker
+
+- name: "hacker | Set screen saver"
+  shell: defaults -currentHost write moduleDict -dict moduleName "Flurry" path "/System/Library/Screen Savers/Flurry.saver" type 0
   changed_when: false
   tags:
     - settings
