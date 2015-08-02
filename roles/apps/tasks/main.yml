@@ -172,6 +172,18 @@
   tags:
     - apps
 
+- name: Install ngrok
+  homebrew_cask:
+    name: ngrok
+  tags:
+    - apps
+
+- name: Install charles
+  homebrew_cask:
+    name: charles
+  tags:
+    - apps
+
 - include: chrome.yml
 - include: flux.yml
 - include: caffeine.yml

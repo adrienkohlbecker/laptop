@@ -137,12 +137,6 @@
   tags:
     - packages
 
-- name: Install ngrok
-  homebrew:
-    name: ngrok
-  tags:
-    - packages
-
 - name: Install heroku-toolbelt
   homebrew:
     name: heroku-toolbelt
