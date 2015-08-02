@@ -7,7 +7,7 @@
     - users
     - adrien
 
-- name: Open dropbox
+- name: adrien | Open dropbox
   shell: "open -a {{ brew_cask_install_directory }}/Dropbox.app"
   changed_when: false
   tags:
@@ -28,7 +28,7 @@
     - users
     - adrien
 
-- name: Open 1password
+- name: adrien | Open 1password
   shell: 'open -a "{{ brew_cask_install_directory }}/1Password 5.app"'
   changed_when: false
   tags:
@@ -57,7 +57,7 @@
     - users
     - adrien
 
-- name: Open arq
+- name: adrien | Open arq
   shell: "open -a {{ brew_cask_install_directory }}/Arq.app"
   changed_when: false
   tags:
@@ -93,7 +93,7 @@
     - users
     - adrien
 
-- name: Open arq
+- name: adrien | Open dash
   shell: "open -a {{ brew_cask_install_directory }}/Dash.app"
   changed_when: false
   tags:
@@ -115,7 +115,7 @@
     - users
     - adrien
 
-- name: Open arq
+- name: adrien | Open divvy
   shell: "open -a {{ brew_cask_install_directory }}/Divvy.app"
   changed_when: false
   tags:
@@ -205,6 +205,27 @@
     - FirstClickThreshold
     - SecondClickThreshold
   changed_when: false
+  tags:
+    - users
+    - adrien
+
+- name: adrien | Setup chrome extensions
+  copy:
+    src: ../../roles/apps/files/extension.json
+    dest: "~/Library/Google/Chrome/External Extensions/{{ item }}.json"
+  with_items:
+    - chlffgpmiacpedhhbkiomidkjlcfhogd # Pushbullet
+    - kbmfpngjjgdllneeigpgjifpgocmfgmb # Reddit enhancement suite
+    - klbibkeccnjlkjkiokjodocebajanakg # The great suspender
+    - cjpalhdlnbpafiamejdnhcphjbkeiagm # ublock origin
+    - aomjjhallfgjeglblehebfpbcfeobpgk # 1password
+  tags:
+    - users
+    - adrien
+
+- name: adrien | Install zenhub Chrome app
+  homebrew_cask:
+    name: zenhub
   tags:
     - users
     - adrien
