@@ -41,6 +41,12 @@
   tags:
     - sharette
 
+- name: Install shrun
+  homebrew:
+    name: shrun
+  tags:
+    - sharette
+
 - name: Install shr-menu
   homebrew_cask:
     name: shr-menu
