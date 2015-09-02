@@ -41,9 +41,9 @@
   tags:
     - sharette
 
-- name: Install shrun
+- name: Install shr
   homebrew:
-    name: shrun
+    name: shr
   tags:
     - sharette
 
