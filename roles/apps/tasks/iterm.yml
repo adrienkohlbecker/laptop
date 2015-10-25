@@ -1,9 +1,9 @@
 ---
 
 
-- name: iterm | Install iterm2-beta
+- name: iterm | Install iterm2-nightly
   homebrew_cask:
-    name: iterm2-beta
+    name: iterm2-nightly
   tags:
     - apps
     - iterm
@@ -28,4 +28,3 @@
   tags:
     - apps
     - iterm
-

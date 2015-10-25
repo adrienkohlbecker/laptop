@@ -105,10 +105,10 @@
     - users
     - alban
 
-- name: alban | Setup EDITOR
+- name: alban | Setup atom as EDITOR
   lineinfile:
     dest: ~/.zshrc.local
-    line: 'export EDITOR="subl -w"'
+    line: 'export EDITOR="atom -w"'
     regexp: '^export EDITOR'
   tags:
     - users
@@ -119,6 +119,22 @@
     dest: ~/.zshrc.local
     line: 'alias git="hub"'
     regexp: '^alias git'
+  tags:
+    - users
+    - alban
+
+- name: alban | Install The Fuck
+  homebrew:
+    name: thefuck
+  tags:
+    - users
+    - alban
+
+- name: alban | Setup The Fuck
+  lineinfile:
+    dest: ~/.zshrc.local
+    line: 'eval "$(thefuck --alias)"'
+    regexp: 'thefuck'
   tags:
     - users
     - alban

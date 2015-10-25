@@ -40,14 +40,7 @@
   tags:
     - apps
     - chrome
-
-- name: Open Google Chrome and set default browser
-  shell: "open -a '{{ brew_cask_install_directory }}/Google Chrome.app' --args --make-default-browser"
-  changed_when: false
-  tags:
-    - apps
-    - chrome
-
+    
 - chlffgpmiacpedhhbkiomidkjlcfhogd # Pushbullet
 - kbmfpngjjgdllneeigpgjifpgocmfgmb # Reddit enhancement suite
 - klbibkeccnjlkjkiokjodocebajanakg # The great suspender

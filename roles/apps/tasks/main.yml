@@ -172,6 +172,18 @@
   tags:
     - apps
 
+- name: Install Paw
+  homebrew_cask:
+    name: paw
+  tags:
+    - apps
+
+- name: Install Dash
+  homebrew_cask:
+    name: Dash
+  tags:
+    - apps
+
 - name: Install ngrok
   homebrew_cask:
     name: ngrok
