@@ -38,17 +38,17 @@
   with_items:
     - line: "# Allow passwordless startup of Vagrant when using NFS."
       regexp: "^# Allow passwordless"
-    - line: Cmnd_Alias VAGRANT_EXPORTS_ADD = /usr/bin/tee -a /etc/exports
-      regexp: "^Cmnd_Alias VAGRANT_EXPORTS_ADD"
+    - line: Cmnd_Alias VAGRANT_EXPORTS_ADD_SHR = /usr/bin/tee -a /etc/exports
+      regexp: "^Cmnd_Alias VAGRANT_EXPORTS_ADD_SHR"
     - line: Cmnd_Alias VAGRANT_EXPORTS_ADD_BREW = /usr/local/opt/coreutils/libexec/gnubin/tee -a /etc/exports
       regexp: "^Cmnd_Alias VAGRANT_EXPORTS_ADD_BREW"
     - line: Cmnd_Alias VAGRANT_NFSD = /sbin/nfsd restart
       regexp: "^Cmnd_Alias VAGRANT_NFSD"
-    - line: Cmnd_Alias VAGRANT_EXPORTS_REMOVE = /usr/bin/sed -E -e /*/ d -ibak /etc/exports
-      regexp: "^Cmnd_Alias VAGRANT_EXPORTS_REMOVE"
+    - line: Cmnd_Alias VAGRANT_EXPORTS_REMOVE_SHR = /usr/bin/sed -E -e /*/ d -ibak /etc/exports
+      regexp: "^Cmnd_Alias VAGRANT_EXPORTS_REMOVE_SHR"
     - line: Cmnd_Alias VAGRANT_EXPORTS_REMOVE_BREW = /usr/local/opt/gnu-sed/libexec/gnubin/sed -E -e /*/ d -ibak /etc/exports
       regexp: "^Cmnd_Alias VAGRANT_EXPORTS_REMOVE_BREW"
-    - line: "%staff ALL=(root) NOPASSWD: VAGRANT_EXPORTS_ADD, VAGRANT_EXPORTS_ADD_BREW, VAGRANT_NFSD, VAGRANT_EXPORTS_REMOVE, VAGRANT_EXPORTS_REMOVE_BREW"
+    - line: "%staff ALL=(root) NOPASSWD: VAGRANT_EXPORTS_ADD_SHR, VAGRANT_EXPORTS_ADD_BREW, VAGRANT_NFSD, VAGRANT_EXPORTS_REMOVE_SHR, VAGRANT_EXPORTS_REMOVE_BREW"
       regexp: "^%staff ALL=(root) NOPASSWD: VAGRANT"
   tags:
     - vagrant
