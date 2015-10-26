@@ -18,7 +18,7 @@
 
 - name: Create chrome directory
   file:
-    path: "~/Library/Google/Chrome/External Extensions/{{ item }}.json"
+    path: "~/Library/Google/Chrome/External Extensions/"
     state: directory
     recurse: true
   tags:
@@ -40,7 +40,7 @@
   tags:
     - apps
     - chrome
-    
+
 # - chlffgpmiacpedhhbkiomidkjlcfhogd # Pushbullet
 # - kbmfpngjjgdllneeigpgjifpgocmfgmb # Reddit enhancement suite
 # - klbibkeccnjlkjkiokjodocebajanakg # The great suspender
