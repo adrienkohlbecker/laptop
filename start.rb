@@ -81,7 +81,7 @@ end
 
 abort "Don't run this as root!" if Process.uid == 0
 abort "This script requires the user #{ENV['USER']} to be an Administrator." unless `groups`.split.include? 'admin'
-abort 'This script is only tested on OSX 10.10.' if macos_version != '10.10'
+abort 'This script is only tested on OSX 10.11.' if macos_version != '10.11'
 
 ohai 'This script will setup:'
 puts '  - FileVault if not already enabled'
