@@ -37,6 +37,46 @@
   tags:
     - apps
 
+- name: Install atom
+  homebrew_cask:
+    name: atom
+  tags:
+    - apps
+
+- name: Install atom plugins
+  shell: apm install {{ item }}
+  with_items:
+    - advanced-open-file
+    - aligner
+    - aligner-ruby
+    - aligner-scss
+    - atom-typescript
+    - color-picker
+    - dash
+    - editorconfig
+    - file-icons
+    - go-plus
+    - highlight-selected
+    - language-docker
+    - language-haml
+    - language-jade
+    - linter
+    - linter-haml
+    - linter-jsonlint
+    - linter-pylama
+    - linter-rubocop
+    - linter-scss-lint
+    - linter-tslint
+    - merge-conflicts
+    - minimap
+    - minimap-highlight-selected
+    - pigments
+    - project-manager
+    - sort-lines
+    - toggle-quotes
+  tags:
+    - apps
+
 - name: Install diffmerge
   homebrew_cask:
     name: diffmerge
