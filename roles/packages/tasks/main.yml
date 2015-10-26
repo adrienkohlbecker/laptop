@@ -202,8 +202,6 @@
     - packages
 
 - include: go.yml
-- include: postgres.yml
-- include: redis.yml
 - include: python.yml
 - include: node.yml
 - include: ruby.yml
