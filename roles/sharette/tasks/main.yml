@@ -30,7 +30,7 @@
     - sharette
 
 - name: Install dev box
-  shell: "/usr/local/bin/vagrant box list | grep -q sharette || /usr/local/bin/vagrant box add http://box.shr.st --provider parallels"
+  shell: "/usr/local/bin/vagrant box list | grep -q sharette || /usr/local/bin/vagrant box add https://box.shr.st --provider parallels"
   changed_when: false
   tags:
     - sharette
@@ -44,6 +44,7 @@
 - name: Install shr
   homebrew:
     name: shr
+    install_options: devel
   tags:
     - sharette
 
