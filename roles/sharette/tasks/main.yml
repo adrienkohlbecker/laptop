@@ -88,3 +88,17 @@
     line: 'export DOCKER_HOST="tcp://dev.shr.st:2375"'
   tags:
     - sharette
+
+- name: Setup aws region
+  lineinfile:
+    dest: ~/.zshrc.local
+    line: 'export AWS_REGION="eu-west-1"'
+  tags:
+    - sharette
+
+- name: Setup aws region
+  lineinfile:
+    dest: ~/.zshrc.local
+    line: 'export AWS_DEFAULT_REGION="eu-west-1"'
+  tags:
+    - sharette
