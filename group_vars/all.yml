@@ -7,3 +7,34 @@ ruby_directory: /opt/rubies
 ruby_gem_executable: "{{ ruby_directory }}/ruby-{{ruby_version}}/bin/gem"
 ruby_bundle_executable: "{{ home }}/.gem/ruby/2.2.0/bin/bundle"
 brew_cask_install_directory: "/Applications"
+
+
+custom_ssh_config:
+  adrien: >
+
+    Host bitbucket.org
+      IdentityFile ~/.ssh/bitbucket_rsa
+
+    Host api.bitbucket.org
+      IdentityFile ~/.ssh/bitbucket_rsa
+
+    Host heroku.com
+      IdentitiesOnly yes
+      IdentityFile ~/.ssh/heroku_rsa
+
+    Host github.com
+      IdentitiesOnly yes
+      IdentityFile ~/.ssh/github_rsa
+
+    Host gitlab.com
+      IdentitiesOnly yes
+      IdentityFile ~/.ssh/gitlab_rsa
+
+    Host hypervisor
+      HostName 10.0.0.11
+      User adrien
+      Port 22
+      IdentitiesOnly yes
+      IdentityFile ~/.ssh/hypervisor_rsa
+
+  alban: ""

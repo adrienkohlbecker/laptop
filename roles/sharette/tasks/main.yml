@@ -102,3 +102,10 @@
     line: 'export AWS_DEFAULT_REGION="eu-west-1"'
   tags:
     - sharette
+
+- name: Setup ssh_config
+  template:
+    src: ssh_config.j2
+    dest: ~/.ssh/config
+  tags:
+    - sharette
