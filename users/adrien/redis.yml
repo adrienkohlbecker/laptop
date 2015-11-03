@@ -1,0 +1,17 @@
+---
+
+- name: redis | Install redis
+  homebrew:
+    name: redis
+  tags:
+    - users
+    - adrien
+    - redis
+
+- name: redis | Launch at login
+  shell: ln -sfv /usr/local/opt/redis/*.plist ~/Library/LaunchAgents
+  changed_when: false
+  tags:
+    - users
+    - adrien
+    - redis

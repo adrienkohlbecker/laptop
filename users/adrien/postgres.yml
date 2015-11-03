@@ -1,0 +1,25 @@
+---
+
+- name: postgres | Install postgres
+  homebrew:
+    name: postgres
+  tags:
+    - users
+    - adrien
+    - postgres
+
+- name: postgres | Install postgis
+  homebrew:
+    name: postgis
+  tags:
+    - users
+    - adrien
+    - postgres
+
+- name: postgres | Launch at login
+  shell: ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+  changed_when: false
+  tags:
+    - users
+    - adrien
+    - postgres
