@@ -47,9 +47,6 @@
   shell: apm install {{ item }}
   with_items:
     - advanced-open-file
-    - aligner
-    - aligner-ruby
-    - aligner-scss
     - atom-typescript
     - color-picker
     - dash
@@ -59,7 +56,6 @@
     - highlight-selected
     - language-docker
     - language-haml
-    - language-jade
     - linter
     - linter-haml
     - linter-jsonlint
@@ -67,9 +63,7 @@
     - linter-rubocop
     - linter-scss-lint
     - linter-tslint
-    - merge-conflicts
     - minimap
-    - minimap-highlight-selected
     - pigments
     - project-manager
     - sort-lines

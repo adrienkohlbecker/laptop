@@ -230,5 +230,23 @@
     - users
     - adrien
 
+- name: adrien | Install additional atom plugins
+  shell: apm install {{ item }}
+  with_items:
+    - atom-jade
+    - file-types
+    - git-plus
+    - language-ansible
+    - language-gradle
+    - language-ini
+    - language-typescript-grammars-only
+    - linter-erb
+    - linter-js-yaml
+    - linter-jshint
+    - linter-shellcheck
+  tags:
+    - users
+    - adrien
+
 - include: postgres.yml
 - include: redis.yml
