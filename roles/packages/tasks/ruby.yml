@@ -80,7 +80,7 @@
     - packages
     - ruby
 
-- name: ruby | Install awesome_print
+- name: ruby | Install packages
   gem:
     name: "{{ item }}"
     executable: "{{ ruby_gem_executable }}"
@@ -90,4 +90,3 @@
   tags:
     - packages
     - ruby
-
