@@ -47,6 +47,7 @@
   shell: apm install {{ item }}
   with_items:
     - advanced-open-file
+    - atom-fix-path
     - atom-typescript
     - color-picker
     - dash
