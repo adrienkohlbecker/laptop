@@ -2,7 +2,7 @@
 
 - name: Clone repository
   git:
-    repo: https://github.com/sharette/dotfiles.git
+    repo: https://gitlab.kohlby.fr/adrienkohlbecker/dotfiles.git
     dest: ~/.dotfiles
     clone: yes
     update: yes
