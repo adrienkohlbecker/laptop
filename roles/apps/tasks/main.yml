@@ -152,19 +152,6 @@
   tags:
     - apps
 
-- name: Start slack at login
-  shell: >
-    osascript -e 'tell application "System Events" to make new login item at end with properties {path:"{{ brew_cask_install_directory }}/Slack.app", name:"Slack", hidden:true}'
-  changed_when: false
-  tags:
-    - apps
-
-- name: Open Slack
-  shell: "open -a {{ brew_cask_install_directory }}/Slack.app"
-  changed_when: false
-  tags:
-    - apps
-
 - name: Install imagealpha
   homebrew_cask:
     name: imagealpha
@@ -195,27 +182,9 @@
   tags:
     - apps
 
-- name: Install hockey
-  homebrew_cask:
-    name: hockey
-  tags:
-    - apps
-
-- name: Install sketch
-  homebrew_cask:
-    name: sketch
-  tags:
-    - apps
-
 - name: Install packer
   homebrew_cask:
     name: packer
-  tags:
-    - apps
-
-- name: Install bee
-  homebrew_cask:
-    name: bee
   tags:
     - apps
 
@@ -252,6 +221,24 @@
 - name: Install charles
   homebrew_cask:
     name: charles
+  tags:
+    - apps
+
+- name: Install viscosity
+  homebrew_cask:
+    name: viscosity
+  tags:
+    - apps
+
+- name: Install transmission
+  homebrew_cask:
+    name: transmission
+  tags:
+    - apps
+
+- name: Install sqlitebrowser
+  homebrew_cask:
+    name: sqlitebrowser
   tags:
     - apps
 

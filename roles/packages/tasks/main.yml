@@ -137,30 +137,6 @@
   tags:
     - packages
 
-- name: Install heroku-toolbelt
-  homebrew:
-    name: heroku-toolbelt
-  tags:
-    - packages
-
-- name: Install github-release
-  homebrew:
-    name: github-release
-  tags:
-    - packages
-
-- name: Install docker
-  homebrew:
-    name: docker
-  tags:
-    - packages
-
-- name: Install ant
-  homebrew:
-    name: ant
-  tags:
-    - packages
-
 - name: Install coreutils
   homebrew:
     name: coreutils

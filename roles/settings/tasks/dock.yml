@@ -12,40 +12,13 @@
   changed_when: false
   with_items:
     # General tools
+    - "{{ brew_cask_install_directory }}/Google Chrome.app"
+    - "{{ brew_cask_install_directory }}/Atom.app"
     - "/Applications/Mail.app"
-    - "/Applications/Calendar.app"
+    - "{{ brew_cask_install_directory }}/iTerm.app"
+    - "/Applications/Sunrise Calendar.app"
     - "/Applications/Notes.app"
     - "/Applications/iTunes.app"
-    - "/Applications/Reminders.app"
-    - "{{ brew_cask_install_directory }}/Google Chrome.app"
-    - "{{ brew_cask_install_directory }}/Slack.app"
-    - "/Applications/Wunderlist.app"
-    - "{{ brew_cask_install_directory }}/Evernote.app"
-
-    # Office
-    - "/Applications/Microsoft Excel.app"
-    - "/Applications/Microsoft Powerpoint.app"
-    - "/Applications/Microsoft Word.app"
-
-    # Design
-    - "/Applications/Adobe InDesign CC 2014/Adobe InDesign CC 2014.app"
-    - "/Applications/Adobe Photoshop CC 2014/Adobe Photoshop CC 2014.app"
-    - "/Applications/Adobe Illustrator CC 2014/Adobe Illustrator.app"
-    - "{{ brew_cask_install_directory }}/Sketch.app"
-
-    # Developer tools
-    - "{{ brew_cask_install_directory }}/Android Studio.app"
-    - "{{ brew_cask_install_directory }}/Bee.app"
-    - "{{ brew_cask_install_directory }}/Firefox.app"
-    - "{{ brew_cask_install_directory }}/HockeyApp.app"
-    - "{{ brew_cask_install_directory }}/iTerm.app"
-    - "/Applications/Parallels Desktop.app"
-    - "{{ brew_cask_install_directory }}/pgAdmin3.app"
-    - "/Applications/Safari.app"
-    - "{{ brew_cask_install_directory }}/SourceTree.app"
-    - "{{ brew_cask_install_directory }}/Sublime Text.app"
-    - "/Applications/Transmit.app"
-    - "/Applications/Xcode.app"
   tags:
     - settings
     - dock

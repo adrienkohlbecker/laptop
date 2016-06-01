@@ -12,12 +12,6 @@
   tags:
     - vagrant
 
-- name: Install virtualbox
-  homebrew_cask:
-    name: virtualbox
-  tags:
-    - vagrant
-
 - name: Install vagrant plugins
   shell: "/usr/local/bin/vagrant plugin list | grep -q {{ item }} || /usr/local/bin/vagrant plugin install {{ item }}"
   with_items:
