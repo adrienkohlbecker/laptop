@@ -31,7 +31,6 @@
     src: extension.json
     dest: "~/Library/Google/Chrome/External Extensions/{{ item }}.json"
   with_items:
-    - hdokiejnpimakedhajhdlcegeplioahd # LastPass
     - fhbjgbiflinjbdggehcddcbncdddomop # Postman
     - aicmkgpgakddgnaphhhpliifpcfhicfo # Postman interceptor
     - jdbcdblgjdpmfninkoogcfpnkjmndgje # Scrum for trello

@@ -3,7 +3,7 @@
 - hosts: all
   roles:
     - base
-    - dotfiles
+    # - dotfiles
     - packages
     - fonts
     - apps
