@@ -15,6 +15,3 @@
 
     - include: "users/adrien/main.yml"
       when: "ansible_ssh_user == 'adrien'"
-
-    - include: "users/alban/main.yml"
-      when: "ansible_ssh_user == 'alban'"

@@ -1,72 +1,5 @@
 ---
 
-- name: Ensure sharette directory is present
-  file:
-    path: ~/Desktop/sharette
-    state: directory
-  tags:
-    - sharette
-
-- name: Ensure secure_files directory is present
-  file:
-    path: ~/Desktop/sharette
-    state: directory
-  tags:
-    - sharette
-
-- name: Ensure sublime project is present
-  copy:
-    src: sharette.sublime-project
-    dest: ~/Desktop/sharette/sharette.sublime-project
-  tags:
-    - sharette
-
-- name: Link sharette to GOPATH
-  file:
-    src: ~/Desktop/sharette
-    path: "{{ gopath }}/src/github.com/sharette"
-    state: link
-  tags:
-    - sharette
-
-- name: Install dev box
-  shell: "/usr/local/bin/vagrant box list | grep -q sharette || /usr/local/bin/vagrant box add https://box.shr.st --provider parallels"
-  changed_when: false
-  tags:
-    - sharette
-
-- name: Tap sharette/tap
-  homebrew_tap:
-    tap: sharette/tap
-  tags:
-    - sharette
-
-- name: Install shr
-  homebrew:
-    name: shr
-    install_options: devel
-  tags:
-    - sharette
-
-- name: Install shr-menu
-  homebrew_cask:
-    name: shr-menu
-  tags:
-    - sharette
-
-- name: Start shr-menu at login
-  shell: >
-    osascript -e 'tell application "System Events" to make new login item at end with properties {path:"{{ brew_cask_install_directory }}/shr.app", name:"shr", hidden:true}'
-  changed_when: false
-  tags:
-    - sharette
-
-- name: Open shr-menu
-  shell: "open -a {{ brew_cask_install_directory }}/shr.app"
-  changed_when: false
-  tags:
-    - sharette
-
 - name: Ensure ejson key directory is present
   file:
     path: $HOME/.ejson/keys
@@ -79,13 +12,6 @@
   lineinfile:
     dest: ~/.zshrc.local
     line: 'export EJSON_KEYDIR="$HOME/.ejson/keys"'
-  tags:
-    - sharette
-
-- name: Setup docker host
-  lineinfile:
-    dest: ~/.zshrc.local
-    line: 'export DOCKER_HOST="tcp://dev.shr.st:2375"'
   tags:
     - sharette
 

@@ -138,16 +138,3 @@
   tags:
     - users
     - alban
-
-- name: alban | Install additional atom plugins
-  shell: apm install {{ item }}
-  with_items:
-    - aligner
-    - aligner-ruby
-    - aligner-scss
-    - language-jade
-    - merge-conflicts
-    - minimap-highlight-selected
-  tags:
-    - users
-    - alban

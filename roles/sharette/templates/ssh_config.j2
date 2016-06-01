@@ -1,31 +1,35 @@
 # Ignore SSH keys unless specified in Host subsection
 IdentitiesOnly yes
 
-{{ custom_ssh_config.get(ansible_ssh_user, "") }}
+Host bitbucket.org
+  IdentityFile ~/.ssh/bitbucket_rsa
 
-Host *.sharette.fr
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
+Host api.bitbucket.org
+  IdentityFile ~/.ssh/bitbucket_rsa
 
-Host *.shr.st
+Host heroku.com
   IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
+  IdentityFile ~/.ssh/heroku_rsa
 
-Host 192.168.34.*
+Host github.com
   IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
+  IdentityFile ~/.ssh/github_rsa
 
-Host pi-eth
-  User ubuntu
-  Hostname 192.168.1.10
+Host gitlab.com
   IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
+  IdentityFile ~/.ssh/gitlab_rsa
 
-Host pi-wlan
-  User ubuntu
-  Hostname 192.168.1.11
+Host ssh.kohlby.fr
+  Port 2222
   IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
+  IdentityFile ~/.ssh/gitlab_home_rsa
+
+Host hypervisor
+  HostName 10.123.0.11
+  User adrien
+  Port 22
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/hypervisor_rsa
 
 Host edgerouter
   Hostname 192.168.1.1
@@ -33,143 +37,3 @@ Host edgerouter
   Port 22
   PreferredAuthentications password
   PubkeyAuthentication no
-
-Host nat1-staging
-  User ubuntu
-  Hostname nat.az1.staging.aws.shr.st
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
-
-Host node1-staging
-  User ubuntu
-  Hostname node.az1.staging.internal
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
-  ProxyCommand ssh -W %h:%p nat1-staging
-
-Host nat2-staging
-  User ubuntu
-  Hostname nat.az2.staging.aws.shr.st
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
-
-Host node2-staging
-  User ubuntu
-  Hostname node.az2.staging.internal
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
-  ProxyCommand ssh -W %h:%p nat2-staging
-
-Host nat3-staging
-  User ubuntu
-  Hostname nat.az3.staging.aws.shr.st
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
-
-Host node3-staging
-  User ubuntu
-  Hostname node.az3.staging.internal
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
-  ProxyCommand ssh -W %h:%p nat3-staging
-
-Host nat1-prod
-  User ubuntu
-  Hostname nat.az1.master.aws.sharette.fr
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
-
-Host node1-prod
-  User ubuntu
-  Hostname node.az1.master.internal
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
-  ProxyCommand ssh -W %h:%p nat1-prod
-
-Host nat2-prod
-  User ubuntu
-  Hostname nat.az2.master.aws.sharette.fr
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
-
-Host node2-prod
-  User ubuntu
-  Hostname node.az2.master.internal
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
-  ProxyCommand ssh -W %h:%p nat2-prod
-
-Host nat3-prod
-  User ubuntu
-  Hostname nat.az3.master.aws.sharette.fr
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
-
-Host node3-prod
-  User ubuntu
-  Hostname node.az3.master.internal
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
-  ProxyCommand ssh -W %h:%p nat3-prod
-
-Host ci-staging
-  User ubuntu
-  Hostname ci.staging.internal
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
-  ProxyCommand ssh -W %h:%p nat1-staging
-
-Host ci-prod
-  User ubuntu
-  Hostname ci.master.internal
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
-  ProxyCommand ssh -W %h:%p nat1-prod
-
-Host dbtunnel-staging
-  User ubuntu
-  Hostname node.az1.staging.internal
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
-  ProxyCommand ssh -W %h:%p nat1-staging
-  LocalForward 2002 rds.staging.internal:5432
-
-Host dbtunnel-prod
-  User ubuntu
-  Hostname node.az1.master.internal
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
-  ProxyCommand ssh -W %h:%p nat1-prod
-  LocalForward 2001 rds.master.internal:5432
-
-Host routing-tunnel-staging
-  User ubuntu
-  Hostname node.az1.staging.internal
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
-  ProxyCommand ssh -W %h:%p nat1-staging
-  LocalForward 8083 routing.staging.internal:80
-
-Host routing-tunnel-prod
-  User ubuntu
-  Hostname node.az1.master.internal
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
-  ProxyCommand ssh -W %h:%p nat1-prod
-  LocalForward 8083 routing.master.internal:80
-
-Host docker-tunnel-staging
-  User ubuntu
-  Hostname node.az1.staging.internal
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
-  ProxyCommand ssh -W %h:%p nat1-staging
-  LocalForward 2375 localhost:2375
-
-Host docker-tunnel-prod
-  User ubuntu
-  Hostname node.az1.master.internal
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/sharette_rsa
-  ProxyCommand ssh -W %h:%p nat1-prod
-  LocalForward 2375 localhost:2375

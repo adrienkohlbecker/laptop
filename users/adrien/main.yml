@@ -214,18 +214,9 @@
     src: ../../roles/apps/files/extension.json
     dest: "~/Library/Google/Chrome/External Extensions/{{ item }}.json"
   with_items:
-    - chlffgpmiacpedhhbkiomidkjlcfhogd # Pushbullet
     - kbmfpngjjgdllneeigpgjifpgocmfgmb # Reddit enhancement suite
-    - klbibkeccnjlkjkiokjodocebajanakg # The great suspender
     - cjpalhdlnbpafiamejdnhcphjbkeiagm # ublock origin
     - aomjjhallfgjeglblehebfpbcfeobpgk # 1password
-  tags:
-    - users
-    - adrien
-
-- name: adrien | Install zenhub Chrome app
-  homebrew_cask:
-    name: zenhub
   tags:
     - users
     - adrien
@@ -233,17 +224,53 @@
 - name: adrien | Install additional atom plugins
   shell: apm install {{ item }}
   with_items:
+    - Sublime-Style-Column-Selection
+    - advanced-open-file
+    - afterglow-like
+    - afterglow-monokai-syntax
     - atom-jade
+    - atom-typescript
+    - autocomplete-go
+    - builder-go
+    - color-picker
+    - dash
+    - editorconfig
+    - environment
+    - file-icons
     - file-types
     - git-plus
+    - go-config
+    - go-get
+    - go-plus
+    - gofmt
+    - gometalinter-linter
+    - gorename
+    - highlight-selected
     - language-ansible
+    - language-docker
     - language-gradle
+    - language-haml
     - language-ini
-    - language-typescript-grammars-only
+    - language-pgsql
+    - linter
     - linter-erb
+    - linter-haml
     - linter-js-yaml
     - linter-jshint
+    - linter-jsonlint
+    - linter-pylama
+    - linter-rubocop
+    - linter-scss-lint
     - linter-shellcheck
+    - linter-tslint
+    - minimap
+    - navigator-godef
+    - pigments
+    - project-manager
+    - sort-lines
+    - tab-title
+    - tester-go
+    - toggle-quotes
   tags:
     - users
     - adrien

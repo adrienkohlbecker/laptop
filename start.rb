@@ -128,7 +128,7 @@ else
   ohai 'Setting up the dotfiles installation...'
   sudo "mkdir -p #{DOTFILES_PATH}"
   sudo "chown -R #{ENV['USER']} #{DOTFILES_PATH}"
-  normaldo "git clone -q #{DOTFILES_REPO} #{DOTFILES_PATH} -b #{DOTFILES_REPO_BRANCH}"
+  normaldo "git clone -q --separate-git-dir=#{DOTFILES_PATH} #{DOTFILES_REPO} #{Dir.home} -b #{DOTFILES_REPO_BRANCH}"
   Dir.chdir DOTFILES_PATH
 end
 
