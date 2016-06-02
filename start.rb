@@ -134,12 +134,9 @@ end
 
 Dir.chdir(LAPTOP_PATH)
 
-if command? 'pip'
-  ohai 'pip is installed. Continuing...'
-else
-  ohai 'Installing pip...'
-  sudo 'easy_install pip'
-end
+ohai 'Installing pip...'
+sudo 'easy_install --upgrade setuptools'
+sudo 'easy_install --upgrade pip'
 
 if command? 'ansible'
   ohai 'Ansible is installed. Continuing...'
