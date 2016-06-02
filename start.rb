@@ -189,6 +189,6 @@ else
 end
 
 ohai 'Running ansible playbook'
-normaldo 'ansible-playbook -i hosts.ini site.yml --ask-sudo-pass'
+normaldo "ansible-playbook -i hosts.ini site.yml --ask-sudo-pass -e ansible_ssh_user=#{ENV['USER']}"
 
 ohai 'Done!'
