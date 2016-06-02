@@ -2,7 +2,7 @@
 
 - name: Ensure ejson key directory is present
   file:
-    path: $HOME/.ejson/keys
+    path: ~/.ejson/keys
     state: directory
     recurse: true
   tags:
