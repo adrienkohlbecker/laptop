@@ -29,7 +29,7 @@
     - adrien
 
 - name: adrien | Open 1password
-  shell: 'open -a "{{ brew_cask_install_directory }}/1Password 5.app"'
+  shell: 'open -a "{{ brew_cask_install_directory }}/1Password 6.app"'
   changed_when: false
   tags:
     - users
