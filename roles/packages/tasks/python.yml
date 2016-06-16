@@ -21,3 +21,11 @@
   tags:
     - packages
     - python
+
+- name: python | Install pylama
+  pip:
+    name: pylama
+  sudo: true
+  tags:
+    - packages
+    - python

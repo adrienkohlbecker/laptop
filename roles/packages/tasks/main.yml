@@ -69,6 +69,24 @@
   tags:
     - packages
 
+- name: Install shellcheck
+  homebrew:
+    name: shellcheck
+  tags:
+    - packages
+
+- name: Install youtube-dl
+  homebrew:
+    name: youtube-dl
+  tags:
+    - packages
+
+- name: Install ffmpeg
+  homebrew:
+    name: ffmpeg
+  tags:
+    - packages
+
 - name: Install moreutils
   homebrew:
     name: moreutils
@@ -174,6 +192,18 @@
   lineinfile:
     dest: ~/.zshrc.local
     line: 'export MANPATH="$(brew --prefix gnu-sed)/libexec/gnuman:$MANPATH"'
+  tags:
+    - packages
+
+- name: Install aacgain
+  homebrew:
+    name: aacgain
+  tags:
+    - packages
+
+- name: Install exiftool
+  homebrew:
+    name: exiftool
   tags:
     - packages
 

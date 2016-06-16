@@ -87,6 +87,10 @@
   with_items:
     - awesome_print
     - foreman
+    - rubocop
+    - rubocop-rspec
+    - haml_lint
+    - ejson
   tags:
     - packages
     - ruby

@@ -48,6 +48,7 @@
     - golang.org/x/tools/cmd/goimports
     - github.com/kisielk/errcheck
     - github.com/FiloSottile/gvt
+    - github.com/alecthomas/gometalinter
   tags:
     - packages
     - go

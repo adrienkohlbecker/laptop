@@ -21,20 +21,6 @@
     - users
     - adrien
 
-- name: adrien | Install 1password
-  homebrew_cask:
-    name: 1password
-  tags:
-    - users
-    - adrien
-
-- name: adrien | Open 1password
-  shell: 'open -a "{{ brew_cask_install_directory }}/1Password 6.app"'
-  changed_when: false
-  tags:
-    - users
-    - adrien
-
 - name: adrien | Install superduper
   homebrew_cask:
     name: superduper
@@ -60,6 +46,13 @@
 - name: adrien | Open arq
   shell: "open -a {{ brew_cask_install_directory }}/Arq.app"
   changed_when: false
+  tags:
+    - users
+    - adrien
+
+- name: adrien | Install gnucash
+  homebrew_cask:
+    name: gnucash
   tags:
     - users
     - adrien
@@ -95,28 +88,6 @@
 
 - name: adrien | Open dash
   shell: "open -a {{ brew_cask_install_directory }}/Dash.app"
-  changed_when: false
-  tags:
-    - users
-    - adrien
-
-- name: adrien | Install divvy
-  homebrew_cask:
-    name: divvy
-  tags:
-    - users
-    - adrien
-
-- name: adrien | Start Divvy at login
-  shell: >
-    osascript -e 'tell application "System Events" to make new login item at end with properties {path:"{{ brew_cask_install_directory }}/Divvy.app", name:"Divvy", hidden:false}'
-  changed_when: false
-  tags:
-    - users
-    - adrien
-
-- name: adrien | Open divvy
-  shell: "open -a {{ brew_cask_install_directory }}/Divvy.app"
   changed_when: false
   tags:
     - users
