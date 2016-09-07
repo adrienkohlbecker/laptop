@@ -63,6 +63,12 @@
   tags:
     - packages
 
+- name: Install packer
+  homebrew:
+    name: packer
+  tags:
+    - packages
+
 - name: Install htop
   homebrew:
     name: htop

@@ -182,12 +182,6 @@
   tags:
     - apps
 
-- name: Install packer
-  homebrew_cask:
-    name: packer
-  tags:
-    - apps
-
 - name: Install pgadmin3
   homebrew_cask:
     name: pgadmin3
