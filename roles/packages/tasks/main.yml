@@ -48,6 +48,12 @@
   tags:
     - packages
 
+- name: Install jq
+  homebrew:
+    name: jq
+  tags:
+    - packages
+
 - name: Enable aws completion
   lineinfile:
     dest: ~/.zshrc.local
