@@ -56,12 +56,6 @@
   tags:
     - base
 
-- name: Install Brew Cask
-  homebrew:
-    name: brew-cask
-  tags:
-    - base
-
 - name: Set-up cask application directory
   lineinfile:
     dest: ~/.zshrc.local
