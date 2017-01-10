@@ -119,18 +119,18 @@ else
   Dir.chdir LAPTOP_PATH
 end
 
-if File.directory?(DOTFILES_PATH) && File.directory?("#{DOTFILES_PATH}/.git")
-  ohai 'Updating existing dotfiles installation...'
-  Dir.chdir DOTFILES_PATH
-  normaldo 'git pull'
-  normaldo "git checkout #{DOTFILES_REPO_BRANCH}"
-else
-  ohai 'Setting up the dotfiles installation...'
-  sudo "mkdir -p #{DOTFILES_PATH}"
-  sudo "chown -R #{ENV['USER']} #{DOTFILES_PATH}"
-  normaldo "git clone -q --separate-git-dir=#{DOTFILES_PATH} #{DOTFILES_REPO} #{Dir.home} -b #{DOTFILES_REPO_BRANCH}"
-  Dir.chdir DOTFILES_PATH
-end
+#if File.directory?(DOTFILES_PATH) && File.directory?("#{DOTFILES_PATH}/.git")
+#  ohai 'Updating existing dotfiles installation...'
+#  Dir.chdir DOTFILES_PATH
+#  normaldo 'git pull'
+#  normaldo "git checkout #{DOTFILES_REPO_BRANCH}"
+#else
+#  ohai 'Setting up the dotfiles installation...'
+#  sudo "mkdir -p #{DOTFILES_PATH}"
+#  sudo "chown -R #{ENV['USER']} #{DOTFILES_PATH}"
+#  normaldo "git clone -q --separate-git-dir=#{DOTFILES_PATH} #{DOTFILES_REPO} #{Dir.home} -b #{DOTFILES_REPO_BRANCH}"
+#  Dir.chdir DOTFILES_PATH
+#end
 
 Dir.chdir(LAPTOP_PATH)
 
