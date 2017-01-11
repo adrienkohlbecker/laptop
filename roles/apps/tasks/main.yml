@@ -25,9 +25,9 @@
   tags:
     - apps
 
-- name: Install sublime-text3
+- name: Install sublime-text
   homebrew_cask:
-    name: sublime-text3
+    name: sublime-text
   tags:
     - apps
 
@@ -52,21 +52,14 @@
     - afterglow-monokai-syntax
     - atom-jade
     - atom-typescript
-    - autocomplete-go
-    - builder-go
     - color-picker
     - dash
     - editorconfig
-    - environment
     - file-icons
     - file-types
     - git-plus
-    - go-config
-    - go-get
+    - go-debug
     - go-plus
-    - gofmt
-    - gometalinter-linter
-    - gorename
     - highlight-selected
     - language-ansible
     - language-docker
@@ -74,6 +67,7 @@
     - language-haml
     - language-ini
     - language-pgsql
+    - language-systemd
     - linter
     - linter-erb
     - linter-haml
@@ -86,12 +80,11 @@
     - linter-shellcheck
     - linter-tslint
     - minimap
-    - navigator-godef
     - pigments
+    - pretty-json
     - project-manager
     - sort-lines
     - tab-title
-    - tester-go
     - toggle-quotes
   tags:
     - apps
@@ -114,31 +107,31 @@
   tags:
     - apps
 
-- name: Install android-studio
-  homebrew_cask:
-    name: android-studio
-  tags:
-    - apps
+# - name: Install android-studio
+#   homebrew_cask:
+#     name: android-studio
+#   tags:
+#     - apps
 
-- name: Setup ANDROID_HOME
-  lineinfile:
-    dest: ~/.zshrc.local
-    line: export ANDROID_HOME="$HOME/Library/Android/sdk"
-  tags:
-    - apps
+# - name: Setup ANDROID_HOME
+#   lineinfile:
+#     dest: ~/.zshrc.local
+#     line: export ANDROID_HOME="$HOME/Library/Android/sdk"
+#   tags:
+#     - apps
 
-- name: Setup PATH for Android SDK
-  lineinfile:
-    dest: ~/.zshrc.local
-    line: export PATH="$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/platform-tools:$HOME/Library/Android/sdk/build-tools:$PATH"
-  tags:
-    - apps
+# - name: Setup PATH for Android SDK
+#   lineinfile:
+#     dest: ~/.zshrc.local
+#     line: export PATH="$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/platform-tools:$HOME/Library/Android/sdk/build-tools:$PATH"
+#   tags:
+#     - apps
 
-- name: Install evernote
-  homebrew_cask:
-    name: evernote
-  tags:
-    - apps
+# - name: Install evernote
+#   homebrew_cask:
+#     name: evernote
+#   tags:
+#     - apps
 
 - name: Install xquartz
   homebrew_cask:
@@ -242,14 +235,19 @@
   tags:
     - apps
 
-- name: Install audacity
+# - name: Install audacity
+#   homebrew_cask:
+#     name: audacity
+#   tags:
+#     - apps
+
+- name: Install gpgtools
   homebrew_cask:
-    name: audacity
+    name: gpgtools
   tags:
     - apps
 
 - include: chrome.yml
 - include: flux.yml
-- include: caffeine.yml
 - include: sourcetree.yml
 - include: iterm.yml

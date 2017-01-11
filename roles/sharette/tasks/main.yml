@@ -1,20 +1,5 @@
 ---
 
-- name: Ensure ejson key directory is present
-  file:
-    path: ~/.ejson/keys
-    state: directory
-    recurse: true
-  tags:
-    - sharette
-
-- name: Setup ejson key directory
-  lineinfile:
-    dest: ~/.zshrc.local
-    line: 'export EJSON_KEYDIR="$HOME/.ejson/keys"'
-  tags:
-    - sharette
-
 - name: Setup aws region
   lineinfile:
     dest: ~/.zshrc.local

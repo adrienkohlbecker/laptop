@@ -3,7 +3,6 @@
 - hosts: all
   roles:
     - base
-    # - dotfiles
     - packages
     - fonts
     - apps
@@ -14,4 +13,4 @@
   tasks:
 
     - include: "users/adrien/main.yml"
-      when: "ansible_ssh_user == 'adrien'"
+      when: "ansible_ssh_user == 'adrien' or ansible_ssh_user == 'adrienkohlbecker'"

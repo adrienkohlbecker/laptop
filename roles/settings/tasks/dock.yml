@@ -16,7 +16,6 @@
     - "{{ brew_cask_install_directory }}/Atom.app"
     - "/Applications/Mail.app"
     - "{{ brew_cask_install_directory }}/iTerm.app"
-    - "/Applications/Sunrise Calendar.app"
     - "/Applications/Notes.app"
     - "/Applications/iTunes.app"
   tags:

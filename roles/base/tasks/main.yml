@@ -33,7 +33,7 @@
 - name: Install Homebrew
   shell: ruby /tmp/homebrew-install.rb
   args:
-    creates: "/usr/local/.git"
+    creates: "/usr/local/Homebrew/.git"
   tags:
     - base
 
