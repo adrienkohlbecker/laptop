@@ -3,9 +3,9 @@
 LAPTOP_PATH = ENV.fetch('LAPTOP_PATH', "#{Dir.home}/Desktop/laptop")
 LAPTOP_REPO = ENV.fetch('LAPTOP_REPO', 'https://github.com/adrienkohlbecker/laptop.git')
 LAPTOP_REPO_BRANCH = ENV.fetch('LAPTOP_REPO_BRANCH', 'master')
-DOTFILES_PATH = ENV.fetch('LAPTOP_PATH', "#{Dir.home}/.dotfiles")
-DOTFILES_REPO = ENV.fetch('LAPTOP_REPO', 'https://github.com/adrienkohlbecker/dotfiles.git')
-DOTFILES_REPO_BRANCH = ENV.fetch('LAPTOP_REPO_BRANCH', 'master')
+DOTFILES_PATH = ENV.fetch('DOTFILES_PATH', "#{Dir.home}/.dotfiles")
+DOTFILES_REPO = ENV.fetch('DOTFILES_REPO', 'https://github.com/adrienkohlbecker/dotfiles.git')
+DOTFILES_REPO_BRANCH = ENV.fetch('DOTFILES_REPO_BRANCH', 'master')
 
 module Tty extend self
   def blue; bold 34; end
