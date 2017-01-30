@@ -56,6 +56,12 @@
   tags:
     - base
 
+- name: Tap own
+  homebrew_tap:
+    tap: adrienkohlbecker/own
+  tags:
+    - base
+
 - name: Set-up cask application directory
   lineinfile:
     dest: ~/.zshrc.local
