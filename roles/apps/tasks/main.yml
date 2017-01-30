@@ -262,6 +262,5 @@
 
 - include: chrome.yml
 - include: flux.yml
-- include: sourcetree.yml
 - include: iterm.yml
 - include: mas.yml
