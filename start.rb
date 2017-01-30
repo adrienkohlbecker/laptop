@@ -120,7 +120,7 @@ else
   normaldo "git remote set-url origin git@github.com:adrienkohlbecker/laptop.git"
 end
 
-if File.directory?(DOTFILES_PATH) && File.directory?("#{DOTFILES_PATH}/.git")
+if File.directory?(DOTFILES_PATH)
  ohai 'Updating existing dotfiles installation...'
  normaldo "git --git-dir=#{Dir.home}/.dotfiles --work-tree=#{Dir.home} pull"
  normaldo "git --git-dir=#{Dir.home}/.dotfiles --work-tree=#{Dir.home} checkout #{DOTFILES_REPO_BRANCH}"
