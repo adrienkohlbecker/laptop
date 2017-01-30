@@ -119,6 +119,12 @@ else
   Dir.chdir LAPTOP_PATH
 end
 
+if File.directory?("#{Dir.home}/.oh-my-zsh")
+  ohai "Oh My ZSH is installed"
+else
+  normaldo "sh -c '$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)'"
+end
+
 if File.directory?(DOTFILES_PATH)
  ohai 'Updating existing dotfiles installation...'
  normaldo "git --git-dir=#{Dir.home}/.dotfiles --work-tree=#{Dir.home} pull"
