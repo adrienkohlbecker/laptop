@@ -45,7 +45,8 @@
 
 - name: Install atom plugins
   shell: apm install {{ item }}
-  creates: "{{ home }}/.atom/packages/{{item}}"
+  args:
+    creates: "{{ home }}/.atom/packages/{{item}}"
   with_items:
     - Sublime-Style-Column-Selection
     - advanced-open-file
