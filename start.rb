@@ -117,6 +117,7 @@ else
   sudo "chown -R #{ENV['USER']} #{LAPTOP_PATH}"
   normaldo "git clone -q #{LAPTOP_REPO} #{LAPTOP_PATH} -b #{LAPTOP_REPO_BRANCH}"
   Dir.chdir LAPTOP_PATH
+  normaldo "git remote set-url origin git@github.com:adrienkohlbecker/laptop.git"
 end
 
 if File.directory?(DOTFILES_PATH) && File.directory?("#{DOTFILES_PATH}/.git")
@@ -127,6 +128,7 @@ else
  ohai 'Setting up the dotfiles installation...'
  normaldo "git clone -q --separate-git-dir=#{DOTFILES_PATH} #{DOTFILES_REPO} #{Dir.home}/temp-dotfikes -b #{DOTFILES_REPO_BRANCH}"
  normaldo "git --git-dir=#{Dir.home}/.dotfiles --work-tree=#{Dir.home} reset --hard"
+ normaldo "git --git-dir=#{Dir.home}/.dotfiles --work-tree=#{Dir.home} remote set-url origin git@github.com:adrienkohlbecker/dotfiles.git"
  normaldo "rm -rf #{Dir.home}/temp-dotfikes"
 end
 
