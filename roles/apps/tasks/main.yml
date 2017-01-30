@@ -107,31 +107,25 @@
   tags:
     - apps
 
-# - name: Install android-studio
-#   homebrew_cask:
-#     name: android-studio
-#   tags:
-#     - apps
+- name: Install android-studio
+  homebrew_cask:
+    name: android-studio
+  tags:
+    - apps
 
-# - name: Setup ANDROID_HOME
-#   lineinfile:
-#     dest: ~/.zshrc.local
-#     line: export ANDROID_HOME="$HOME/Library/Android/sdk"
-#   tags:
-#     - apps
+- name: Setup ANDROID_HOME
+  lineinfile:
+    dest: ~/.zshrc.local
+    line: export ANDROID_HOME="$HOME/Library/Android/sdk"
+  tags:
+    - apps
 
-# - name: Setup PATH for Android SDK
-#   lineinfile:
-#     dest: ~/.zshrc.local
-#     line: export PATH="$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/platform-tools:$HOME/Library/Android/sdk/build-tools:$PATH"
-#   tags:
-#     - apps
-
-# - name: Install evernote
-#   homebrew_cask:
-#     name: evernote
-#   tags:
-#     - apps
+- name: Setup PATH for Android SDK
+  lineinfile:
+    dest: ~/.zshrc.local
+    line: export PATH="$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/platform-tools:$HOME/Library/Android/sdk/build-tools:$PATH"
+  tags:
+    - apps
 
 - name: Install xquartz
   homebrew_cask:
@@ -235,11 +229,11 @@
   tags:
     - apps
 
-# - name: Install audacity
-#   homebrew_cask:
-#     name: audacity
-#   tags:
-#     - apps
+- name: Install audacity
+  homebrew_cask:
+    name: audacity
+  tags:
+    - apps
 
 - name: Install gpgtools
   homebrew_cask:
