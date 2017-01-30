@@ -17,7 +17,7 @@
 - name: python | Install boto
   pip:
     name: boto
-  sudo: true
+  become: true
   tags:
     - packages
     - python
@@ -25,7 +25,7 @@
 - name: python | Install pylama
   pip:
     name: pylama
-  sudo: true
+  become: true
   tags:
     - packages
     - python

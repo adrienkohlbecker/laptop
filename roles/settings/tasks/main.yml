@@ -2,7 +2,7 @@
 
 - name: Disable Gatekeeper
   shell: spctl --master-disable
-  sudo: true
+  become: true
   changed_when: false
   tags:
     - settings
@@ -18,7 +18,7 @@
 
 - name: Exclude VM directories from TimeMachine
   shell: 'tmutil addexclusion "{{ item }}"'
-  sudo: true
+  become: true
   changed_when: false
   with_items:
     - "{{ home }}/Documents/Parallels"
@@ -34,7 +34,7 @@
 - name: "Check for updates automatically"
   shell: softwareupdate --schedule on
   changed_when: false
-  sudo: true
+  become: true
   tags:
     - settings
 
@@ -42,7 +42,7 @@
 - name: "Speeding up wake from sleep to 24 hours from an hour"
   shell: pmset -a standbydelay 86400
   changed_when: false
-  sudo: true
+  become: true
   tags:
     - settings
 

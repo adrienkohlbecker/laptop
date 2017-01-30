@@ -28,7 +28,7 @@
     line: "{{ item.line }}"
     regexp: "{{ item.regexp }}"
     dest: /etc/sudoers
-  sudo: true
+  become: true
   with_items:
     - line: "# Allow passwordless startup of Vagrant when using NFS."
       regexp: "^# Allow passwordless"

@@ -9,7 +9,7 @@
     - base
 
 - name: Change shell to zsh
-  sudo: yes
+  become: true
   shell: "chsh -s $(which zsh) {{ansible_ssh_user}}"
   register: _base_chsh
   changed_when: "'no changes made' not in _base_chsh.stderr"

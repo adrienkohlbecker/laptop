@@ -42,7 +42,7 @@
 - name: "hacker | Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window"
   shell: defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
   changed_when: false
-  sudo: true
+  become: true
   tags:
     - settings
     - hacker
@@ -74,7 +74,7 @@
 - name: "hacker | Automatically install updates (1)"
   shell: defaults write /Library/Preferences/com.apple.commerce {{ item }} -bool TRUE
   changed_when: false
-  sudo: true
+  become: true
   with_items:
     - AutoUpdate
     - AutoUpdateRestartRequired
@@ -85,7 +85,7 @@
 - name: "hacker | Automatically install updates (2)"
   shell: defaults write /Library/Preferences/com.apple.SoftwareUpdate {{ item }} -bool TRUE
   changed_when: false
-  sudo: true
+  become: true
   with_items:
     - AutomaticCheckEnabled
     - AutomaticDownload
@@ -254,7 +254,7 @@
 
 - name: "hacker | Enabling HiDPI display modes (requires restart)"
   shell: defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
-  sudo: true
+  become: true
   changed_when: false
   tags:
     - settings

@@ -37,7 +37,7 @@
     mode: "u=rwx,g=rwx,o=rx"
     state: directory
     recurse: yes
-  sudo: true
+  become: true
   tags:
     - packages
     - ruby
