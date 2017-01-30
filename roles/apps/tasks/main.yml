@@ -229,12 +229,6 @@
   tags:
     - apps
 
-- name: Install audacity
-  homebrew_cask:
-    name: audacity
-  tags:
-    - apps
-
 - name: Install gpgtools
   homebrew_cask:
     name: gpgtools
@@ -250,6 +244,18 @@
 - name: Install docker
   homebrew_cask:
     name: docker
+  tags:
+    - apps
+
+- name: Install spotify
+  homebrew_cask:
+    name: spotify
+  tags:
+    - apps
+
+- name: Install lastfm
+  homebrew_cask:
+    name: lastfm
   tags:
     - apps
 
