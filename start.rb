@@ -133,8 +133,8 @@ end
 Dir.chdir(LAPTOP_PATH)
 
 ohai 'Installing pip...'
-sudo 'easy_install --upgrade setuptools'
-sudo 'easy_install --upgrade pip'
+normaldo "curl -fsSL https://bootstrap.pypa.io/get-pip.py > /tmp/get-pip.py"
+sudo "python /tmp/get-pip.py"
 
 if command? 'ansible'
   ohai 'Ansible is installed. Continuing...'
