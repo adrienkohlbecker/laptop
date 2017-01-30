@@ -169,9 +169,9 @@
   tags:
     - apps
 
-- name: Install pgadmin3
+- name: Install pgadmin4
   homebrew_cask:
-    name: pgadmin3
+    name: pgadmin4
   tags:
     - apps
 
@@ -238,6 +238,18 @@
 - name: Install gpgtools
   homebrew_cask:
     name: gpgtools
+  tags:
+    - apps
+
+- name: Install telegram-desktop
+  homebrew_cask:
+    name: telegram-desktop
+  tags:
+    - apps
+
+- name: Install docker
+  homebrew_cask:
+    name: docker
   tags:
     - apps
 

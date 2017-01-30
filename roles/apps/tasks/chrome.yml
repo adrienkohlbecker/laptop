@@ -35,6 +35,9 @@
     - cjpalhdlnbpafiamejdnhcphjbkeiagm # ublock origin
     - aomjjhallfgjeglblehebfpbcfeobpgk # 1password
     - bappiabcodbpphnojdiaddhnilfnjmpm # Hacker News enhancement suite
+    # datadog
+    - hdokiejnpimakedhajhdlcegeplioahd # LastPass
+    - ofdlgimnfjfacgcjkafmmjigpgjnjjpn # Ajax Debug Toolbar
   tags:
     - apps
     - chrome

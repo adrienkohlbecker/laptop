@@ -13,10 +13,13 @@
   with_items:
     # General tools
     - "{{ brew_cask_install_directory }}/Google Chrome.app"
+    - "{{ brew_cask_install_directory }}/Telegram.app"
     - "{{ brew_cask_install_directory }}/Atom.app"
     - "/Applications/Mail.app"
     - "{{ brew_cask_install_directory }}/iTerm.app"
     - "/Applications/Notes.app"
+    - "/Applications/Slack.app"
+    - "/Applications/Calendar.app"
     - "/Applications/iTunes.app"
   tags:
     - settings
