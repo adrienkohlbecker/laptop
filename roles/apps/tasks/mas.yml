@@ -1,0 +1,40 @@
+---
+- name: Ensure MAS is installed.
+  homebrew:
+    name: mas
+    state: present
+  tags:
+    - apps
+    - mas
+
+- name: Get MAS account status
+  shell: 'mas account'
+  register: mas_account_result
+  failed_when: mas_account_result.rc > 1
+  changed_when: false
+  tags:
+    - apps
+    - mas
+
+- name: List installed MAS apps.
+  command: mas list
+  register: mas_list
+  check_mode: no
+  changed_when: false
+  tags:
+    - apps
+    - mas
+
+- name: Ensure configured MAS apps are installed.
+  command: mas install "{{ item }}"
+  with_items:
+    - 413857545 # Divvy
+    - 443987910 # 1Password
+    - 525912054 # Wifi Signal
+    - 497799835 # Xcode
+    - 463362050 # Photosweeper
+    - 937984704 # Amphetamine
+  when: "'{{ item }}' not in mas_list.stdout"
+  tags:
+    - apps
+    - mas
