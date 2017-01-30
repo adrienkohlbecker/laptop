@@ -180,12 +180,12 @@ else
   end
 end
 
-if File.exist?("#{Dir.home}/.ssh/id_rsa")
+if File.exist?("#{Dir.home}/.ssh/id_ed25519")
   ohai 'SSH key already exists. Continuing...'
 else
   ohai 'Generating SSH key'
-  normaldo "ssh-keygen -t ed25519 -f #{Dir.home}/.ssh/id_rsa -C #{git_user_email}"
-  normaldo "ssh-add -K #{Dir.home}/.ssh/id_rsa"
+  normaldo "ssh-keygen -t ed25519 -f #{Dir.home}/.ssh/id_ed25519 -C #{git_user_email}"
+  normaldo "ssh-add -K #{Dir.home}/.ssh/id_ed25519"
 end
 
 ohai 'Running ansible playbook'
