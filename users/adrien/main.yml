@@ -179,6 +179,3 @@
   tags:
     - users
     - adrien
-
-- include: postgres.yml
-- include: redis.yml

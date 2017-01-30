@@ -81,7 +81,7 @@ end
 
 abort "Don't run this as root!" if Process.uid == 0
 abort "This script requires the user #{ENV['USER']} to be an Administrator." unless `groups`.split.include? 'admin'
-abort 'This script is only tested on OSX 10.11.' if macos_version != '10.11'
+abort 'This script is only tested on OSX 10.12.' if macos_version != '10.12'
 
 ohai 'This script will setup:'
 puts '  - FileVault if not already enabled'
@@ -117,19 +117,19 @@ else
   sudo "chown -R #{ENV['USER']} #{LAPTOP_PATH}"
   normaldo "git clone -q #{LAPTOP_REPO} #{LAPTOP_PATH} -b #{LAPTOP_REPO_BRANCH}"
   Dir.chdir LAPTOP_PATH
+  normaldo "git remote set-url origin git@github.com:adrienkohlbecker/laptop.git"
 end
 
 if File.directory?(DOTFILES_PATH) && File.directory?("#{DOTFILES_PATH}/.git")
-  ohai 'Updating existing dotfiles installation...'
-  Dir.chdir DOTFILES_PATH
-  normaldo 'git pull'
-  normaldo "git checkout #{DOTFILES_REPO_BRANCH}"
+ ohai 'Updating existing dotfiles installation...'
+ normaldo "git --git-dir=#{Dir.home}/.dotfiles --work-tree=#{Dir.home} pull"
+ normaldo "git --git-dir=#{Dir.home}/.dotfiles --work-tree=#{Dir.home} checkout #{DOTFILES_REPO_BRANCH}"
 else
-  ohai 'Setting up the dotfiles installation...'
-  sudo "mkdir -p #{DOTFILES_PATH}"
-  sudo "chown -R #{ENV['USER']} #{DOTFILES_PATH}"
-  normaldo "git clone -q --separate-git-dir=#{DOTFILES_PATH} #{DOTFILES_REPO} #{Dir.home} -b #{DOTFILES_REPO_BRANCH}"
-  Dir.chdir DOTFILES_PATH
+ ohai 'Setting up the dotfiles installation...'
+ normaldo "git clone -q --separate-git-dir=#{DOTFILES_PATH} #{DOTFILES_REPO} #{Dir.home}/temp-dotfikes -b #{DOTFILES_REPO_BRANCH}"
+ normaldo "git --git-dir=#{Dir.home}/.dotfiles --work-tree=#{Dir.home} reset --hard"
+ normaldo "git --git-dir=#{Dir.home}/.dotfiles --work-tree=#{Dir.home} remote set-url origin git@github.com:adrienkohlbecker/dotfiles.git"
+ normaldo "rm -rf #{Dir.home}/temp-dotfikes"
 end
 
 Dir.chdir(LAPTOP_PATH)
@@ -180,12 +180,12 @@ else
   end
 end
 
-if File.exist?("#{Dir.home}/.ssh/id_rsa")
+if File.exist?("#{Dir.home}/.ssh/id_ed25519")
   ohai 'SSH key already exists. Continuing...'
 else
   ohai 'Generating SSH key'
-  normaldo "ssh-keygen -t rsa -f #{Dir.home}/.ssh/id_rsa -C #{git_user_email}"
-  normaldo "ssh-add -K #{Dir.home}/.ssh/id_rsa"
+  normaldo "ssh-keygen -t ed25519 -f #{Dir.home}/.ssh/id_ed25519 -C #{git_user_email}"
+  normaldo "ssh-add -K #{Dir.home}/.ssh/id_ed25519"
 end
 
 ohai 'Running ansible playbook'

@@ -33,7 +33,7 @@
 - name: Install Homebrew
   shell: ruby /tmp/homebrew-install.rb
   args:
-    creates: "/usr/local/.git"
+    creates: "/usr/local/Homebrew/.git"
   tags:
     - base
 
@@ -56,9 +56,9 @@
   tags:
     - base
 
-- name: Install Brew Cask
-  homebrew:
-    name: brew-cask
+- name: Tap own
+  homebrew_tap:
+    tap: adrienkohlbecker/own
   tags:
     - base
 

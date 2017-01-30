@@ -31,14 +31,10 @@
     src: extension.json
     dest: "~/Library/Google/Chrome/External Extensions/{{ item }}.json"
   with_items:
-    - fhbjgbiflinjbdggehcddcbncdddomop # Postman
-    - aicmkgpgakddgnaphhhpliifpcfhicfo # Postman interceptor
-    - jdbcdblgjdpmfninkoogcfpnkjmndgje # Scrum for trello
-    - ogcgkffhplmphkaahpmffcafajaocjbd # Zenhub
-    - oapdhhkmnfhbiciagepjminahingaiik # Zenhub points counter
     - kbmfpngjjgdllneeigpgjifpgocmfgmb # Reddit enhancement suite
     - cjpalhdlnbpafiamejdnhcphjbkeiagm # ublock origin
     - aomjjhallfgjeglblehebfpbcfeobpgk # 1password
+    - bappiabcodbpphnojdiaddhnilfnjmpm # Hacker News enhancement suite
   tags:
     - apps
     - chrome
