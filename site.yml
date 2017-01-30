@@ -13,4 +13,3 @@
   tasks:
 
     - include: "users/adrien/main.yml"
-      when: "ansible_ssh_user == 'adrien' or ansible_ssh_user == 'adrienkohlbecker'"
