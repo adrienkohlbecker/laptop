@@ -1,5 +1,6 @@
 # Ignore SSH keys unless specified in Host subsection
 IdentitiesOnly yes
+ControlPath ~/.ssh/controlmasters/%r@%h:%p
 
 ##### FROM https://wiki.mozilla.org/Security/Guidelines/OpenSSH#Modern_.28OpenSSH_6.7.2B.29
 
@@ -50,3 +51,23 @@ Host edgerouter
   Port 22
   PreferredAuthentications password
   PubkeyAuthentication no
+
+Host staging
+  User akohlbecker
+  Hostname jumpbox.datad0g.com
+  ForwardAgent yes
+  ControlMaster auto
+  ControlPersist 10m
+  UseKeychain yes
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/datadog_rsa
+
+Host prod
+  User akohlbecker
+  Hostname jumpbox.datadoghq.com
+  ForwardAgent yes
+  ControlMaster auto
+  ControlPersist 10m
+  UseKeychain yes
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/datadog_rsa

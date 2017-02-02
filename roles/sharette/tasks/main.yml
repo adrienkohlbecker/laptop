@@ -20,3 +20,11 @@
     dest: ~/.ssh/config
   tags:
     - sharette
+
+- name: Create controlmasters directory
+  file:
+    path: "~/.ssh/controlmasters"
+    state: directory
+    recurse: true
+  tags:
+    - sharette
