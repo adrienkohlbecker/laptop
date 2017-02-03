@@ -58,4 +58,29 @@
   tags:
     - settings
 
+- name: List installed login items.
+  command: osascript -e 'tell application "System Events" to get the name of every login item'
+  register: login_list
+  check_mode: no
+  changed_when: false
+  tags:
+    - settings
+    - temp
+
+- name: Ensure configured MAS apps are installed.
+  command: osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/{{item}}.app", hidden:false}'
+  with_items:
+    - WiFi Signal
+    - Flux
+    - Google Drive
+    - Divvy
+    - Dropbox
+    - Dash
+    # - Arq Agent # TODO
+    - Last.fm
+    - Telegram Desktop
+  when: "'{{ item }}' not in login_list.stdout"
+  tags:
+    - settings
+
 - include: hacker.yml
