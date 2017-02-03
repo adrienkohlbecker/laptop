@@ -159,6 +159,18 @@
   tags:
     - apps
 
+- name: Install logitech-options
+  homebrew_cask:
+    name: logitech-options
+  tags:
+    - apps
+
+- name: Install logitech-unifying
+  homebrew_cask:
+    name: logitech-unifying
+  tags:
+    - apps
+
 - name: Open the-unarchiver
   shell: "open -a '{{ brew_cask_install_directory }}/The Unarchiver.app'"
   changed_when: false
