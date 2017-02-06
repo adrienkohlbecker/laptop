@@ -1,6 +1,6 @@
 ---
 
-home: "/Users/{{ansible_ssh_user}}"
+home: "/Users/{{ansible_user_id}}"
 gopath: "{{ home }}/.gopath"
 ruby_version: 2.4.0
 ruby_directory: /opt/rubies
