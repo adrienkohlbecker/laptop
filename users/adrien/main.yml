@@ -179,3 +179,14 @@
   tags:
     - users
     - adrien
+
+- name: adrien | Enable compta cron
+  cron:
+    name: daily compta
+    minute: "32"
+    hour: "17"
+    job: "{{ home }}/Desktop/compta/daily.sh 2>&1 | tee -a {{ home }}/Desktop/compta/log/daily.log"
+  tags:
+    - users
+    - adrien
+    - test
