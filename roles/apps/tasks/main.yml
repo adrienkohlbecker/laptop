@@ -273,6 +273,18 @@
   tags:
     - apps
 
+- name: Install google-play-music-desktop-player
+  homebrew_cask:
+    name: google-play-music-desktop-player
+  tags:
+    - apps
+
+- name: Install lastfm
+  homebrew_cask:
+    name: lastfm
+  tags:
+    - apps
+
 - include: chrome.yml
 - include: flux.yml
 - include: iterm.yml

@@ -48,6 +48,7 @@
     - github.com/kisielk/errcheck
     - github.com/FiloSottile/gvt
     - github.com/alecthomas/gometalinter
+    - github.com/cloudflare/cfssl/cmd/...
   tags:
     - packages
     - go
