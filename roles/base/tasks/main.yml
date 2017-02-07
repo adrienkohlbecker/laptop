@@ -10,7 +10,8 @@
 
 - name: Change shell to zsh
   become: true
-  shell: "chsh -s $(which zsh) {{ansible_ssh_user}}"
+  shell: "chsh -s $(which zsh) {{ansible_user_id}}"
+  when: not ansible_check_mode
   register: _base_chsh
   changed_when: "'no changes made' not in _base_chsh.stderr"
   tags:

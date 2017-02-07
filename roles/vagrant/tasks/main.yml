@@ -43,6 +43,6 @@
     - line: Cmnd_Alias VAGRANT_EXPORTS_REMOVE_BREW = /usr/local/opt/gnu-sed/libexec/gnubin/sed -E -e /*/ d -ibak /etc/exports
       regexp: "^Cmnd_Alias VAGRANT_EXPORTS_REMOVE_BREW"
     - line: "%staff ALL=(root) NOPASSWD: VAGRANT_EXPORTS_ADD_SHR, VAGRANT_EXPORTS_ADD_BREW, VAGRANT_NFSD, VAGRANT_EXPORTS_REMOVE_SHR, VAGRANT_EXPORTS_REMOVE_BREW"
-      regexp: "^%staff ALL=(root) NOPASSWD: VAGRANT"
+      regexp: "^%staff ALL=\\(root\\) NOPASSWD: VAGRANT"
   tags:
     - vagrant
