@@ -37,6 +37,24 @@
   tags:
     - apps
 
+- name: Install google-play-music-desktop-player
+  homebrew_cask:
+    name: google-play-music-desktop-player
+  tags:
+    - apps
+
+- name: Install istat-menus
+  homebrew_cask:
+    name: istat-menus
+  tags:
+    - apps
+
+- name: Install gmvault
+  homebrew_cask:
+    name: gmvault
+  tags:
+    - apps
+
 - name: Install atom
   homebrew_cask:
     name: atom
@@ -264,18 +282,6 @@
 - name: Install spotify
   homebrew_cask:
     name: spotify
-  tags:
-    - apps
-
-- name: Install lastfm
-  homebrew_cask:
-    name: lastfm
-  tags:
-    - apps
-
-- name: Install google-play-music-desktop-player
-  homebrew_cask:
-    name: google-play-music-desktop-player
   tags:
     - apps
 

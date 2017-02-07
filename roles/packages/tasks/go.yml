@@ -49,6 +49,7 @@
     - github.com/FiloSottile/gvt
     - github.com/alecthomas/gometalinter
     - github.com/cloudflare/cfssl/cmd/...
+    - github.com/k0kubun/pp
   tags:
     - packages
     - go
