@@ -178,14 +178,14 @@
 - name: Add unprefixed coreutils to PATH
   lineinfile:
     dest: ~/.zshrc.local
-    line: 'export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"'
+    line: 'export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"'
   tags:
     - packages
 
 - name: Add unprefixed coreutils to MANPATH
   lineinfile:
     dest: ~/.zshrc.local
-    line: 'export MANPATH="$(brew --prefix coreutils)/libexec/gnuman:$MANPATH"'
+    line: 'export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"'
   tags:
     - packages
 
