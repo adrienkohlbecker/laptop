@@ -34,6 +34,7 @@
     - 497799835 # Xcode
     - 463362050 # Photosweeper
     - 937984704 # Amphetamine
+    - 410628904 # Wunderlist
   when: "'{{ item }}' not in mas_list.stdout"
   tags:
     - apps

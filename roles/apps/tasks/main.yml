@@ -10,8 +10,10 @@
   homebrew_cask:
     name: "{{ item }}"
   with_items:
+    - adobe-creative-cloud
     - android-studio
     - atom
+    - aws-vault
     - caprine
     - charles
     - diffmerge
@@ -42,6 +44,7 @@
     - transmission
     - virtualbox
     - viscosity
+    - visual-studio-code
     - vlc
     - xquartz
   tags:
@@ -123,6 +126,12 @@
     - Sublime Text
     - The Unarchiver
     - Google Drive
+  tags:
+    - apps
+
+- name: Open adobe installer
+  shell: "open -a '/usr/local/Caskroom/adobe-creative-cloud/latest/Creative Cloud Installer.app'"
+  changed_when: false
   tags:
     - apps
 
