@@ -129,8 +129,15 @@
     - settings
     - hacker
 
-- name: "hacker | Setting a blazingly fast keyboard repeat rate"
-  shell: defaults write NSGlobalDomain KeyRepeat -int 0
+- name: "hacker | Setting a blazingly fast keyboard repeat rate (1/2)"
+  shell: defaults write NSGlobalDomain KeyRepeat -int 2
+  changed_when: false
+  tags:
+    - settings
+    - hacker
+
+- name: "hacker | Setting a blazingly fast keyboard repeat rate (2/2)"
+  shell: defaults write NSGlobalDomain InitialKeyRepeat -int 25
   changed_when: false
   tags:
     - settings
@@ -172,7 +179,7 @@
     - hacker
 
 - name: "hacker | Trackpad: enable tap to click for this user and for the login screen (1)"
-  shell: defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+  shell: defaults write com.apple.AppleMultitouchTrackpad Clicking -int 1
   changed_when: false
   tags:
     - settings
