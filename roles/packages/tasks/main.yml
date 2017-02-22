@@ -30,6 +30,18 @@
   tags:
     - packages
 
+- name: Install mosh
+  homebrew:
+    name: mosh
+  tags:
+    - packages
+
+- name: Install scw
+  homebrew:
+    name: scw
+  tags:
+    - packages
+
 - name: Install hub
   homebrew:
     name: hub
