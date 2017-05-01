@@ -20,7 +20,7 @@
 
 - name: Install font-meslo-lg
   homebrew_cask:
-    name: font-meslo-lg
+    name: adrienkohlbecker/own/font-meslo-lg
   tags:
     - fonts
 
