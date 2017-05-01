@@ -36,9 +36,9 @@
   tags:
     - packages
 
-- name: Install homebrew/versions/gnupg21
+- name: Install gnupg2
   homebrew:
-    name: homebrew/versions/gnupg21
+    name: gnupg2
   tags:
     - packages
 
