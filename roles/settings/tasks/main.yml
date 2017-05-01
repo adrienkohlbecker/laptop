@@ -1,46 +1,17 @@
 ---
 
-- name: Disable Gatekeeper
-  shell: spctl --master-disable
-  become: true
-  changed_when: false
-  tags:
-    - settings
 
-- name: Ensure VM Directories are present
-  file:
-    name: "{{ item }}"
-    state: directory
-  with_items:
-    - ~/Documents/Parallels
-  tags:
-    - settings
-
-- name: Exclude VM directories from TimeMachine
-  shell: 'tmutil addexclusion "{{ item }}"'
-  become: true
-  changed_when: false
-  with_items:
-    - "{{ home }}/Documents/Parallels"
-  tags:
-    - settings
-
-- name: Removing duplicates in the 'Open With' menu
-  shell: /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
-  changed_when: false
+- name: Enable compta cron
+  cron:
+    name: daily compta
+    minute: "32"
+    hour: "17"
+    job: "{{ home }}/Desktop/compta/daily.sh 2>&1 | tee -a {{ home }}/Desktop/compta/log/daily.log"
   tags:
     - settings
 
 - name: "Check for updates automatically"
   shell: softwareupdate --schedule on
-  changed_when: false
-  become: true
-  tags:
-    - settings
-
-# http://www.cultofmac.com/221392/quick-hack-speeds-up-retina-macbooks-wake-from-sleep-os-x-tips/
-- name: "Speeding up wake from sleep to 24 hours from an hour"
-  shell: pmset -a standbydelay 86400
   changed_when: false
   become: true
   tags:
@@ -53,34 +24,8 @@
     - settings
 
 - name: "Disable local Time Machine backups (This can take up a ton of SSD space on <128GB SSDs)"
-  shell: "hash tmutil &> /dev/null && sudo tmutil disablelocal"
+  shell: "tmutil disablelocal"
   changed_when: false
+  become: true
   tags:
     - settings
-
-- name: List installed login items.
-  command: osascript -e 'tell application "System Events" to get the name of every login item'
-  register: login_list
-  check_mode: no
-  changed_when: false
-  tags:
-    - settings
-    - temp
-
-- name: Ensure configured MAS apps are installed.
-  command: osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/{{item}}.app", hidden:false}'
-  with_items:
-    - WiFi Signal
-    - Flux
-    - Google Drive
-    - Divvy
-    - Dropbox
-    - Dash
-    # - Arq Agent # TODO
-    - Last.fm
-    - Telegram Desktop
-  when: "'{{ item }}' not in login_list.stdout"
-  tags:
-    - settings
-
-- include: hacker.yml

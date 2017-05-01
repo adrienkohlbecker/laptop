@@ -90,12 +90,7 @@
     - rubocop
     - rubocop-rspec
     - haml_lint
-    - ejson
     - scss_lint
-    # datadog
-    - test-kitchen
-    - kitchen-vagrant
-    - berkshelf
   tags:
     - packages
     - ruby

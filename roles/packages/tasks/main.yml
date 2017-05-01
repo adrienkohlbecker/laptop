@@ -36,9 +36,41 @@
   tags:
     - packages
 
-- name: Install scw
+- name: Install homebrew/versions/gnupg21
   homebrew:
-    name: scw
+    name: homebrew/versions/gnupg21
+  tags:
+    - packages
+
+- name: Start gpg-agent on login
+  lineinfile:
+    dest: ~/.zshrc.local
+    line: 'gpg-agent --daemon'
+  tags:
+    - packages
+
+- name: Use gpg-agent as ssh-agent
+  lineinfile:
+    dest: ~/.zshrc.local
+    line: 'export SSH_AUTH_SOCK="$HOME/.gnupg/S.gpg-agent.ssh"'
+  tags:
+    - packages
+
+- name: Install pinentry-mac
+  homebrew:
+    name: pinentry-mac
+  tags:
+    - packages
+
+- name: Install zsh-syntax-highlighting
+  homebrew:
+    name: zsh-syntax-highlighting
+  tags:
+    - packages
+
+- name: Install zsh-history-substring-search
+  homebrew:
+    name: zsh-history-substring-search
   tags:
     - packages
 

@@ -12,17 +12,17 @@
   with_items:
     - adobe-creative-cloud
     - android-studio
-    - atom
+    - arq
     - aws-vault
     - caprine
     - charles
+    - dash
     - diffmerge
     - docker
-    - firefox-beta
-    - gmvault
+    - dropbox
+    - gnucash
     - google-drive
-    - google-play-music-desktop-player
-    - gpgtools
+    - houdahgeo
     - imagealpha
     - imageoptim
     - istat-menus
@@ -32,13 +32,17 @@
     - logitech-unifying
     - musicbrainz-picard
     - ngrok
+    - omnidisksweeper
     - paw
     - pgadmin4
     - skype
     - slack
+    - sonos
     - spotify
     - sqlitebrowser
+    - steam
     - sublime-text
+    - superduper
     - telegram-desktop
     - the-unarchiver
     - transmission
@@ -57,54 +61,6 @@
   tags:
     - apps
 
-- name: atom | Install atom plugins
-  shell: apm install {{ item }}
-  args:
-    creates: "{{ home }}/.atom/packages/{{item}}"
-  with_items:
-    - Sublime-Style-Column-Selection
-    - advanced-open-file
-    - afterglow-like
-    - afterglow-monokai-syntax
-    - atom-jade
-    - atom-typescript
-    - color-picker
-    - dash
-    - editorconfig
-    - file-icons
-    - file-types
-    - git-plus
-    - go-debug
-    - go-plus
-    - highlight-selected
-    - language-ansible
-    - language-docker
-    - language-gradle
-    - language-haml
-    - language-ini
-    - language-pgsql
-    - language-systemd
-    - linter
-    - linter-erb
-    - linter-haml
-    - linter-js-yaml
-    - linter-jshint
-    - linter-jsonlint
-    - linter-pylama
-    - linter-rubocop
-    - linter-scss-lint
-    - linter-shellcheck
-    - linter-tslint
-    - minimap
-    - pigments
-    - pretty-json
-    - project-manager
-    - sort-lines
-    - tab-title
-    - toggle-quotes
-  tags:
-    - apps
-
 - name: android-studio | Setup ANDROID_HOME
   lineinfile:
     dest: ~/.zshrc.local
@@ -116,22 +72,6 @@
   lineinfile:
     dest: ~/.zshrc.local
     line: export PATH="$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/platform-tools:$HOME/Library/Android/sdk/build-tools:$PATH"
-  tags:
-    - apps
-
-- name: Open apps
-  shell: "open -a '{{ brew_cask_install_directory }}/{{ item }}.app'"
-  changed_when: false
-  with_items:
-    - Sublime Text
-    - The Unarchiver
-    - Google Drive
-  tags:
-    - apps
-
-- name: Open adobe installer
-  shell: "open -a '/usr/local/Caskroom/adobe-creative-cloud/latest/Creative Cloud Installer.app'"
-  changed_when: false
   tags:
     - apps
 

@@ -9,7 +9,3 @@
     - vagrant
     - settings
     - sharette
-
-  tasks:
-
-    - include: "users/adrien/main.yml"
