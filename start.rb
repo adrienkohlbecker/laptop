@@ -106,12 +106,12 @@ else
   warnandexit 'Relaunch this script when the installation has completed.'
 end
 
-if command? 'xcodebuild'
-  ohai 'Xcode is installed. Asking for licence...'
-  sudo 'xcodebuild -license accept'
-else
-  ohai 'Xcode is not installed'
-end
+# if command? 'xcodebuild'
+#   ohai 'Xcode is installed. Asking for licence...'
+#   sudo 'xcodebuild -license accept'
+# else
+#   ohai 'Xcode is not installed'
+# end
 
 if File.directory?(LAPTOP_PATH) && File.directory?("#{LAPTOP_PATH}/.git")
   ohai 'Updating existing laptop installation...'
