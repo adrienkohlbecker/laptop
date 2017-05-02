@@ -5,7 +5,6 @@
 
 - include: go.yml
 - include: python.yml
-- include: node.yml
 - include: ruby.yml
 
 - include: casks.yml
