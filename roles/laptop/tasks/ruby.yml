@@ -1,25 +1,10 @@
 ---
 
-- name: ruby | Install chruby
-  homebrew:
-    name: chruby
-  tags:
-    - packages
-    - ruby
-
-- name: ruby | Install ruby-install
-  homebrew:
-    name: ruby-install
-  tags:
-    - packages
-    - ruby
-
 - name: ruby | Setup chruby
   lineinfile:
     dest: ~/.zshrc.local
     line: source /usr/local/share/chruby/chruby.sh
   tags:
-    - packages
     - ruby
 
 - name: ruby | Setup autoloading of ruby version via .ruby-version files
@@ -27,7 +12,6 @@
     dest: ~/.zshrc.local
     line: source /usr/local/share/chruby/auto.sh
   tags:
-    - packages
     - ruby
 
 - name: ruby | Ensure ruby_directory exists
@@ -39,7 +23,6 @@
     recurse: yes
   become: true
   tags:
-    - packages
     - ruby
 
 - name: ruby | Install ruby
@@ -47,7 +30,6 @@
   register: _ruby_install
   changed_when: "'already installed' not in _ruby_install.stdout"
   tags:
-    - packages
     - ruby
 
 - name: ruby | Setup default ruby version
@@ -55,14 +37,12 @@
     dest: ~/.zshrc.local
     line: "chruby ruby-{{ ruby_version }}"
   tags:
-    - packages
     - ruby
 
 - name: ruby | Update rubygems
   shell: "{{ ruby_gem_executable }} update --system"
   changed_when: false
   tags:
-    - packages
     - ruby
 
 - name: ruby | Install bundler
@@ -70,14 +50,12 @@
     name: bundler
     executable: "{{ ruby_gem_executable }}"
   tags:
-    - packages
     - ruby
 
 - name: ruby | Configure bundler parallelism
   shell: "mkdir -p $HOME/.bundle && echo \"---\\nBUNDLE_JOBS: '{{ ansible_processor_cores }}'\" > $HOME/.bundle/config"
   changed_when: false
   tags:
-    - packages
     - ruby
 
 - name: ruby | Install packages
@@ -92,5 +70,4 @@
     - haml_lint
     - scss_lint
   tags:
-    - packages
     - ruby

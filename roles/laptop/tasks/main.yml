@@ -1,0 +1,15 @@
+---
+
+- include: base.yml
+- include: packages.yml
+
+- include: go.yml
+- include: python.yml
+- include: node.yml
+- include: ruby.yml
+
+- include: casks.yml
+- include: mas.yml
+
+- include: vagrant.yml
+- include: settings.yml

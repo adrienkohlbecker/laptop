@@ -1,0 +1,12 @@
+---
+
+- name: Install python packages
+  pip:
+    name: "{{ item }}"
+  with_items:
+    - ansible
+    - boto
+    - pylama
+  become: true
+  tags:
+    - python

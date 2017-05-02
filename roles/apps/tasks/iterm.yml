@@ -1,9 +1,0 @@
----
-
-
-- name: iterm | Install iterm2
-  homebrew_cask:
-    name: iterm2
-  tags:
-    - apps
-    - iterm

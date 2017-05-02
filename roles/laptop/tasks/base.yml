@@ -42,12 +42,6 @@
   tags:
     - base
 
-- name: Tap own
-  homebrew_tap:
-    tap: adrienkohlbecker/own
-  tags:
-    - base
-
 - name: Install zsh
   homebrew:
     name: zsh

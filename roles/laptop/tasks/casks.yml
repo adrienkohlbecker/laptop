@@ -4,10 +4,12 @@
   homebrew_tap:
     tap: "{{ item }}"
   with_items:
+    - adrienkohlbecker/own
     - caskroom/drivers
+    - caskroom/fonts
     - caskroom/versions
   tags:
-    - apps
+    - casks
 
 - name: Install packages
   homebrew_cask:
@@ -23,12 +25,18 @@
     - diffmerge
     - docker
     - dropbox
+    - flux
+    - font-anonymous-pro
+    - font-meslo-lg
+    - font-roboto
     - gnucash
+    - google-chrome-beta
     - google-drive
     - houdahgeo
     - imagealpha
     - imageoptim
     - istat-menus
+    - iterm2
     - java7
     - lastfm
     - logitech-options
@@ -36,6 +44,7 @@
     - musicbrainz-picard
     - ngrok
     - omnidisksweeper
+    - parallels-virtualization-sdk
     - paw
     - pgadmin4
     - skype
@@ -49,36 +58,32 @@
     - telegram-desktop
     - the-unarchiver
     - transmission
+    - vagrant
     - virtualbox
     - viscosity
     - visual-studio-code
     - vlc
     - xquartz
   tags:
-    - apps
+    - casks
 
 - name: java | Setup JAVA_HOME
   lineinfile:
     dest: ~/.zshrc.local
     line: export JAVA_HOME="$(/usr/libexec/java_home -v 1.7)"
   tags:
-    - apps
+    - casks
 
 - name: android-studio | Setup ANDROID_HOME
   lineinfile:
     dest: ~/.zshrc.local
     line: export ANDROID_HOME="$HOME/Library/Android/sdk"
   tags:
-    - apps
+    - casks
 
 - name: android-studio | Setup PATH for Android SDK
   lineinfile:
     dest: ~/.zshrc.local
     line: export PATH="$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/platform-tools:$HOME/Library/Android/sdk/build-tools:$PATH"
   tags:
-    - apps
-
-- include: chrome.yml
-- include: flux.yml
-- include: iterm.yml
-- include: mas.yml
+    - casks

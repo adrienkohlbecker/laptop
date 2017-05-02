@@ -1,8 +1,0 @@
----
-
-- name: Install google-chrome-beta
-  homebrew_cask:
-    name: google-chrome-beta
-  tags:
-    - apps
-    - chrome

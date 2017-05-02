@@ -1,5 +1,33 @@
 ---
 
+- name: Setup aws region
+  lineinfile:
+    dest: ~/.zshrc.local
+    line: 'export AWS_REGION="eu-west-1"'
+  tags:
+    - settings
+
+- name: Setup aws region
+  lineinfile:
+    dest: ~/.zshrc.local
+    line: 'export AWS_DEFAULT_REGION="eu-west-1"'
+  tags:
+    - settings
+
+- name: Setup ssh_config
+  template:
+    src: ssh_config.j2
+    dest: ~/.ssh/config
+  tags:
+    - settings
+
+- name: Create controlmasters directory
+  file:
+    path: "~/.ssh/controlmasters"
+    state: directory
+    recurse: true
+  tags:
+    - settings
 
 - name: Enable compta cron
   cron:

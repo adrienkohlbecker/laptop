@@ -2,10 +2,4 @@
 
 - hosts: all
   roles:
-    - base
-    - packages
-    - fonts
-    - apps
-    - vagrant
-    - settings
-    - sharette
+    - laptop

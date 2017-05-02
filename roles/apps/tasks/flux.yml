@@ -1,8 +1,0 @@
----
-
-- name: flux | Install flux
-  homebrew_cask:
-    name: flux
-  tags:
-    - apps
-    - flux

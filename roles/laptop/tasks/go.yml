@@ -1,12 +1,5 @@
 ---
 
-- name: go | Install go
-  homebrew:
-    name: go
-  tags:
-    - packages
-    - go
-
 - name: go | Ensure GOPATH directory is present
   file:
     path: "{{ item }}"
@@ -17,7 +10,6 @@
     - "{{ gopath }}/pkg"
     - "{{ gopath }}/src"
   tags:
-    - packages
     - go
 
 - name: go | Setup GOPATH
@@ -26,7 +18,6 @@
     line: 'export GOPATH="{{ gopath }}"'
     regexp: '^export GOPATH'
   tags:
-    - packages
     - go
 
 - name: go | Add go binaries to PATH
@@ -34,7 +25,6 @@
     dest: ~/.zshrc.local
     line: 'export PATH="$GOPATH/bin:$PATH"'
   tags:
-    - packages
     - go
 
 - name: go | Install packages
@@ -44,5 +34,4 @@
     - github.com/cloudflare/cfssl/cmd/...
     - github.com/k0kubun/pp
   tags:
-    - packages
     - go

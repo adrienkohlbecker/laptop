@@ -1,0 +1,32 @@
+---
+
+- name: Install vagrant plugins
+  shell: "/usr/local/bin/vagrant plugin list | grep -q {{ item }} || /usr/local/bin/vagrant plugin install {{ item }}"
+  with_items:
+    - vagrant-cachier
+    - vagrant-parallels
+    - vagrant-fsnotify
+  register: _vagrant_plugin
+  changed_when: "'Installing' in _vagrant_plugin.stdout"
+  tags:
+    - vagrant
+
+- name: Add vagrant to sudoers
+  lineinfile:
+    line: "{{ item.line }}"
+    regexp: "{{ item.regexp }}"
+    dest: /etc/sudoers
+  become: true
+  with_items:
+    - line: "# Allow passwordless startup of Vagrant when using NFS."
+      regexp: "^# Allow passwordless"
+    - line: Cmnd_Alias VAGRANT_EXPORTS_ADD = /usr/local/opt/coreutils/libexec/gnubin/tee -a /etc/exports
+      regexp: "^Cmnd_Alias VAGRANT_EXPORTS_ADD"
+    - line: Cmnd_Alias VAGRANT_NFSD = /sbin/nfsd restart
+      regexp: "^Cmnd_Alias VAGRANT_NFSD"
+    - line: Cmnd_Alias VAGRANT_EXPORTS_REMOVE = /usr/local/opt/gnu-sed/libexec/gnubin/sed -E -e /*/ d -ibak /etc/exports
+      regexp: "^Cmnd_Alias VAGRANT_EXPORTS_REMOVE"
+    - line: "%staff ALL=(root) NOPASSWD: VAGRANT_EXPORTS_ADD, VAGRANT_NFSD, VAGRANT_EXPORTS_REMOVE"
+      regexp: "^%staff ALL=\\(root\\) NOPASSWD: VAGRANT"
+  tags:
+    - vagrant
