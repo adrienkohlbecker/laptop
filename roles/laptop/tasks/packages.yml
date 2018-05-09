@@ -40,6 +40,7 @@
     - dep
     - docker
     - docker-compose
+    - docker-credential-helper
     - docker-machine
     - dockutil
     - dpkg
@@ -113,4 +114,21 @@
     line: 'eval $(docker-machine env)'
   tags:
     - packages
+
+- name: Create docker directory
+  file:
+    path: ~/.docker
+    state: directory
+    recurse: true
+  tags:
+    - packages
+    - test
+
+- name: Configure docker
+  copy:
+    src: docker.json
+    dest: ~/.docker/config.json
+  tags:
+    - packages
+    - test
 
