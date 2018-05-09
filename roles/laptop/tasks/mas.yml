@@ -28,10 +28,13 @@
     - 413857545 # Divvy
     - 443987910 # 1Password
     - 525912054 # Wifi Signal
-    # - 497799835 # Xcode
     - 463362050 # Photosweeper
     - 937984704 # Amphetamine
-    # - 410628904 # Wunderlist
+    - 496437906 # Shush
+    - 904280696 # Things 3
+    - 975937182 # Fantastical 2
+    - 1289583905 # Pixelmator Pro
+    - 1292198261 # HEIC Converter
   when: "'{{ item }}' not in mas_list.stdout"
   tags:
     - mas
