@@ -14,19 +14,24 @@
   homebrew_cask:
     name: "{{ item }}"
   with_items:
+    - 1password-cli
     - adobe-creative-cloud
+    - aerial
     - arq
     - aws-vault
+    - bonjour-browser
+    - calibre
     - charles
+    - cloak
     - dash
     - diffmerge
-    - docker
     - flux
     - font-anonymous-pro
     - font-meslo-lg
     - font-roboto
     - gnucash
     - google-chrome-beta
+    - google-cloud-sdk
     - houdahgeo
     - imagealpha
     - imageoptim
@@ -43,6 +48,7 @@
     - skype
     - slack
     - sonos
+    - soundflower
     - spotify
     - sqlitebrowser
     - steam
@@ -52,10 +58,12 @@
     - the-unarchiver
     - transmission
     - vagrant
+    - vagrant-vmware-utility
     - virtualbox
     - viscosity
     - visual-studio-code
     - vlc
+    - vmware-fusion
     - xquartz
   tags:
     - casks
