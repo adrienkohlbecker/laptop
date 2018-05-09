@@ -28,10 +28,10 @@
     - 413857545 # Divvy
     - 443987910 # 1Password
     - 525912054 # Wifi Signal
-    - 497799835 # Xcode
+    # - 497799835 # Xcode
     - 463362050 # Photosweeper
     - 937984704 # Amphetamine
-    - 410628904 # Wunderlist
+    # - 410628904 # Wunderlist
   when: "'{{ item }}' not in mas_list.stdout"
   tags:
     - mas
