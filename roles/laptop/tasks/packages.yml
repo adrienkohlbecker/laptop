@@ -14,6 +14,12 @@
     - name: grep
       options:
         - with-default-names # Do not prepend 'g' to the binary
+    - name: gnu-sed
+      options:
+        - with-default-names # Do not prepend 'g' to the binary
+    - name: gnu-tar
+      options:
+        - with-default-names # Do not prepend 'g' to the binary
   tags:
     - packages
 
@@ -29,8 +35,6 @@
     - dpkg
     - exiftool
     - ffmpeg
-    - gnu-sed
-    - gnu-tar
     - gnupg2
     - go
     - htop
@@ -86,30 +90,3 @@
   tags:
     - packages
 
-- name: Add unprefixed gnu-tar to PATH
-  lineinfile:
-    dest: ~/.zshrc.local
-    line: 'export PATH="$(brew --prefix gnu-tar)/libexec/gnubin:$PATH"'
-  tags:
-    - packages
-
-- name: Add unprefixed gnu-tar to MANPATH
-  lineinfile:
-    dest: ~/.zshrc.local
-    line: 'export MANPATH="$(brew --prefix gnu-tar)/libexec/gnuman:$MANPATH"'
-  tags:
-    - packages
-
-- name: Add unprefixed gnu-sed to PATH
-  lineinfile:
-    dest: ~/.zshrc.local
-    line: 'export PATH="$(brew --prefix gnu-sed)/libexec/gnubin:$PATH"'
-  tags:
-    - packages
-
-- name: Add unprefixed gnu-sed to MANPATH
-  lineinfile:
-    dest: ~/.zshrc.local
-    line: 'export MANPATH="$(brew --prefix gnu-sed)/libexec/gnuman:$MANPATH"'
-  tags:
-    - packages
