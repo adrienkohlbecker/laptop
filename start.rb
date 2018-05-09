@@ -128,7 +128,7 @@ end
 if File.directory?("#{Dir.home}/.oh-my-zsh")
   ohai "Oh My ZSH is installed"
 else
-  normaldo "sh -c '$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)'"
+  normaldo 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
 end
 
 if File.directory?(DOTFILES_PATH)
