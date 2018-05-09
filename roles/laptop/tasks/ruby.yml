@@ -3,14 +3,14 @@
 - name: ruby | Setup chruby
   lineinfile:
     dest: ~/.zshrc.local
-    line: source /usr/local/share/chruby/chruby.sh
+    line: source /usr/local/opt/chruby/share/chruby/chruby.sh
   tags:
     - ruby
 
 - name: ruby | Setup autoloading of ruby version via .ruby-version files
   lineinfile:
     dest: ~/.zshrc.local
-    line: source /usr/local/share/chruby/auto.sh
+    line: source /usr/local/opt/chruby/share/chruby/auto.sh
   tags:
     - ruby
 
