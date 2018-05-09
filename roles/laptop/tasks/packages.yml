@@ -22,6 +22,12 @@
         - with-default-names # Do not prepend 'g' to the binary
   tags:
     - packages
+    
+- name: Install packages
+  homebrew_cask:
+    name: osxfuse # depenency of sshfs
+  tags:
+    - packages
 
 - name: Install packages
   homebrew:
@@ -31,6 +37,10 @@
     - awscli
     - chruby
     - coreutils
+    - dep
+    - docker
+    - docker-compose
+    - docker-machine
     - dockutil
     - dpkg
     - exiftool
@@ -43,13 +53,21 @@
     - jq
     - moreutils
     - mosh
+    - mp3info
+    - mp4v2
+    - nmap
     - node
     - openssl
     - packer
     - pinentry-mac
+    - rclone
     - ruby-install
     - screen
     - shellcheck
+    - sshfs
+    - telnet
+    - tfenv
+    - tmux
     - tig
     - tree
     - vim
@@ -86,6 +104,13 @@
   lineinfile:
     dest: ~/.zshrc.local
     line: 'export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"'
+  tags:
+    - packages
+
+- name: Add docker-machine env
+  lineinfile:
+    dest: ~/.zshrc.local
+    line: 'eval $(docker-machine env)'
   tags:
     - packages
 
