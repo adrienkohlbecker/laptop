@@ -58,10 +58,3 @@
   changed_when: false
   tags:
     - settings
-
-- name: "Disable local Time Machine backups (This can take up a ton of SSD space on <128GB SSDs)"
-  shell: "tmutil disablelocal"
-  changed_when: false
-  become: true
-  tags:
-    - settings
