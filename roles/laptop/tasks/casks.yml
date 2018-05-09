@@ -16,15 +16,12 @@
     name: "{{ item }}"
   with_items:
     - adobe-creative-cloud
-    - android-studio
     - arq
     - aws-vault
-    - caprine
     - charles
     - dash
     - diffmerge
     - docker
-    - dropbox
     - flux
     - font-anonymous-pro
     - font-meslo-lg
@@ -38,15 +35,12 @@
     - istat-menus
     - intel-power-gadget
     - iterm2
-    - java7
-    - lastfm
+    - java8
     - logitech-options
     - logitech-unifying
     - musicbrainz-picard
     - ngrok
     - omnidisksweeper
-    - parallels-virtualization-sdk
-    - paw
     - pgadmin4
     - skype
     - slack
@@ -71,20 +65,6 @@
 - name: java | Setup JAVA_HOME
   lineinfile:
     dest: ~/.zshrc.local
-    line: export JAVA_HOME="$(/usr/libexec/java_home -v 1.7)"
-  tags:
-    - casks
-
-- name: android-studio | Setup ANDROID_HOME
-  lineinfile:
-    dest: ~/.zshrc.local
-    line: export ANDROID_HOME="$HOME/Library/Android/sdk"
-  tags:
-    - casks
-
-- name: android-studio | Setup PATH for Android SDK
-  lineinfile:
-    dest: ~/.zshrc.local
-    line: export PATH="$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/platform-tools:$HOME/Library/Android/sdk/build-tools:$PATH"
+    line: export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
   tags:
     - casks
