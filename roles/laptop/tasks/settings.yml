@@ -22,13 +22,6 @@
   tags:
     - settings
 
-- name: Setup ssh_config
-  template:
-    src: ssh_config.j2
-    dest: ~/.ssh/config
-  tags:
-    - settings
-
 - name: Create controlmasters directory
   file:
     path: "~/.ssh/controlmasters"
