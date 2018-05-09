@@ -144,9 +144,13 @@ end
 
 Dir.chdir(LAPTOP_PATH)
 
-ohai 'Installing pip...'
-normaldo "curl -fsSL https://bootstrap.pypa.io/get-pip.py > /tmp/get-pip.py"
-sudo "python /tmp/get-pip.py"
+if command? 'pip'
+  ohai 'pip is installed. Continuing...'
+else
+  ohai 'Installing pip...'
+  normaldo "curl -fsSL https://bootstrap.pypa.io/get-pip.py > /tmp/get-pip.py"
+  sudo "python /tmp/get-pip.py"
+end
 
 if command? 'ansible'
   ohai 'Ansible is installed. Continuing...'
@@ -191,6 +195,6 @@ else
 end
 
 ohai 'Running ansible playbook'
-normaldo 'ansible-playbook -i hosts.ini site.yml --ask-sudo-pass'
+normaldo 'ansible-playbook -i hosts.ini site.yml --ask-become-pass'
 
 ohai 'Done!'
