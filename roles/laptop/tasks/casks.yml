@@ -4,7 +4,6 @@
   homebrew_tap:
     tap: "{{ item }}"
   with_items:
-    - adrienkohlbecker/own
     - caskroom/drivers
     - caskroom/fonts
     - caskroom/versions
