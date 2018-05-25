@@ -6,6 +6,7 @@
   with_items:
     - ansible
     - boto
+    - pre-commit
     - pylama
   become: true
   tags:

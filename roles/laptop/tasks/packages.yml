@@ -22,7 +22,7 @@
         - with-default-names # Do not prepend 'g' to the binary
   tags:
     - packages
-    
+
 - name: Install packages
   homebrew_cask:
     name: osxfuse # depenency of sshfs
@@ -52,6 +52,7 @@
     - hub
     - imagemagick
     - jq
+    - lego
     - moreutils
     - mosh
     - mp3info
@@ -65,6 +66,7 @@
     - ruby-install
     - screen
     - shellcheck
+    - socat
     - sshfs
     - telnet
     - tfenv
@@ -131,4 +133,3 @@
   tags:
     - packages
     - test
-

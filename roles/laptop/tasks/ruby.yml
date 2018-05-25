@@ -69,5 +69,6 @@
     - rubocop-rspec
     - haml_lint
     - scss_lint
+    - terraform_landscape
   tags:
     - ruby

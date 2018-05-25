@@ -74,3 +74,10 @@
     line: export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
   tags:
     - casks
+
+- name: adobe-creative-cloud | run installer
+  shell: open '/usr/local/Caskroom/adobe-creative-cloud/latest/Creative Cloud Installer.app'
+  args:
+    creates: /Applications/Adobe Creative Cloud
+  tags:
+    - casks
