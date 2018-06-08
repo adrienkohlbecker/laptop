@@ -8,6 +8,8 @@
     - boto
     - pre-commit
     - pylama
+    - botocore
+    - boto3
   become: true
   tags:
     - python

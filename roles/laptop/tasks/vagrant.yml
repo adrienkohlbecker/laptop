@@ -6,6 +6,7 @@
     - vagrant-cachier
     - vagrant-parallels
     - vagrant-fsnotify
+    - vagrant-vmware-desktop
   register: _vagrant_plugin
   changed_when: "'Installing' in _vagrant_plugin.stdout"
   tags:

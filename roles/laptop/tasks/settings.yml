@@ -51,3 +51,11 @@
   changed_when: false
   tags:
     - settings
+
+- name: "Save screenshots to ~/Downloads"
+  osx_defaults:
+    domain: com.apple.screencapture
+    key: location
+    type: string
+    value: ~/Downloads
+    state: present

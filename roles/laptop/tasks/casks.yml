@@ -4,9 +4,9 @@
   homebrew_tap:
     tap: "{{ item }}"
   with_items:
-    - caskroom/drivers
-    - caskroom/fonts
-    - caskroom/versions
+    - homebrew/cask-drivers
+    - homebrew/cask-fonts
+    - homebrew/cask-versions
   tags:
     - casks
 
@@ -22,8 +22,10 @@
     - bonjour-browser
     - calibre
     - charles
+    - chefdk
     - cloak
     - dash
+    - db-browser-for-sqlite
     - diffmerge
     - flux
     - font-anonymous-pro
