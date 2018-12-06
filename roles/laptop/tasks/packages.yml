@@ -109,27 +109,3 @@
     line: 'export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"'
   tags:
     - packages
-
-- name: Add docker-machine env
-  lineinfile:
-    dest: ~/.zshrc.local
-    line: 'eval $(docker-machine env)'
-  tags:
-    - packages
-
-- name: Create docker directory
-  file:
-    path: ~/.docker
-    state: directory
-    recurse: true
-  tags:
-    - packages
-    - test
-
-- name: Configure docker
-  copy:
-    src: docker.json
-    dest: ~/.docker/config.json
-  tags:
-    - packages
-    - test
