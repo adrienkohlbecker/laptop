@@ -1,19 +1,5 @@
 ---
 
-- name: Setup aws region
-  lineinfile:
-    dest: ~/.zshrc.local
-    line: 'export AWS_REGION="eu-west-1"'
-  tags:
-    - settings
-
-- name: Setup aws region
-  lineinfile:
-    dest: ~/.zshrc.local
-    line: 'export AWS_DEFAULT_REGION="eu-west-1"'
-  tags:
-    - settings
-
 - name: Create ssh directory
   file:
     path: "~/.ssh"
@@ -35,7 +21,7 @@
     name: daily compta
     minute: "32"
     hour: "17"
-    job: "{{ home }}/Desktop/compta/daily.sh 2>&1 | tee -a {{ home }}/Desktop/compta/log/daily.log"
+    job: "{{ home }}/Work/compta/daily.sh 2>&1 | tee -a {{ home }}/Work/compta/log/daily.log"
   tags:
     - settings
 
