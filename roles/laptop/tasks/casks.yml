@@ -22,11 +22,10 @@
     - bonjour-browser
     - calibre
     - charles
-    - chefdk
-    - cloak
     - dash
     - db-browser-for-sqlite
     - diffmerge
+    - encryptme
     - flux
     - font-anonymous-pro
     - font-meslo-lg
@@ -34,7 +33,7 @@
     - gnucash
     - google-chrome-beta
     - google-cloud-sdk
-    - houdahgeo
+    # - houdahgeo
     - imagealpha
     - imageoptim
     - istat-menus
@@ -52,7 +51,6 @@
     - sonos
     - soundflower
     - spotify
-    - sqlitebrowser
     - steam
     - sublime-text
     - superduper
