@@ -26,7 +26,6 @@
   command: mas install "{{ item }}"
   with_items:
     - 413857545 # Divvy
-    - 443987910 # 1Password
     - 525912054 # Wifi Signal
     - 463362050 # Photosweeper
     - 937984704 # Amphetamine
