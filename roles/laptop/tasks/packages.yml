@@ -46,10 +46,12 @@
     - dpkg
     - exiftool
     - ffmpeg
+    - fzf
     - gnupg2
     - go
     - htop
     - hub
+    - icdiff
     - imagemagick
     - jq
     - lego
