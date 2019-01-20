@@ -55,10 +55,12 @@
     - imagemagick
     - jq
     - lego
+    - libav # avconv
     - moreutils
     - mosh
     - mp3info
     - mp4v2
+    - mp4box
     - nmap
     - node
     - openssl
@@ -69,6 +71,7 @@
     - screen
     - shellcheck
     - socat
+    - sound-touch # soundstretch
     - sshfs
     - telnet
     - tfenv
@@ -78,9 +81,13 @@
     - vim
     - watch
     - wget
+    - wireguard-go
+    - wireguard-tools
     - youtube-dl
     - zsh-history-substring-search
     - zsh-syntax-highlighting
+    - jansson # telegram-cli
+    - libconfig # telegram-cli
   tags:
     - packages
 

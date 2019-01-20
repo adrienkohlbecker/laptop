@@ -2,7 +2,7 @@
 
 home: "/Users/{{ansible_user_id}}"
 gopath: "{{ home }}/.gopath"
-ruby_version: 2.4.0
+ruby_version: 2.5.0
 ruby_directory: /opt/rubies
 ruby_gem_executable: "{{ ruby_directory }}/ruby-{{ruby_version}}/bin/gem"
 ruby_bundle_executable: "{{ home }}/.gem/ruby/{{ruby_version}}/bin/bundle"
