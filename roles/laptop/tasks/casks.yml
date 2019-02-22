@@ -26,12 +26,12 @@
     - dash
     - db-browser-for-sqlite
     - diffmerge
-    - encryptme
+    - docker
     - flux
     - font-anonymous-pro
     - font-meslo-lg
     - font-roboto
-    - gnucash
+    # - gnucash
     - google-chrome-beta
     - google-cloud-sdk
     # - houdahgeo
@@ -42,7 +42,7 @@
     - iterm2
     - java8
     - logitech-options
-    - logitech-unifying
+    # - logitech-unifying
     - losslesscut
     - musicbrainz-picard
     - ngrok

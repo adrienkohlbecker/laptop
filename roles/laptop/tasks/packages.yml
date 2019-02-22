@@ -2,24 +2,12 @@
 
 - name: Install git
   homebrew:
-    name: "{{ item.name }}"
-    install_options: "{{ item.options }}"
-  with_items:
-    - name: git
-      options:
-        - with-blk-sha1 # Compile with the block-optimized SHA1 implementation (10% faster than openssl's)
-    - name: findutils
-      options:
-        - with-default-names # Do not prepend 'g' to the binary
-    - name: grep
-      options:
-        - with-default-names # Do not prepend 'g' to the binary
-    - name: gnu-sed
-      options:
-        - with-default-names # Do not prepend 'g' to the binary
-    - name: gnu-tar
-      options:
-        - with-default-names # Do not prepend 'g' to the binary
+    name: 
+      - git
+      - findutils
+      - grep
+      - gnu-sed
+      - gnu-tar
   tags:
     - packages
 
@@ -31,63 +19,62 @@
 
 - name: Install packages
   homebrew:
-    name: "{{ item }}"
-  with_items:
-    - aacgain
-    - awscli
-    - chruby
-    - coreutils
-    - dep
-    - docker
-    - docker-compose
-    - docker-credential-helper
-    - docker-machine
-    - dockutil
-    - dpkg
-    - exiftool
-    - ffmpeg
-    - fzf
-    - gnupg2
-    - go
-    - htop
-    - hub
-    - icdiff
-    - imagemagick
-    - jq
-    - lego
-    - libav # avconv
-    - moreutils
-    - mosh
-    - mp3info
-    - mp4v2
-    - mp4box
-    - nmap
-    - node
-    - openssl
-    - packer
-    - pinentry-mac
-    - rclone
-    - ruby-install
-    - screen
-    - shellcheck
-    - socat
-    - sound-touch # soundstretch
-    - sshfs
-    - telnet
-    - tfenv
-    - tmux
-    - tig
-    - tree
-    - vim
-    - watch
-    - wget
-    - wireguard-go
-    - wireguard-tools
-    - youtube-dl
-    - zsh-history-substring-search
-    - zsh-syntax-highlighting
-    - jansson # telegram-cli
-    - libconfig # telegram-cli
+    name: 
+      - aacgain
+      - awscli
+      - chruby
+      - coreutils
+      - dep
+      - docker
+      - docker-compose
+      - docker-credential-helper
+      - docker-machine
+      - dockutil
+      - dpkg
+      - exiftool
+      - ffmpeg
+      - fzf
+      - gnupg2
+      - go
+      - htop
+      - hub
+      - icdiff
+      - imagemagick
+      - jq
+      - lego
+      - libav # avconv
+      - moreutils
+      - mosh
+      - mp3info
+      - mp4v2
+      - mp4box
+      - nmap
+      - node
+      - openssl
+      - packer
+      - pinentry-mac
+      - rclone
+      - ruby-install
+      - screen
+      - shellcheck
+      - socat
+      - sound-touch # soundstretch
+      - sshfs
+      - telnet
+      - tfenv
+      - tmux
+      - tig
+      - tree
+      - vim
+      - watch
+      - wget
+      - wireguard-go
+      - wireguard-tools
+      - youtube-dl
+      - zsh-history-substring-search
+      - zsh-syntax-highlighting
+      - jansson # telegram-cli
+      - libconfig # telegram-cli
   tags:
     - packages
 
@@ -102,6 +89,34 @@
   lineinfile:
     dest: ~/.zshrc.local
     line: 'source /usr/local/share/zsh/site-functions/_aws'
+  tags:
+    - packages
+
+- name: Add unprefixed findutils to PATH
+  lineinfile:
+    dest: ~/.zshrc.local
+    line: 'export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"'
+  tags:
+    - packages
+
+- name: Add unprefixed grep to PATH
+  lineinfile:
+    dest: ~/.zshrc.local
+    line: 'export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"'
+  tags:
+    - packages
+
+- name: Add unprefixed gnu-sed to PATH
+  lineinfile:
+    dest: ~/.zshrc.local
+    line: 'export PATH="/usr/local/opt/grep/gnu-sed/gnubin:$PATH"'
+  tags:
+    - packages
+
+- name: Add unprefixed gnu-tar to PATH
+  lineinfile:
+    dest: ~/.zshrc.local
+    line: 'export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"'
   tags:
     - packages
 

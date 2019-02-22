@@ -34,6 +34,6 @@
     - 975937182 # Fantastical 2
     - 1289583905 # Pixelmator Pro
     - 1292198261 # HEIC Converter
-  when: "'{{ item }}' not in mas_list.stdout"
+  when: item not in mas_list.stdout
   tags:
     - mas

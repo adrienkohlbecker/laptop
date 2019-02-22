@@ -2,14 +2,13 @@
 
 - name: Install python packages
   pip:
-    name: "{{ item }}"
-  with_items:
-    - ansible
-    - boto
-    - pre-commit
-    - pylama
-    - botocore
-    - boto3
+    name:
+      - ansible
+      - boto
+      - pre-commit
+      - pylama
+      - botocore
+      - boto3
   become: true
   tags:
     - python
