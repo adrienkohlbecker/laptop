@@ -2,7 +2,7 @@
 
 - name: Install git
   homebrew:
-    name: 
+    name:
       - git
       - findutils
       - grep
@@ -19,7 +19,7 @@
 
 - name: Install packages
   homebrew:
-    name: 
+    name:
       - aacgain
       - awscli
       - chruby
@@ -64,6 +64,7 @@
       - tfenv
       - tmux
       - tig
+      - trash
       - tree
       - vim
       - watch
@@ -109,7 +110,7 @@
 - name: Add unprefixed gnu-sed to PATH
   lineinfile:
     dest: ~/.zshrc.local
-    line: 'export PATH="/usr/local/opt/grep/gnu-sed/gnubin:$PATH"'
+    line: 'export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"'
   tags:
     - packages
 

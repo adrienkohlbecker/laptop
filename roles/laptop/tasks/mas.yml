@@ -34,6 +34,8 @@
     - 975937182 # Fantastical 2
     - 1289583905 # Pixelmator Pro
     - 1292198261 # HEIC Converter
+    - 1381004916 # Discovery / Bonjour Browser
+    - 1451685025 # Wireguard
   when: item not in mas_list.stdout
   tags:
     - mas
