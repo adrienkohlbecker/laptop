@@ -45,3 +45,17 @@
     type: string
     value: ~/Downloads
     state: present
+
+- name: Set faster key repeat
+  osx_defaults:
+    key: KeyRepeat
+    type: int
+    value: 2
+    state: present
+
+- name: Set faster key repeat
+  osx_defaults:
+    key: InitialKeyRepeat
+    type: int
+    value: 15
+    state: present
