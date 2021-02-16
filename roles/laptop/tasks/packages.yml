@@ -22,7 +22,6 @@
     name:
       - aacgain
       - awscli
-      - chruby
       - coreutils
       - dep
       - docker
@@ -41,6 +40,8 @@
       - icdiff
       - imagemagick
       - jq
+      - zaquestion/tap/lab
+      - kubernetes-helm
       - lego
       - libav # avconv
       - moreutils
@@ -54,7 +55,7 @@
       - packer
       - pinentry-mac
       - rclone
-      - ruby-install
+      - ruby
       - screen
       - shellcheck
       - socat
@@ -132,5 +133,25 @@
   lineinfile:
     dest: ~/.zshrc.local
     line: 'export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"'
+  tags:
+    - packages
+
+- name: Add sqlite3 to PATH
+  lineinfile:
+    dest: ~/.zshrc.local
+    line: 'export PATH="/usr/local/opt/sqlite/bin:$PATH"'
+  tags:
+    - packages
+
+- name: Add ruby to PATH
+  lineinfile:
+    dest: ~/.zshrc.local
+    line: 'export PATH="/usr/local/opt/ruby/bin:$PATH"'
+  tags:
+
+- name: Add gems to PATH
+  lineinfile:
+    dest: ~/.zshrc.local
+    line: 'export PATH="/usr/local/lib/ruby/gems/2.6.0/bin:$PATH"'
   tags:
     - packages

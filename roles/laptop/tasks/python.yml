@@ -9,6 +9,7 @@
       - pylama
       - botocore
       - boto3
+      - netaddr # for ansible ipmath module
   become: true
   tags:
     - python

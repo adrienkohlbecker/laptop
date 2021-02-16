@@ -1,46 +1,7 @@
 ---
 
-- name: ruby | Setup chruby
-  lineinfile:
-    dest: ~/.zshrc.local
-    line: source /usr/local/opt/chruby/share/chruby/chruby.sh
-  tags:
-    - ruby
-
-- name: ruby | Setup autoloading of ruby version via .ruby-version files
-  lineinfile:
-    dest: ~/.zshrc.local
-    line: source /usr/local/opt/chruby/share/chruby/auto.sh
-  tags:
-    - ruby
-
-- name: ruby | Ensure ruby_directory exists
-  file:
-    path: "{{ ruby_directory }}"
-    group: admin
-    mode: "u=rwx,g=rwx,o=rx"
-    state: directory
-    recurse: yes
-  become: true
-  tags:
-    - ruby
-
-- name: ruby | Install ruby
-  shell: "ruby-install --rubies-dir {{ ruby_directory }} --cleanup --no-reinstall ruby {{ ruby_version }}"
-  register: _ruby_install
-  changed_when: "'already installed' not in _ruby_install.stdout"
-  tags:
-    - ruby
-
-- name: ruby | Setup default ruby version
-  lineinfile:
-    dest: ~/.zshrc.local
-    line: "chruby ruby-{{ ruby_version }}"
-  tags:
-    - ruby
-
 - name: ruby | Update rubygems
-  shell: "{{ ruby_gem_executable }} update --system"
+  shell: "/usr/local/opt/ruby/bin/gem update --system"
   changed_when: false
   tags:
     - ruby
@@ -48,7 +9,7 @@
 - name: ruby | Install bundler
   gem:
     name: bundler
-    executable: "{{ ruby_gem_executable }}"
+    executable: /usr/local/opt/ruby/bin/gem
   tags:
     - ruby
 
@@ -61,12 +22,13 @@
 - name: ruby | Install packages
   gem:
     name: "{{ item }}"
-    executable: "{{ ruby_gem_executable }}"
+    executable: /usr/local/opt/ruby/bin/gem
   with_items:
     - awesome_print
     - foreman
     - rubocop
     - rubocop-rspec
+    - rubocop-rails
     - haml_lint
     - scss_lint
     - terraform_landscape

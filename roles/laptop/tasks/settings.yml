@@ -20,8 +20,8 @@
   cron:
     name: daily compta
     minute: "32"
-    hour: "17"
-    job: "{{ home }}/Work/compta/daily.sh 2>&1 | tee -a {{ home }}/Work/compta/log/daily.log"
+    hour: "22"
+    job: "cd {{ home }}/Work/compta && bin/daily > daily.log 2>&1"
   tags:
     - settings
 

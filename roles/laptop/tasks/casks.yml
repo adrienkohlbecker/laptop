@@ -22,6 +22,7 @@
     - aws-vault
     - calibre
     - charles
+    - chromedriver
     - dash
     - db-browser-for-sqlite
     - diffmerge
@@ -33,7 +34,9 @@
     # - gnucash
     - google-chrome-beta
     - google-cloud-sdk
+    - hex-fiend
     # - houdahgeo
+    - hyperswitch
     - imagealpha
     - imageoptim
     - istat-menus
@@ -51,7 +54,6 @@
     - skype
     - slack
     - sonos
-    - soundflower
     - spotify
     - steam
     - sublime-text
@@ -67,6 +69,7 @@
     - vlc
     - vmware-fusion10
     - xquartz
+    - yubico-yubikey-manager
   tags:
     - casks
 
