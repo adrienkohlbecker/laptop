@@ -17,13 +17,13 @@
 
 - name: Fetch Homebrew installer
   get_url:
-    url: https://raw.githubusercontent.com/Homebrew/install/master/install
-    dest: /tmp/homebrew-install.rb
+    url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+    dest: /tmp/homebrew-install.sh
   tags:
     - base
 
 - name: Install Homebrew
-  shell: ruby /tmp/homebrew-install.rb
+  command: /tmp/homebrew-install.sh
   args:
     creates: "/usr/local/Homebrew/.git"
   tags:
