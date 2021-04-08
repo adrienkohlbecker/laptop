@@ -5,7 +5,6 @@
     tap: "{{ item }}"
   with_items:
     - homebrew/cask-drivers
-    - homebrew/cask-fonts
     - homebrew/cask-versions
   tags:
     - casks
@@ -14,75 +13,42 @@
   homebrew_cask:
     name: "{{ item }}"
   with_items:
-    - 1password
-    - 1password-cli
-    - adobe-creative-cloud
-    - aerial
-    - arq
-    - aws-vault
-    - calibre
-    - charles
-    - chromedriver
-    - dash
-    - db-browser-for-sqlite
-    - diffmerge
-    - docker
-    - flux
-    - font-anonymous-pro
-    - font-meslo-lg
-    - font-roboto
-    # - gnucash
-    - google-chrome-beta
-    - google-cloud-sdk
-    - hex-fiend
-    # - houdahgeo
-    - hyperswitch
-    - imagealpha
-    - imageoptim
-    - istat-menus
-    - intel-power-gadget
-    - iterm2
-    - java8
-    - logitech-options
-    # - logitech-unifying
-    - losslesscut
-    - mailplane
-    - musicbrainz-picard
-    - ngrok
-    - omnidisksweeper
-    - pgadmin4
-    - skype
-    - slack
-    - sonos
-    - spotify
-    - steam
-    - sublime-text
-    - superduper
-    - telegram-desktop
-    - the-unarchiver
-    - transmission
-    - vagrant
-    - vagrant-vmware-utility
-    - virtualbox
-    - viscosity
-    - visual-studio-code
-    - vlc
-    - vmware-fusion10
-    - xquartz
-    - yubico-yubikey-manager
-  tags:
-    - casks
-
-- name: java | Setup JAVA_HOME
-  lineinfile:
-    dest: ~/.zshrc.local
-    line: export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
-  tags:
-    - casks
-
-- name: adobe-creative-cloud | run installer
-  shell: open '/usr/local/Caskroom/adobe-creative-cloud/latest/Creative Cloud Installer.app'
-  args:
-    creates: /Applications/Adobe Creative Cloud
+    - homebrew/cask/1password
+    - homebrew/cask/1password-cli
+    - homebrew/cask/divvy
+    - homebrew/cask/arq
+    - homebrew/cask/aws-vault
+    - homebrew/cask/calibre
+    - homebrew/cask/dash
+    - homebrew/cask/db-browser-for-sqlite
+    - homebrew/cask/diffmerge
+    - homebrew/cask-versions/firefox-developer-edition
+    - homebrew/cask/docker
+    - homebrew/cask/flux
+    - homebrew/cask/gnucash
+    - homebrew/cask-versions/google-chrome-beta
+    - homebrew/cask/google-cloud-sdk
+    - homebrew/cask/hex-fiend
+    # - homebrew/cask/houdahgeo
+    - homebrew/cask/istat-menus
+    - homebrew/cask/intel-power-gadget
+    - homebrew/cask-drivers/logitech-options
+    - homebrew/cask/losslesscut
+    - homebrew/cask/mailplane
+    - homebrew/cask/musicbrainz-picard
+    - homebrew/cask/omnidisksweeper
+    - homebrew/cask/slack
+    - homebrew/cask-drivers/sonos
+    - homebrew/cask/spotify
+    - homebrew/cask/steam
+    - homebrew/cask/superduper
+    - homebrew/cask/telegram
+    - homebrew/cask/transmission
+    - homebrew/cask/vagrant
+    - homebrew/cask/vagrant-vmware-utility
+    - homebrew/cask/virtualbox
+    - homebrew/cask/visual-studio-code
+    - homebrew/cask/vlc
+    # - homebrew/cask/vmware-fusion12
   tags:
     - casks

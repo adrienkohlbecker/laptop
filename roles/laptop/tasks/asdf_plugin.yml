@@ -1,0 +1,28 @@
+---
+
+- name: "Install asdf plugin {{ plugin.name }}"
+  shell: >-
+    . {{ ansible_user_dir }}/.asdf/asdf.sh &&
+    asdf plugin-add {{ plugin.name }} {{ plugin.repository | default() }}
+    {% if plugin.name == "nodejs" %}&& {{ ansible_user_dir }}/.asdf/plugins/nodejs/bin/import-release-team-keyring{% endif %}
+  args:
+    creates: "{{ ansible_user_dir }}/.asdf/plugins/{{ plugin.name }}"
+  environment:
+    # Fix `gpg or gpg2 command not found!`
+    PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
+
+- name: "Install asdf package versions for {{ plugin.name }}"
+  shell: >-
+    . {{ ansible_user_dir }}/.asdf/asdf.sh &&
+    asdf install {{ plugin.name }} {{ item }}
+  args:
+    creates: "{{ ansible_user_dir }}/.asdf/installs/{{ plugin.name }}/{{ item }}"
+  environment:
+    # Fix `.asdf/plugins/java/bin/install: line 88: gsha256sum: command not found`
+    PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
+  loop: "{{ plugin.versions }}"
+
+- name: "Set global asdf package version for {{ plugin.name }}"
+  shell: >-
+    . {{ ansible_user_dir }}/.asdf/asdf.sh &&
+    asdf global {{ plugin.name }} {% if plugin.global == "latest" %}$(asdf list {{ plugin.name }}){% else %}{{ plugin.global | default(plugin.versions[0]) }}{% endif %}

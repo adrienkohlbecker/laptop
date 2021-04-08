@@ -25,11 +25,9 @@
 - name: Ensure configured MAS apps are installed.
   command: mas install "{{ item }}"
   with_items:
-    - '413857545' # Divvy
     - '525912054' # Wifi Signal
     - '463362050' # Photosweeper
     - '937984704' # Amphetamine
-    - '496437906' # Shush
     - '904280696' # Things 3
     - '975937182' # Fantastical 2
     - '1289583905' # Pixelmator Pro

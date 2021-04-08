@@ -2,3 +2,23 @@
 
 home: "/Users/{{ansible_user_id}}"
 gopath: "{{ home }}/.gopath"
+
+ruby_gems:
+  - bundler
+  - awesome_print
+  - rubocop
+  - rubocop-rspec
+  - rubocop-rails
+
+pip_packages:
+  - pip>=21
+  - pipenv
+  - ansible
+  - boto
+  - pylama
+  - botocore
+  - boto3
+  - netaddr # for ansible ipmath module
+
+npm_packages:
+  - yarn

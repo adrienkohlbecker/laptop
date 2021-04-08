@@ -1,0 +1,40 @@
+---
+
+- name: Ensure configured taps are tapped.
+  homebrew_tap:
+    tap: gitlab/shared-runners 
+    url: https://gitlab.com/gitlab-org/ci-cd/shared-runners/homebrew.git
+    state: present
+
+- name: Install brew packages
+  homebrew:
+    name:
+      - awscli
+      - coreutils
+      - exiftool
+      - ffmpeg
+      - findutils
+      - fzf
+      - git
+      - gitlab/shared-runners/sshpass
+      - gnu-sed
+      - gnu-tar
+      - gnupg
+      - grep
+      - htop
+      - jq
+      - kubernetes-helm
+      - moreutils
+      - pinentry-mac
+      - shellcheck
+      - socat
+      - tig
+      - trash
+      - tree
+      - vim
+      - watch
+      - wget
+      - zsh-autosuggestions
+      - zsh-syntax-highlighting
+  tags:
+    - packages

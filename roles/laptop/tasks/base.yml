@@ -1,20 +1,5 @@
 ---
 
-- name: Ensure .zshrc.local is present
-  file:
-    path: ~/.zshrc.local
-    state: touch
-  changed_when: false
-  tags:
-    - base
-
-- name: Install Oh-My-Zsh
-  shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-  args:
-    creates: "~/.oh-my-zsh"
-  tags:
-    - base
-
 - name: Fetch Homebrew installer
   get_url:
     url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
@@ -29,30 +14,8 @@
   tags:
     - base
 
-- name: Add homebrew binaries to PATH
-  lineinfile:
-    dest: ~/.zshrc.local
-    line: 'export PATH="/usr/local/bin:$PATH"'
-  tags:
-    - base
-
 - name: Update homebrew
   homebrew:
     update_homebrew: yes
-  tags:
-    - base
-
-- name: Install zsh
-  homebrew:
-    name: zsh
-  tags:
-    - base
-
-- name: Change shell to zsh
-  become: true
-  shell: "chsh -s /usr/local/bin/zsh {{ansible_user_id}}"
-  when: not ansible_check_mode
-  register: _base_chsh
-  changed_when: "'no changes made' not in _base_chsh.stderr"
   tags:
     - base

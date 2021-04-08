@@ -1,0 +1,54 @@
+- name: "Clone asdf repository"
+  git:
+    repo: "https://github.com/asdf-vm/asdf.git"
+    dest: "{{ ansible_user_dir }}/.asdf"
+    version: "v0.8.0"
+
+- name: Install asdf deps
+  homebrew:
+    name:
+      - curl
+      - coreutils
+      - git
+
+- name: Create ~/.default-gems configuration file
+  copy:
+    content: "{{ ruby_gems|join('\n') }}\n"
+    dest: "{{ ansible_user_dir }}/.default-gems"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_gid }}"
+    mode: 0644
+
+- name: Create ~/.default-python-packages configuration file
+  copy:
+    content: "{{ pip_packages|join('\n') }}\n"
+    dest: "{{ ansible_user_dir }}/.default-python-packages"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_gid }}"
+    mode: 0644
+
+- name: Create ~/.default-npm-packages configuration file
+  copy:
+    content: "{{ npm_packages|join('\n') }}\n"
+    dest: "{{ ansible_user_dir }}/.default-npm-packages"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_gid }}"
+    mode: 0644
+
+- name: Install asdf plugins
+  loop: 
+    - name: python
+      versions: ['3.9.4']
+      global: '3.9.4'
+    - name: ruby
+      versions: ['2.7.3']
+      global: '2.7.3'
+    - name: nodejs
+      versions: ['14.16.1']
+      global: '14.16.1'
+    - name: golang
+      versions: ['1.13.8']
+      global: '1.13.8'
+  loop_control:
+    loop_var: plugin
+  include_tasks: asdf_plugin.yml
