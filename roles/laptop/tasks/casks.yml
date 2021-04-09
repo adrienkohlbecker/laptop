@@ -15,7 +15,6 @@
   with_items:
     - homebrew/cask/1password
     - homebrew/cask/1password-cli
-    - homebrew/cask/divvy
     - homebrew/cask/arq
     - homebrew/cask/aws-vault
     - homebrew/cask/calibre
