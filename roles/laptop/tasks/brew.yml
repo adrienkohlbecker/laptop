@@ -2,7 +2,7 @@
 
 - name: Ensure configured taps are tapped.
   homebrew_tap:
-    tap: gitlab/shared-runners 
+    tap: gitlab/shared-runners
     url: https://gitlab.com/gitlab-org/ci-cd/shared-runners/homebrew.git
     state: present
 
@@ -34,6 +34,7 @@
       - vim
       - watch
       - wget
+      - youtube-dl
       - zsh-autosuggestions
       - zsh-syntax-highlighting
   tags:

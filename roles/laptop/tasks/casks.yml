@@ -36,6 +36,8 @@
     - homebrew/cask/mailplane
     - homebrew/cask/musicbrainz-picard
     - homebrew/cask/omnidisksweeper
+    - homebrew/cask/portfolioperformance
+    - homebrew/cask/the-unarchiver
     - homebrew/cask/slack
     - homebrew/cask-drivers/sonos
     - homebrew/cask/spotify
