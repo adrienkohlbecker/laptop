@@ -44,11 +44,11 @@
       versions: ['2.7.3']
       global: '2.7.3'
     - name: nodejs
-      versions: ['14.16.1']
-      global: '14.16.1'
+      versions: ['16.2.0']
+      global: '16.2.0'
     - name: golang
-      versions: ['1.13.8']
-      global: '1.13.8'
+      versions: ['1.16.6']
+      global: '1.16.6'
   loop_control:
     loop_var: plugin
   include_tasks: asdf_plugin.yml

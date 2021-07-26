@@ -125,21 +125,15 @@ else
   Dir.chdir LAPTOP_PATH
 end
 
-if File.directory?("#{Dir.home}/.oh-my-zsh")
-  ohai "Oh My ZSH is installed"
-else
-  normaldo 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
-end
-
 if File.directory?(DOTFILES_PATH)
  ohai 'Updating existing dotfiles installation...'
  normaldo "git --git-dir=#{Dir.home}/.dotfiles --work-tree=#{Dir.home} pull"
  normaldo "git --git-dir=#{Dir.home}/.dotfiles --work-tree=#{Dir.home} checkout #{DOTFILES_REPO_BRANCH}"
 else
  ohai 'Setting up the dotfiles installation...'
- normaldo "git clone -q --separate-git-dir=#{DOTFILES_PATH} #{DOTFILES_REPO} #{Dir.home}/temp-dotfikes -b #{DOTFILES_REPO_BRANCH}"
+ normaldo "git clone -q --separate-git-dir=#{DOTFILES_PATH} #{DOTFILES_REPO} #{Dir.home}/temp-dotfiles -b #{DOTFILES_REPO_BRANCH}"
  normaldo "git --git-dir=#{Dir.home}/.dotfiles --work-tree=#{Dir.home} reset --hard"
- normaldo "rm -rf #{Dir.home}/temp-dotfikes"
+ normaldo "rm -rf #{Dir.home}/temp-dotfiles"
 end
 
 Dir.chdir(LAPTOP_PATH)
@@ -148,7 +142,7 @@ if command? 'pip'
   ohai 'pip is installed. Continuing...'
 else
   ohai 'Installing pip...'
-  normaldo "curl -fsSL https://bootstrap.pypa.io/get-pip.py > /tmp/get-pip.py"
+  normaldo "curl -fsSL https://bootstrap.pypa.io/pip/2.7/get-pip.py  > /tmp/get-pip.py"
   sudo "python /tmp/get-pip.py"
 end
 
@@ -157,41 +151,6 @@ if command? 'ansible'
 else
   ohai 'Installing ansible...'
   sudo 'pip install ansible'
-end
-
-git_user_name = `git config -f #{Dir.home}/.gitconfig.local user.name`
-git_user_email = `git config -f #{Dir.home}/.gitconfig.local user.email`
-
-if git_user_name != '' && git_user_email != ''
-  ohai 'Git is already configured. Continuing...'
-else
-  ohai 'Asking for Git configuration'
-
-  if git_user_name == ''
-
-    while git_user_name == ''
-      git_user_name = prompt('', 'Your GIT full name (eg: John Doe)')
-      if git_user_name == ''
-        warn 'Should not be empty'
-      end
-    end
-
-    normaldo "git config -f #{Dir.home}/.gitconfig.local --add user.name '#{git_user_name}'"
-
-  end
-
-  if git_user_email == ''
-
-    while git_user_email == ''
-      git_user_email = prompt('', 'Your GIT email (eg: john@doe.com)')
-      if git_user_email == ''
-        warn 'Should not be empty'
-      end
-    end
-
-    normaldo "git config -f #{Dir.home}/.gitconfig.local --add user.email '#{git_user_email}'"
-
-  end
 end
 
 ohai 'Running ansible playbook'

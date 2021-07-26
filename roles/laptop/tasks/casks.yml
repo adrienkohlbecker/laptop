@@ -30,7 +30,7 @@
     - homebrew/cask/hex-fiend
     # - homebrew/cask/houdahgeo
     - homebrew/cask/istat-menus
-    - homebrew/cask/intel-power-gadget
+#    - homebrew/cask/intel-power-gadget
     - homebrew/cask-drivers/logitech-options
     - homebrew/cask/losslesscut
     - homebrew/cask/mailplane
@@ -45,11 +45,12 @@
     - homebrew/cask/superduper
     - homebrew/cask/telegram
     - homebrew/cask/transmission
-    - homebrew/cask/vagrant
-    - homebrew/cask/vagrant-vmware-utility
-    - homebrew/cask/virtualbox
+#    - homebrew/cask/vagrant
+#    - homebrew/cask/vagrant-vmware-utility
+#    - homebrew/cask/virtualbox
     - homebrew/cask/visual-studio-code
     - homebrew/cask/vlc
     # - homebrew/cask/vmware-fusion12
+    - homebrew/cask/zoom
   tags:
     - casks
