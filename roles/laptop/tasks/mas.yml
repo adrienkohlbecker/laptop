@@ -9,7 +9,7 @@
 - name: Get MAS account status
   shell: 'mas account'
   register: mas_account_result
-  failed_when: mas_account_result.rc > 1
+  failed_when: mas_account_result.rc > 0
   changed_when: false
   tags:
     - mas
