@@ -23,10 +23,12 @@
     - homebrew/cask/diffmerge
     - homebrew/cask-versions/firefox-developer-edition
     - homebrew/cask/docker
+    - homebrew/cask/elgato-wave-link
     - homebrew/cask/flux
     - homebrew/cask/gnucash
-    - homebrew/cask-versions/google-chrome-beta
+    - homebrew/cask/google-chrome
     - homebrew/cask/google-cloud-sdk
+    - homebrew/cask/grammarly
     - homebrew/cask/hex-fiend
     # - homebrew/cask/houdahgeo
     - homebrew/cask/istat-menus
@@ -40,6 +42,7 @@
     - homebrew/cask/the-unarchiver
     - homebrew/cask/slack
     - homebrew/cask-drivers/sonos
+    - homebrew/cask/screenflow
     - homebrew/cask/spotify
     - homebrew/cask/steam
     - homebrew/cask/superduper
@@ -50,6 +53,7 @@
 #    - homebrew/cask/virtualbox
     - homebrew/cask/visual-studio-code
     - homebrew/cask/vlc
+    - homebrew/cask/zoom
     # - homebrew/cask/vmware-fusion12
     - homebrew/cask/zoom
   tags:

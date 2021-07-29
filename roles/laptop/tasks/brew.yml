@@ -24,6 +24,7 @@
       - htop
       - jq
       - kubernetes-helm
+      - minipro
       - moreutils
       - pinentry-mac
       - shellcheck
