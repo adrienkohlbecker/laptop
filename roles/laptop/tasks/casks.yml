@@ -23,7 +23,7 @@
     - homebrew/cask/diffmerge
     - homebrew/cask-versions/firefox-developer-edition
     - homebrew/cask/docker
-    - homebrew/cask/elgato-wave-link
+    - homebrew/cask-drivers/elgato-wave-link
     - homebrew/cask/flux
     - homebrew/cask/gnucash
     - homebrew/cask/google-chrome
