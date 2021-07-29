@@ -1,21 +1,5 @@
 ---
 
-- name: Fetch Homebrew installer
-  get_url:
-    url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
-    dest: /tmp/homebrew-install.sh
-    mode: 0755
-  tags:
-    - base
-
-- name: Install Homebrew
-  command: /tmp/homebrew-install.sh
-  args:
-    creates: "/opt/homebrew/.git"
-  tags:
-    - base
-  become: true
-
 - name: Update homebrew
   homebrew:
     update_homebrew: yes
