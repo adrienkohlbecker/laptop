@@ -35,9 +35,11 @@
 #    - homebrew/cask/intel-power-gadget
     - homebrew/cask-drivers/logitech-options
     - homebrew/cask/losslesscut
+    - homebrew/cask/karabiner-elements
     - homebrew/cask/mailplane
     - homebrew/cask/musicbrainz-picard
     - homebrew/cask/omnidisksweeper
+    - homebrew/cask/parsec
     - homebrew/cask/portfolioperformance
     - homebrew/cask/the-unarchiver
     - homebrew/cask/slack
@@ -48,7 +50,7 @@
     - homebrew/cask/superduper
     - homebrew/cask/telegram
     - homebrew/cask/transmission
-#    - homebrew/cask/vagrant
+    - homebrew/cask/vagrant
 #    - homebrew/cask/vagrant-vmware-utility
 #    - homebrew/cask/virtualbox
     - homebrew/cask/visual-studio-code

@@ -20,6 +20,7 @@ if [ -d $HOME/.dotfiles ]; then
 else
     git clone -q --separate-git-dir=$HOME/.dotfiles https://github.com/adrienkohlbecker/dotfiles.git $HOME/temp-dotfiles -b master
     git --git-dir=$HOME/.dotfiles --work-tree=$HOME reset --hard
+    git --git-dir=$HOME/.dotfiles --work-tree=$HOME submodule update
     rm -rf $HOME/temp-dotfiles
 fi
 
