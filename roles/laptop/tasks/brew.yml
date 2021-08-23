@@ -41,3 +41,10 @@
       - zsh-syntax-highlighting
   tags:
     - packages
+
+- name: Install FZF
+  shell: $(brew --prefix)/opt/fzf/install --key-bindings --completion --no-update-rc
+  args:
+    creates: "{{ ansible_user_dir }}/.fzf.zsh"
+  tags:
+    - packages
