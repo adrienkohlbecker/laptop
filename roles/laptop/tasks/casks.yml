@@ -28,18 +28,14 @@
     - homebrew/cask/gnucash
     - homebrew/cask/google-chrome
     - homebrew/cask/google-cloud-sdk
-    - homebrew/cask/grammarly
     - homebrew/cask/hex-fiend
-    # - homebrew/cask/houdahgeo
     - homebrew/cask/istat-menus
-#    - homebrew/cask/intel-power-gadget
     - homebrew/cask-drivers/logitech-options
     - homebrew/cask/losslesscut
     - homebrew/cask/karabiner-elements
     - homebrew/cask/mailplane
     - homebrew/cask/musicbrainz-picard
     - homebrew/cask/omnidisksweeper
-    - homebrew/cask/parsec
     - homebrew/cask/portfolioperformance
     - homebrew/cask/the-unarchiver
     - homebrew/cask/slack
@@ -51,12 +47,9 @@
     - homebrew/cask/telegram
     - homebrew/cask/transmission
     - homebrew/cask/vagrant
-#    - homebrew/cask/vagrant-vmware-utility
-#    - homebrew/cask/virtualbox
     - homebrew/cask/visual-studio-code
     - homebrew/cask/vlc
     - homebrew/cask/zoom
-    # - homebrew/cask/vmware-fusion12
-    - homebrew/cask/zoom
+    - homebrew/cask/whatsapp
   tags:
     - casks

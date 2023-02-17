@@ -36,19 +36,19 @@
     mode: 0644
 
 - name: Install asdf plugins
-  loop: 
+  loop:
     - name: python
-      versions: ['3.9.4']
-      global: '3.9.4'
+      versions: ['3.11.2']
+      global: '3.11.2'
     - name: ruby
-      versions: ['2.7.3']
-      global: '2.7.3'
+      versions: ['3.0.2']
+      global: '3.0.2'
     - name: nodejs
-      versions: ['16.2.0']
-      global: '16.2.0'
+      versions: ['19.6.1']
+      global: '19.6.1'
     - name: golang
-      versions: ['1.16.6']
-      global: '1.16.6'
+      versions: ['1.20.1']
+      global: '1.20.1'
   loop_control:
     loop_var: plugin
   include_tasks: asdf_plugin.yml
