@@ -49,13 +49,21 @@
 - name: Set faster key repeat
   osx_defaults:
     key: KeyRepeat
-    type: int
+    type: float
     value: 2
     state: present
 
 - name: Set faster key repeat
   osx_defaults:
     key: InitialKeyRepeat
-    type: int
+    type: float
     value: 15
+    state: present
+
+- name: Set faster dock hide
+  osx_defaults:
+    domain: com.apple.Dock
+    key: autohide-delay
+    type: float
+    value: 0
     state: present

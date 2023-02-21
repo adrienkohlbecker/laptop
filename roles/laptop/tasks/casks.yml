@@ -32,7 +32,6 @@
     - homebrew/cask/istat-menus
     - homebrew/cask-drivers/logitech-options
     - homebrew/cask/losslesscut
-    - homebrew/cask/karabiner-elements
     - homebrew/cask/mailplane
     - homebrew/cask/musicbrainz-picard
     - homebrew/cask/omnidisksweeper
@@ -46,7 +45,6 @@
     - homebrew/cask/superduper
     - homebrew/cask/telegram
     - homebrew/cask/transmission
-    - homebrew/cask/vagrant
     - homebrew/cask/visual-studio-code
     - homebrew/cask/vlc
     - homebrew/cask/zoom

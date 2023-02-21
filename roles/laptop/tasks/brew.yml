@@ -23,10 +23,10 @@
       - grep
       - htop
       - jq
-      - kubernetes-helm
       - minipro
       - moreutils
       - pinentry-mac
+      - platformio
       - shellcheck
       - socat
       - tig

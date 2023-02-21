@@ -4,7 +4,6 @@
   shell: >-
     . {{ ansible_user_dir }}/.asdf/asdf.sh &&
     asdf plugin-add {{ plugin.name }} {{ plugin.repository | default() }}
-    {% if plugin.name == "nodejs" %}&& {{ ansible_user_dir }}/.asdf/plugins/nodejs/bin/import-release-team-keyring{% endif %}
   args:
     creates: "{{ ansible_user_dir }}/.asdf/plugins/{{ plugin.name }}"
   environment:
