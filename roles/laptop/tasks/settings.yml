@@ -67,3 +67,10 @@
     type: float
     value: 0
     state: present
+
+- name: Disable popup when long-pressing accented keys like "e"
+  osx_defaults:
+    key: ApplePressAndHoldEnabled
+    type: bool
+    value: false
+    state: present

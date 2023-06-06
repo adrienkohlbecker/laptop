@@ -49,5 +49,7 @@
     - homebrew/cask/vlc
     - homebrew/cask/zoom
     - homebrew/cask/whatsapp
+    - homebrew/cask/shifty
+    - homebrew/cask/lunar
   tags:
     - casks
