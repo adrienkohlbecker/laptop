@@ -1,10 +1,10 @@
 ---
 
-- include: base.yml
-- include: brew.yml
-- include: asdf.yml
+- import_tasks: base.yml
+- import_tasks: brew.yml
+- import_tasks: asdf.yml
 
-- include: casks.yml
-- include: mas.yml
+- import_tasks: casks.yml
+- import_tasks: mas.yml
 
-- include: settings.yml
+- import_tasks: settings.yml
