@@ -8,13 +8,22 @@
   tags:
     - settings
 
-- name: Create controlmasters directory
+- name: Create ssh config.d directory
   file:
-    path: "~/.ssh/controlmasters"
+    path: "~/.ssh/config.d"
     state: directory
     recurse: true
   tags:
     - settings
+    - focus
+
+- name: Copy using inline content
+  copy:
+    content: "Host *\n  UseKeychain yes\n"
+    dest: "~/.ssh/config.d/keychain"
+  tags:
+    - settings
+    - focus
 
 - name: Enable compta cron
   cron:
