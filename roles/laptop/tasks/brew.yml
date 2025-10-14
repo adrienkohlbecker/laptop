@@ -11,7 +11,9 @@
     name:
       - awscli
       - ansible
+      - colima
       - coreutils
+      - docker
       - exiftool
       - ffmpeg
       - findutils
@@ -25,8 +27,10 @@
       - jq
       - minipro
       - moreutils
+      - nnn
       - pinentry-mac
       - platformio
+      - rsync
       - shellcheck
       - socat
       - tig
@@ -34,6 +38,7 @@
       - tree
       - vim
       - watch
+      - wakeonlan
       - wget
       - youtube-dl
   tags:

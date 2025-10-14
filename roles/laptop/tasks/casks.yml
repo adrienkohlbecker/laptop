@@ -22,7 +22,6 @@
     - homebrew/cask/db-browser-for-sqlite
     - homebrew/cask/diffmerge
     - homebrew/cask-versions/firefox-developer-edition
-    - homebrew/cask/docker
     - homebrew/cask-drivers/elgato-wave-link
     - homebrew/cask/flux
     - homebrew/cask/gnucash
