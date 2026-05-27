@@ -43,18 +43,26 @@
       - parallel
       - pinentry-mac
       - platformio
+      - podman
       - pv
+      - qemu
+      - qrencode
       - rsync
+      - scw
       - shellcheck
       - socat
       - stow
       - tig
       - trash
       - tree
+      - typst
       - vim
+      - virt-manager
       - wakeonlan
       - watch
       - wget
+      - wireguard-tools
+      - wireshark
       - yt-dlp
   tags:
     - packages

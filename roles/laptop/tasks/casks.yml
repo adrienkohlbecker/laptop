@@ -6,22 +6,28 @@
   with_items:
     - 1password
     - 1password-cli
+    - aegisub
     - arq
     - calibre
     - dash
     - db-browser-for-sqlite
     - diffmerge
+    - digital
     - elgato-wave-link
     - firefox@developer-edition
     - flux-app
+    - font-meslo-lg-nerd-font
     - gcloud-cli
     - gnucash
     - google-chrome
     - hex-fiend
     - istat-menus
+    - kicad
     - losslesscut
+    - monero-wallet
     - musicbrainz-picard
     - omnidisksweeper
+    - podman-desktop
     - portfolioperformance
     - screenflow
     - slack
@@ -29,9 +35,11 @@
     - spotify
     - steam
     - superduper
+    - superkey
     - telegram
     - the-unarchiver
     - transmission
+    - vagrant
     - visual-studio-code
     - vlc
     - whatsapp
