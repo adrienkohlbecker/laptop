@@ -115,6 +115,18 @@ PLIST
     ok "Command Line Tools installed"
   fi
 
+  # Rosetta 2 — required to run x86_64 casks/binaries on Apple Silicon. Skipped
+  # on Intel (no Rosetta there); a no-op once oahd (the Rosetta daemon) is up.
+  if [ "$(uname -m)" != "arm64" ]; then
+    ok "Rosetta not needed (not Apple Silicon)"
+  elif /usr/bin/pgrep -q oahd; then
+    ok "Rosetta already installed"
+  else
+    info "Installing Rosetta 2"
+    sudo softwareupdate --install-rosetta --agree-to-license
+    ok "Rosetta installed"
+  fi
+
   # Homebrew.
   if [ -x "$HOMEBREW_PREFIX/bin/brew" ]; then
     ok "Homebrew present"
