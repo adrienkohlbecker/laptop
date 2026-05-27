@@ -24,7 +24,7 @@ BREWFILE="$SCRIPT_DIR/Brewfile"
 DOTFILES_DIR="$HOME/Work/dotfiles"
 DOTFILES_REPO="https://github.com/adrienkohlbecker/dotfiles.git"
 HOMEBREW_PREFIX="/opt/homebrew"
-SUDO_PASS="${LAPTOP_BECOME_PASS:-admin}"
+SUDO_PASS="${LAPTOP_BECOME_PASS:-}"
 ALL_SECTIONS=(bootstrap packages dotfiles runtimes settings)
 
 # --- pretty output -----------------------------------------------------------
@@ -42,6 +42,9 @@ ok()   { printf '  %s✓%s %s\n' "$GREEN" "$RESET" "$*"; }
 warn() { printf '  %s⚠%s  %s\n' "$YELLOW" "$RESET" "$*" >&2; }
 die()  { printf '\n%s✗ %s%s\n' "$RED" "$*" "$RESET" >&2; exit 1; }
 
+# Escape XML metacharacters so a value can be safely interpolated into a plist.
+xml_escape() { local s=$1; s=${s//&/&amp;}; s=${s//</&lt;}; s=${s//>/&gt;}; printf '%s' "$s"; }
+
 # --- sudo --------------------------------------------------------------------
 
 # Acquire sudo once up front and keep the timestamp warm so later steps never
@@ -49,6 +52,7 @@ die()  { printf '\n%s✗ %s%s\n' "$RED" "$*" "$RESET" >&2; exit 1; }
 establish_sudo() {
   step "Acquiring administrator rights"
   if [ -n "${LAPTOP_VM:-}" ]; then
+    : "${SUDO_PASS:?LAPTOP_BECOME_PASS must be set in VM mode}"
     echo "$SUDO_PASS" | sudo -S -v 2>/dev/null || die "sudo authentication failed"
   else
     sudo -v || die "sudo authentication failed"
@@ -72,30 +76,33 @@ bootstrap() {
     ok "FileVault already enabled"
   elif [ -n "${LAPTOP_VM:-}" ]; then
     info "Enabling FileVault (non-interactive)"
-    local plist
-    plist=$(mktemp)
-    cat > "$plist" <<PLIST
+    # Feed the input plist on stdin so the password never lands on disk, and
+    # XML-escape the credentials so metacharacters can't corrupt or inject into
+    # it. -norecoverykey: this is a throwaway VM, don't mint a key into the logs.
+    sudo fdesetup enable -inputplist -norecoverykey <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
     <key>Username</key>
-    <string>$(whoami)</string>
+    <string>$(xml_escape "$(whoami)")</string>
     <key>Password</key>
-    <string>$SUDO_PASS</string>
+    <string>$(xml_escape "$SUDO_PASS")</string>
 </dict>
 </plist>
 PLIST
-    # $plist is user-readable, so the redirect (opened by us) is fine — fdesetup
-    # reads it as root via the inherited descriptor.
-    # shellcheck disable=SC2024
-    sudo fdesetup enable -inputplist < "$plist"
-    rm -f "$plist"
     ok "FileVault enabled"
   else
     info "Enabling FileVault — enter your login password when prompted"
-    sudo fdesetup enable
-    ok "FileVault enabled (note the recovery key above)"
+    # Capture the recovery key to a file instead of letting it scroll past — it
+    # is the only irreplaceable secret this run produces.
+    local keyfile="$HOME/Desktop/FileVault-recovery-key.plist"
+    # The redirect is opened by us (not root) on purpose, so the key file is
+    # owned by the user.
+    # shellcheck disable=SC2024
+    sudo fdesetup enable -outputplist > "$keyfile"
+    chmod 600 "$keyfile"
+    ok "FileVault enabled — recovery key saved to $keyfile (store it somewhere safe)"
   fi
 
   # Command Line Tools — install headlessly via softwareupdate when clang is
