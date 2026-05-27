@@ -16,6 +16,7 @@
 # LAPTOP_BECOME_PASS (default "admin"), and App Store apps are skipped.
 
 set -euo pipefail
+IFS=$'\n\t'
 
 # --- configuration -----------------------------------------------------------
 
@@ -36,7 +37,7 @@ else
   BOLD='' DIM='' RED='' GREEN='' YELLOW='' BLUE='' RESET=''
 fi
 
-step() { printf '\n%s==>%s %s%s%s\n' "$BLUE" "$RESET" "$BOLD" "$*" "$RESET"; }
+step() { CURRENT_STEP="$*"; printf '\n%s==>%s %s%s%s\n' "$BLUE" "$RESET" "$BOLD" "$*" "$RESET"; }
 info() { printf '    %s%s%s\n' "$DIM" "$*" "$RESET"; }
 ok()   { printf '  %s✓%s %s\n' "$GREEN" "$RESET" "$*"; }
 warn() { printf '  %s⚠%s  %s\n' "$YELLOW" "$RESET" "$*" >&2; }
@@ -44,6 +45,18 @@ die()  { printf '\n%s✗ %s%s\n' "$RED" "$*" "$RESET" >&2; exit 1; }
 
 # Escape XML metacharacters so a value can be safely interpolated into a plist.
 xml_escape() { local s=$1; s=${s//&/&amp;}; s=${s//</&lt;}; s=${s//>/&gt;}; printf '%s' "$s"; }
+
+# On any non-zero exit before we finish, report which step was running — a bare
+# `set -e` abort otherwise dies with only a numeric code.
+CURRENT_STEP="startup"
+INSTALL_DONE=""
+on_exit() {
+  local rc=$?
+  [ "$rc" -eq 0 ] && return
+  [ -n "$INSTALL_DONE" ] && return
+  printf '\n%s✗ Failed during: %s (exit %d)%s\n' "$RED" "$CURRENT_STEP" "$rc" "$RESET" >&2
+}
+trap on_exit EXIT
 
 # --- sudo --------------------------------------------------------------------
 
@@ -57,6 +70,8 @@ establish_sudo() {
   else
     sudo -v || die "sudo authentication failed"
   fi
+  # Keep the machine awake for the whole run; exits when this script does.
+  caffeinate -s -w "$$" &
   while true; do
     sudo -n true
     sleep 60
@@ -254,6 +269,7 @@ main() {
     "$s"
   done
 
+  INSTALL_DONE=1
   step "Done"
   ok "Provisioning complete in ${SECONDS}s"
 }
