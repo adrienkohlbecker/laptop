@@ -213,6 +213,14 @@ settings() {
   sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.InternetSharing.default.plist \
     bootpd -dict DHCPLeaseTimeSecs -int 600
 
+  # Apply the prefs that have a live-reload path: Dock (autohide-delay) and
+  # SystemUIServer (screenshot location). The NSGlobalDomain keyboard prefs have
+  # none and take effect on next login. || true so a not-running process (e.g. in
+  # the headless VM) doesn't fail the run.
+  info "Restart Dock and SystemUIServer to apply prefs"
+  killall Dock 2>/dev/null || true
+  killall SystemUIServer 2>/dev/null || true
+
   ok "Settings applied"
 }
 
