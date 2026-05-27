@@ -21,7 +21,7 @@ set -euo pipefail
 
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 BREWFILE="$SCRIPT_DIR/Brewfile"
-DOTFILES_DIR="$HOME/Desktop/dotfiles"
+DOTFILES_DIR="$HOME/Work/dotfiles"
 DOTFILES_REPO="https://github.com/adrienkohlbecker/dotfiles.git"
 HOMEBREW_PREFIX="/opt/homebrew"
 SUDO_PASS="${LAPTOP_BECOME_PASS:-admin}"
@@ -138,8 +138,9 @@ PLIST
   fi
   eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv)"
 
-  # Dotfiles — a separate repo, cloned to ~/Desktop so `dotfiles` (stow) can
-  # deploy from it without depending on ~/Work being restored from backup first.
+  # Dotfiles — a separate repo cloned to ~/Work/dotfiles, which the `dotfiles`
+  # (stow) step deploys from. On a machine restored from backup the clone already
+  # exists, so this just fast-forwards it.
   if [ -d "$DOTFILES_DIR/.git" ]; then
     info "Updating dotfiles clone"
     git -C "$DOTFILES_DIR" pull --ff-only || warn "dotfiles pull failed; continuing with the existing clone"
@@ -165,11 +166,12 @@ packages() {
 dotfiles() {
   step "Dotfiles (stow)"
   [ -d "$DOTFILES_DIR" ] || die "$DOTFILES_DIR is missing — run the 'bootstrap' section first"
-  command -v stow >/dev/null 2>&1 || eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv)"
-  info "Symlinking every package into \$HOME"
-  # stow wants bare package directory names (config/ vim/ ...), not ./*/.
-  # shellcheck disable=SC2035
-  ( cd "$DOTFILES_DIR" && stow --verbose --target="$HOME" --no-folding --restow */ )
+  command -v mise >/dev/null 2>&1 || eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv)"
+  # Delegate to the dotfiles repo's own restow task so it owns the stow
+  # invocation (and the ~/.gnupg homedir hardening it does afterwards).
+  # `mise trust` is needed because it's a fresh, not-yet-trusted clone.
+  info "Restowing via the dotfiles repo's mise task"
+  ( cd "$DOTFILES_DIR" && mise trust && mise run restow )
   ok "Dotfiles symlinked"
 }
 
