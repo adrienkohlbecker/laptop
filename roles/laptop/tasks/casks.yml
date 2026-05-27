@@ -7,6 +7,7 @@
     - 1password
     - 1password-cli
     - aegisub
+    - alt-tab
     - arq
     - calibre
     - dash
@@ -40,6 +41,7 @@
     - the-unarchiver
     - transmission
     - vagrant
+    - vagrant-vmware-utility
     - visual-studio-code
     - vlc
     - whatsapp

@@ -19,6 +19,9 @@
       - curl
       - direnv
       - docker
+      - docker-buildx
+      - docker-compose
+      - esphome
       - exiftool
       - ffmpeg
       - findutils
@@ -33,6 +36,7 @@
       - grep
       - htop
       - imagemagick
+      - minicom
       - minipro
       - mise
       - moreutils
@@ -63,6 +67,7 @@
       - wget
       - wireguard-tools
       - wireshark
+      - xorriso
       - yt-dlp
   tags:
     - packages
