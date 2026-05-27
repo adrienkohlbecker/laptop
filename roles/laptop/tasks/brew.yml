@@ -13,8 +13,6 @@
       - aws-vault
       - awscli
       - btop
-      - cmake
-      - colima
       - coreutils
       - curl
       - direnv
