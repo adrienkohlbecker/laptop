@@ -14,5 +14,5 @@ run = [
   "packer init laptop.pkr.hcl",
   # Extra args land before the template, as `packer build` requires, e.g.
   # `mise run test-vm -- -var vm_base_name=tahoe-vanilla` or `-- -force`.
-  "packer build -on-error=ask {{arg(name='packer_args', var=true, default='')}} laptop.pkr.hcl",
+  "packer build -on-error=ask {{arg(name='packer_args', var=true, required=false)}} laptop.pkr.hcl",
 ]
