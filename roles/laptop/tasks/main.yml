@@ -1,12 +1,17 @@
 ---
 
-- import_tasks: base.yml
-- import_tasks: brew.yml
+- import_tasks: packages.yml
+  tags:
+    - packages
 
 - import_tasks: stow.yml
-- import_tasks: mise.yml
+  tags:
+    - stow
 
-- import_tasks: casks.yml
-- import_tasks: mas.yml
+- import_tasks: mise.yml
+  tags:
+    - mise
 
 - import_tasks: settings.yml
+  tags:
+    - settings

@@ -31,29 +31,26 @@ ansible-playbook -i hosts.ini site.yml --ask-become-pass --tags mise
 
 ## Architecture
 
-Everything lives in a single role, `laptop`, orchestrated by `roles/laptop/tasks/main.yml`, which imports task files **in this order** (order matters):
+Everything lives in a single role, `laptop`, orchestrated by `roles/laptop/tasks/main.yml`, which imports task files **in this order** (order matters). Each `import_tasks` carries the tag for that slice, so the tag applies to every task in the imported file:
 
-1. `base.yml` — updates Homebrew.
-2. `brew.yml` — taps + CLI tools via the `homebrew` module (includes `mise` and `stow`, the two managers the later steps drive).
-3. `stow.yml` — runs `stow */` from `~/Desktop/dotfiles` (the bootstrap clone `start.sh` creates) to symlink every dotfiles package into `$HOME`. **Must precede `mise.yml`**, because it deploys `~/.config/mise/config.toml` + `config.mac.toml` and the `~/.default-*` package lists that mise reads.
-4. `mise.yml` — `MISE_ENV=mac mise install`: installs everything declared in the stowed mise config. The global `config.toml` holds cross-platform CLI utilities; `config.mac.toml` (gated behind `MISE_ENV=mac`) adds language runtimes (python, ruby, node, go) and mac-only tools. The single `MISE_ENV=mac` invocation resolves both layers.
-5. `casks.yml` — GUI apps via `homebrew_cask`.
-6. `mas.yml` — Mac App Store apps via `mas` (referenced by numeric app ID, with a trailing comment naming each app).
-7. `settings.yml` — SSH config dirs/keychain, macOS preferences via `osx_defaults` / `shell`, and `softwareupdate --schedule on`.
+1. `packages.yml` — runs `brew bundle install --no-upgrade` against the repo-root `Brewfile`, which declares the tap, CLI formulae (incl. `mise` and `stow`, the two managers the later steps drive), GUI casks, and Mac App Store apps. `brew bundle` is idempotent and resolves its own ordering (taps → brews → casks → mas).
+2. `stow.yml` — asserts the bootstrap clone exists, then runs `stow */` from `~/Desktop/dotfiles` (the clone `start.sh` creates) to symlink every dotfiles package into `$HOME`. **Must precede `mise.yml`**, because it deploys `~/.config/mise/config.toml` + `config.mac.toml` and the `~/.default-*` package lists that mise reads.
+3. `mise.yml` — `MISE_ENV=mac mise install`: installs everything declared in the stowed mise config. The global `config.toml` holds cross-platform CLI utilities; `config.mac.toml` (gated behind `MISE_ENV=mac`) adds language runtimes (python, ruby, node, go) and mac-only tools. The single `MISE_ENV=mac` invocation resolves both layers.
+4. `settings.yml` — SSH config dirs/keychain, macOS preferences via `osx_defaults` / `shell`, and `softwareupdate --schedule on`.
 
 ### What is and isn't configured here
 
 - **Tool/runtime versions are NOT in this repo.** To change a CLI tool or language version, edit the mise config in the **dotfiles repo** (`config/.config/mise/config.toml` for cross-platform tools, `config.mac.toml` for runtimes/mac-only), not anything here. `mise.yml` just triggers the install.
-- **GUI apps and CLI packages installed via Homebrew** are the editable lists here: `brew.yml` (CLI), `casks.yml` (GUI), `mas.yml` (App Store). Add/remove by editing the relevant list, not by adding tasks.
+- **GUI apps and CLI packages installed via Homebrew** are the editable list in the repo-root `Brewfile`: `brew` (CLI formulae), `cask` (GUI), `mas` (App Store, by numeric ID). Add/remove by editing the `Brewfile`, not by adding tasks.
 - **There are no `group_vars`** — every former variable became dead when asdf and the cron jobs were removed.
 
 ### Tags
 
-Task slices you can run with `--tags`: `base`, `packages` (brew CLI install), `stow`, `mise`, `casks`, `mas`, `settings`.
+Task slices you can run with `--tags`: `packages` (the `brew bundle` run), `stow`, `mise`, `settings`. Tags are declared on the `import_tasks` lines in `main.yml`, so every task in a file inherits its slice's tag.
 
 ## Conventions & gotchas
 
-- **Bootstrap ordering / chicken-and-egg:** the mise config is delivered by stow, and stow + mise binaries come from Homebrew — hence the strict `brew → stow → mise` order in `main.yml`. Shell tasks that invoke `mise`/`stow` prepend `/opt/homebrew/bin` to `PATH` (the binaries aren't on Ansible's non-interactive PATH otherwise).
+- **Bootstrap ordering / chicken-and-egg:** the mise config is delivered by stow, and stow + mise binaries come from Homebrew (installed by `brew bundle`) — hence the strict `packages → stow → mise` order in `main.yml`. Shell/command tasks that invoke `brew`/`mise`/`stow` prepend `/opt/homebrew/bin` to `PATH` (the binaries aren't on Ansible's non-interactive PATH otherwise).
 - **dotfiles are a plain repo deployed via stow** (bootstrap clone at `~/Desktop/dotfiles`), not a bare git repo and not submodules. vim/zsh plugins that used to be git submodules are now fetched by mise's `http` backend (see the dotfiles `config.toml`).
 - **Scheduled jobs are launchd, not cron.** `settings.yml` no longer defines the compta/backup jobs; they are launchd agents/daemons installed by each job's own repo via its `mise install-launchd` task. Don't re-add them as cron here.
 - `start.sh` clones over **https** (a fresh machine has no SSH key yet); the dotfiles repo's own `origin` is SSH.

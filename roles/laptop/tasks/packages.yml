@@ -1,0 +1,14 @@
+---
+
+# Installs the Homebrew formulae, casks, and Mac App Store apps declared in the
+# repo-root Brewfile. `brew bundle` is idempotent and resolves its own ordering
+# (taps -> brews -> casks -> mas), so it replaces the former base/brew/casks/mas
+# task files. --no-upgrade keeps already-installed packages pinned (install-only,
+# matching the previous homebrew-module behaviour). `mas` itself is listed in the
+# Brewfile, so it is installed before the App Store entries are processed.
+- name: Install Homebrew formulae, casks, and Mac App Store apps from the Brewfile
+  command: brew bundle install --no-upgrade --file={{ playbook_dir }}/Brewfile
+  environment:
+    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+  register: brew_bundle
+  changed_when: "'Installing ' in brew_bundle.stdout"
