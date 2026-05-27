@@ -185,7 +185,7 @@ packages() {
   # HOMEBREW_LAPTOP_VM (HOMEBREW_-prefixed so it survives brew's env scrub) lets
   # the Brewfile skip its App Store apps in the headless VM. --no-upgrade keeps
   # already-installed packages pinned.
-  HOMEBREW_LAPTOP_VM="${LAPTOP_VM:-}" brew bundle install --no-upgrade --jobs=auto --file="$BREWFILE"
+  HOMEBREW_LAPTOP_VM="${LAPTOP_VM:-}" brew bundle install --no-upgrade --file="$BREWFILE"
   ok "Packages installed"
 }
 
