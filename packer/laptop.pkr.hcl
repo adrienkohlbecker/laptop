@@ -1,16 +1,16 @@
-# Builds a throwaway macOS VM with Tart and runs the laptop bootstrap (start.sh)
-# inside it, to test provisioning end to end on a clean machine.
+# Builds a throwaway macOS VM with Tart and runs install.sh inside it, to test
+# provisioning end to end on a clean machine.
 #
 #   mise run test-vm                              # init + build with defaults
 #   mise run test-vm -- -var project_dir=/path/to/laptop
 #   mise run test-vm -- -var vm_base_name=ghcr.io/cirruslabs/macos-tahoe-vanilla:latest
 #
 # The repo is mounted read-only into the VM (Tart exposes it at
-# "/Volumes/My Shared Files/laptop"); start.sh copies it to ~/Desktop/laptop and
-# provisions from there, so the local working copy — including uncommitted
-# changes — is what gets tested, no push required. start.sh runs with LAPTOP_VM=1,
-# which makes it skip the FileVault gate and take the sudo password from the
-# environment instead of prompting.
+# "/Volumes/My Shared Files/laptop") and install.sh provisions straight from the
+# mount, so the local working copy — including uncommitted changes — is what gets
+# tested, no push required. install.sh runs with LAPTOP_VM=1, which makes it
+# non-interactive: sudo/FileVault credentials come from the environment and App
+# Store apps are skipped.
 
 packer {
   required_plugins {
@@ -59,45 +59,9 @@ source "tart-cli" "tart" {
 build {
   sources = ["source.tart-cli.tart"]
 
-  provisioner "shell" {
-    inline = [
-      "set -euxo pipefail",
-      # Install command-line tools
-      "touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress",
-      "softwareupdate --list | sed -n 's/.*Label: \\(Command Line Tools for Xcode.*\\)/\\1/p' | xargs -I {} softwareupdate --install '{}'",
-      "rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress",
-      "clang --version",
-    ]
-  }
-
-  # Enable FileVault. On Apple Silicon the data volume is always encrypted, so
-  # this just wraps the volume key with the user's password — effective
-  # immediately, no conversion and no reboot. Credentials are supplied via
-  # -inputplist (no interactive prompt, no `expect`); admin/admin matches the
-  # base image. The plist is written to a temp file so sudo's -S password and
-  # fdesetup's plist don't fight over stdin, and is removed right after.
-  provisioner "shell" {
-    inline = [<<SHELL
-set -euxo pipefail
-cat > /tmp/fv.plist <<'PLIST'
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>Username</key>
-    <string>admin</string>
-    <key>Password</key>
-    <string>admin</string>
-</dict>
-</plist>
-PLIST
-echo admin | sudo -S fdesetup enable -inputplist /tmp/fv.plist
-rm -f /tmp/fv.plist
-fdesetup status
-SHELL
-    ]
-  }
-
+  # install.sh handles everything (FileVault, Command Line Tools, Homebrew,
+  # packages, dotfiles, runtimes, settings). LAPTOP_VM makes it non-interactive;
+  # NONINTERACTIVE lets the Homebrew installer run unattended on a vanilla image.
   provisioner "shell" {
     environment_vars = [
       "LAPTOP_VM=1",
@@ -105,8 +69,8 @@ SHELL
       "NONINTERACTIVE=1",
     ]
     inline = [
-      "set -euxo pipefail",
-      "bash '/Volumes/My Shared Files/laptop/start.sh'",
+      "set -euo pipefail",
+      "bash '/Volumes/My Shared Files/laptop/install.sh'",
     ]
   }
 }
