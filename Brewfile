@@ -2,12 +2,14 @@
 # Installed (idempotently) by `brew bundle`, driven by roles/laptop/tasks/packages.yml.
 # `brew bundle` handles its own ordering (taps -> brews -> casks -> mas).
 
+tap "cirruslabs/cli"
 tap "gitlab/shared-runners", "https://gitlab.com/gitlab-org/ci-cd/shared-runners/homebrew.git"
 
 brew "ansible"
 brew "aws-vault"
 brew "awscli"
 brew "btop"
+brew "cirruslabs/cli/tart"
 brew "coreutils"
 brew "curl"
 brew "direnv"

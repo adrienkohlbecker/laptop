@@ -76,3 +76,23 @@
     type: bool
     value: false
     state: present
+
+# tart (cirruslabs) recommends shortening the bootpd DHCP lease from the 86400s
+# default to 600s so running many VMs daily doesn't exhaust the lease pool. The
+# value lives in a root-owned system plist as a nested dict, which osx_defaults
+# can't express, so it is written with `defaults` under become.
+- name: Read the bootpd DHCP lease configuration
+  command: defaults read /Library/Preferences/SystemConfiguration/com.apple.InternetSharing.default.plist bootpd
+  register: bootpd_config
+  changed_when: false
+  failed_when: false
+  become: true
+
+- name: Reduce the DHCP lease time for tart VMs
+  command: >-
+    defaults write
+    /Library/Preferences/SystemConfiguration/com.apple.InternetSharing.default.plist
+    bootpd -dict DHCPLeaseTimeSecs -int 600
+  when: "'DHCPLeaseTimeSecs = 600' not in bootpd_config.stdout"
+  changed_when: true
+  become: true

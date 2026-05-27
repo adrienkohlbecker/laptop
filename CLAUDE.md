@@ -33,7 +33,7 @@ ansible-playbook -i hosts.ini site.yml --ask-become-pass --tags mise
 
 Everything lives in a single role, `laptop`, orchestrated by `roles/laptop/tasks/main.yml`, which imports task files **in this order** (order matters). Each `import_tasks` carries the tag for that slice, so the tag applies to every task in the imported file:
 
-1. `packages.yml` — runs `brew bundle install --no-upgrade` against the repo-root `Brewfile`, which declares the tap, CLI formulae (incl. `mise` and `stow`, the two managers the later steps drive), GUI casks, and Mac App Store apps. `brew bundle` is idempotent and resolves its own ordering (taps → brews → casks → mas).
+1. `packages.yml` — runs `brew bundle install --no-upgrade` against the repo-root `Brewfile`, which declares the taps, CLI formulae (incl. `mise` and `stow`, the two managers the later steps drive), GUI casks, and Mac App Store apps. `brew bundle` is idempotent and resolves its own ordering (taps → brews → casks → mas).
 2. `stow.yml` — asserts the bootstrap clone exists, then runs `stow */` from `~/Desktop/dotfiles` (the clone `start.sh` creates) to symlink every dotfiles package into `$HOME`. **Must precede `mise.yml`**, because it deploys `~/.config/mise/config.toml` + `config.mac.toml` and the `~/.default-*` package lists that mise reads.
 3. `mise.yml` — `MISE_ENV=mac mise install`: installs everything declared in the stowed mise config. The global `config.toml` holds cross-platform CLI utilities; `config.mac.toml` (gated behind `MISE_ENV=mac`) adds language runtimes (python, ruby, node, go) and mac-only tools. The single `MISE_ENV=mac` invocation resolves both layers.
 4. `settings.yml` — SSH config dirs/keychain, macOS preferences via `osx_defaults` / `shell`, and `softwareupdate --schedule on`.
