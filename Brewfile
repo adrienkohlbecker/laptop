@@ -85,6 +85,7 @@ cask "gnucash"
 cask "google-chrome"
 cask "hex-fiend"
 cask "istat-menus"
+cask "key-codes"
 cask "kicad"
 cask "losslesscut"
 cask "monero-wallet"
@@ -100,23 +101,29 @@ cask "superkey"
 cask "telegram"
 cask "the-unarchiver"
 cask "transmission"
+cask "utm"
 cask "vagrant"
 cask "vagrant-vmware-utility"
 cask "visual-studio-code"
 cask "vlc"
 cask "whatsapp"
+cask "windows-app"
 cask "zoom"
 
-mas "Amphetamine", id: 937984704
-mas "Discovery", id: 1381004916
-mas "Divvy", id: 413857545
-mas "Final Cut Pro", id: 424389933
-mas "Key Codes", id: 414568915
-mas "Merlin Project", id: 1335639877
-mas "Pixelmator Pro", id: 1289583905
-mas "uBlock Origin Lite", id: 6745342698
-mas "UTM", id: 1538878817
-mas "WiFi Explorer Lite", id: 1408727408
-mas "WiFi Signal", id: 525912054
-mas "Windows App", id: 1295203466
-mas "WireGuard", id: 1451685025
+# App Store apps need an interactive Apple ID sign-in, which can't be automated
+# in the headless test VM, so skip them when HOMEBREW_LAPTOP_VM is set (see
+# packages.yml, which bridges LAPTOP_VM -> HOMEBREW_LAPTOP_VM; Homebrew scrubs
+# non-HOMEBREW_* vars from the Brewfile's environment). The Brewfile is Ruby, so
+# this is a plain conditional; .to_s.empty? treats unset and empty as "not a VM".
+if ENV["HOMEBREW_LAPTOP_VM"].to_s.empty?
+  mas "Amphetamine", id: 937984704
+  mas "Discovery", id: 1381004916
+  mas "Divvy", id: 413857545
+  mas "Final Cut Pro", id: 424389933
+  mas "Merlin Project", id: 1335639877
+  mas "Pixelmator Pro", id: 1289583905
+  mas "uBlock Origin Lite", id: 6745342698
+  mas "WiFi Explorer Lite", id: 1408727408
+  mas "WiFi Signal", id: 525912054
+  mas "WireGuard", id: 1451685025
+end
