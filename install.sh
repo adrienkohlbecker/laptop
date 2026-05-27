@@ -132,6 +132,10 @@ PLIST
     label=$(softwareupdate --list 2>/dev/null \
       | sed -n 's/.*Label: \(Command Line Tools for Xcode.*\)/\1/p' | tail -1)
     [ -n "$label" ] || { rm -f "$trigger"; die "No Command Line Tools package offered by softwareupdate"; }
+    case "$label" in
+      "Command Line Tools for Xcode"*) ;;
+      *) rm -f "$trigger"; die "Unexpected softwareupdate label, refusing to install: $label" ;;
+    esac
     sudo softwareupdate --install "$label" --verbose
     rm -f "$trigger"
     ok "Command Line Tools installed"
@@ -165,7 +169,7 @@ PLIST
   # exists, so this just fast-forwards it.
   if [ -d "$DOTFILES_DIR/.git" ]; then
     info "Updating dotfiles clone"
-    git -C "$DOTFILES_DIR" pull --ff-only || warn "dotfiles pull failed; continuing with the existing clone"
+    git -C "$DOTFILES_DIR" pull --ff-only origin master || warn "dotfiles pull failed; continuing with the existing clone"
   else
     info "Cloning dotfiles into $DOTFILES_DIR"
     git clone -q "$DOTFILES_REPO" "$DOTFILES_DIR" -b master
@@ -188,6 +192,7 @@ packages() {
 dotfiles() {
   step "Dotfiles (stow)"
   [ -d "$DOTFILES_DIR" ] || die "$DOTFILES_DIR is missing — run the 'bootstrap' section first"
+  [ -x "$HOMEBREW_PREFIX/bin/brew" ] || die "Homebrew is missing — run the 'bootstrap' and 'packages' sections first"
   command -v mise >/dev/null 2>&1 || eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv)"
   # Delegate to the dotfiles repo's own restow task so it owns the stow
   # invocation (and the ~/.gnupg homedir hardening it does afterwards).
@@ -199,6 +204,7 @@ dotfiles() {
 
 runtimes() {
   step "Runtimes (mise)"
+  [ -x "$HOMEBREW_PREFIX/bin/brew" ] || die "Homebrew is missing — run the 'bootstrap' and 'packages' sections first"
   command -v mise >/dev/null 2>&1 || eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv)"
   # Run from $HOME so the repo-local mise.toml (the packer test harness) is not
   # loaded; this installs the global tools declared in the stowed mise config.
