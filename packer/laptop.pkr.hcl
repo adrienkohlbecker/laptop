@@ -24,7 +24,7 @@ packer {
 variable "vm_base_name" {
   type        = string
   default     = "ghcr.io/cirruslabs/macos-tahoe-vanilla:latest"
-  description = "Base image to clone. The *-vanilla images ship the Command Line Tools (so start.sh's clang check passes) but no Homebrew, which start.sh installs — a faithful fresh-machine test."
+  description = "Base image to clone. The *-vanilla images ship the Command Line Tools (so install.sh's clang check passes) but no Homebrew, which install.sh installs — a faithful fresh-machine test."
 }
 
 variable "vm_name" {
@@ -52,7 +52,7 @@ source "tart-cli" "tart" {
   ssh_password = "admin"
   ssh_timeout  = "120s"
 
-  # Mount the repo read-only; start.sh copies it out before provisioning.
+  # Mount the repo read-only; install.sh provisions straight from the mount.
   run_extra_args = ["--dir=laptop:${local.project_dir}:ro"]
 }
 

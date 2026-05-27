@@ -1,6 +1,6 @@
 # Repo-local tooling for the Tart/Packer test harness only (see packer/).
 # This is NOT the machine's runtime config — that lives in the dotfiles repo's
-# mise config and is installed by the playbook's mise.yml. Run `mise trust`
+# mise config and is installed by install.sh's `runtimes` step. Run `mise trust`
 # once in this repo, then `mise install`, before `mise run test-vm`.
 
 [tools]
