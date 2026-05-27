@@ -60,13 +60,52 @@ build {
   sources = ["source.tart-cli.tart"]
 
   provisioner "shell" {
+    inline = [
+      "set -euxo pipefail",
+      # Install command-line tools
+      "touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress",
+      "softwareupdate --list | sed -n 's/.*Label: \\(Command Line Tools for Xcode.*\\)/\\1/p' | xargs -I {} softwareupdate --install '{}'",
+      "rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress",
+      "clang --version",
+    ]
+  }
+
+  # Enable FileVault. On Apple Silicon the data volume is always encrypted, so
+  # this just wraps the volume key with the user's password — effective
+  # immediately, no conversion and no reboot. Credentials are supplied via
+  # -inputplist (no interactive prompt, no `expect`); admin/admin matches the
+  # base image. The plist is written to a temp file so sudo's -S password and
+  # fdesetup's plist don't fight over stdin, and is removed right after.
+  provisioner "shell" {
+    inline = [<<SHELL
+set -euxo pipefail
+cat > /tmp/fv.plist <<'PLIST'
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Username</key>
+    <string>admin</string>
+    <key>Password</key>
+    <string>admin</string>
+</dict>
+</plist>
+PLIST
+echo admin | sudo -S fdesetup enable -inputplist /tmp/fv.plist
+rm -f /tmp/fv.plist
+fdesetup status
+SHELL
+    ]
+  }
+
+  provisioner "shell" {
     environment_vars = [
       "LAPTOP_VM=1",
       "LAPTOP_BECOME_PASS=admin",
       "NONINTERACTIVE=1",
     ]
     inline = [
-      "set -euo pipefail",
+      "set -euxo pipefail",
       "bash '/Volumes/My Shared Files/laptop/start.sh'",
     ]
   }
