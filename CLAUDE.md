@@ -29,6 +29,20 @@ ansible-playbook -i hosts.ini site.yml --ask-become-pass --tags mise
 
 `ansible.cfg` sets verbose, YAML-formatted output (`result_format = yaml`, `verbosity = 1`, `bin_ansible_callbacks = True`) and `diff.always = True`, so runs are verbose and show diffs by default.
 
+## Testing in a throwaway VM
+
+`packer/laptop.pkr.hcl` builds a clean macOS VM with [Tart](https://tart.run) and runs `start.sh` inside it (with `LAPTOP_VM=1`) to exercise the whole bootstrap end to end. `tart` and `packer` are pinned in the **repo-local `mise.toml`** (separate from the machine's runtime config in the dotfiles repo; the playbook's `mise.yml` deliberately runs from `$HOME` so it never loads this file).
+
+```bash
+mise trust && mise install            # one-time: trust + install the pinned tart/packer
+mise run test-vm                      # packer init + build with defaults
+mise run test-vm -- -var vm_base_name=ghcr.io/cirruslabs/macos-tahoe-vanilla:latest
+```
+
+How it works: the repo is mounted **read-only** into the VM (Tart exposes it at `/Volumes/My Shared Files/laptop`); `start.sh` copies it to `~/Desktop/laptop` and provisions from there, so your **local working copy — including uncommitted changes — is what gets tested, no push required** (the copy step also avoids the space-containing mount path, which would break ansible's `command` module). `LAPTOP_VM=1` makes `start.sh` skip the FileVault gate and take the sudo password from `LAPTOP_BECOME_PASS` (default `admin`) instead of prompting.
+
+Gotchas: the default `*-vanilla` image ships the Command Line Tools but not Homebrew (which `start.sh` installs, hence `NONINTERACTIVE=1`). App Store (`mas`) apps in the Brewfile **cannot install headlessly** (no signed-in Apple ID), so a full run currently fails at that step — strip `mas` entries or sign in if you need a green build.
+
 ## Architecture
 
 Everything lives in a single role, `laptop`, orchestrated by `roles/laptop/tasks/main.yml`, which imports task files **in this order** (order matters). Each `import_tasks` carries the tag for that slice, so the tag applies to every task in the imported file:

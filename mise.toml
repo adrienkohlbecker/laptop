@@ -1,0 +1,16 @@
+# Repo-local tooling for the Tart/Packer test harness only (see packer/).
+# This is NOT the machine's runtime config — that lives in the dotfiles repo's
+# mise config and is installed by the playbook's mise.yml. Run `mise trust`
+# once in this repo, then `mise install`, before `mise run test-vm`.
+
+[tools]
+tart = "2.32.1"
+packer = "1.15.3"
+
+[tasks.test-vm]
+description = "Build a throwaway Tart macOS VM and run start.sh inside it"
+dir = "{{ config_root }}/packer"
+run = [
+  "packer init laptop.pkr.hcl",
+  "packer build laptop.pkr.hcl",
+]
