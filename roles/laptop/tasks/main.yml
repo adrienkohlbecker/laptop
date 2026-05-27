@@ -2,7 +2,9 @@
 
 - import_tasks: base.yml
 - import_tasks: brew.yml
-- import_tasks: asdf.yml
+
+- import_tasks: stow.yml
+- import_tasks: mise.yml
 
 - import_tasks: casks.yml
 - import_tasks: mas.yml

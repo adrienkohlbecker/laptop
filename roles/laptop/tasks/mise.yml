@@ -1,0 +1,16 @@
+---
+
+# Installs every tool declared in the stowed mise config. The global
+# ~/.config/mise/config.toml holds cross-platform CLI utilities; config.mac.toml
+# (loaded via MISE_ENV=mac) adds the language runtimes (python, ruby, node, go)
+# and mac-only tools. A single `MISE_ENV=mac mise install` resolves both layers.
+# Runs after stow.yml, which provides those config files.
+- name: Install mise-managed tools (CLI utilities + macOS language runtimes)
+  command: mise install
+  environment:
+    MISE_ENV: mac
+    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+  register: mise_install
+  changed_when: "'installing' in (mise_install.stderr | lower) or 'installing' in (mise_install.stdout | lower)"
+  tags:
+    - mise

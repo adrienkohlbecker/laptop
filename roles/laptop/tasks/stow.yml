@@ -1,0 +1,19 @@
+---
+
+# Deploys the dotfiles repo's GNU stow symlinks into $HOME. Must run before
+# mise.yml: it links ~/.config/mise/{config,config.mac}.toml and the
+# ~/.default-* package lists that `mise install` reads. The dotfiles repo is
+# bootstrap-cloned into ~/Desktop/dotfiles by start.sh (so provisioning a fresh
+# machine doesn't depend on ~/Work being restored from backup first). The
+# canonical stow invocation lives in that repo's mise.toml (`mise run stow`);
+# kept in sync here as a plain stow call so a fresh machine needs no
+# mise-config trust step.
+- name: Stow dotfiles into $HOME
+  shell: stow --target="{{ ansible_user_dir }}" --no-folding --restow */
+  args:
+    chdir: "{{ ansible_user_dir }}/Desktop/dotfiles"
+  environment:
+    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+  changed_when: false
+  tags:
+    - stow

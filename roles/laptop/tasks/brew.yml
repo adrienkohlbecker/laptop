@@ -26,6 +26,7 @@
       - htop
       - jq
       - minipro
+      - mise
       - moreutils
       - nnn
       - pinentry-mac
@@ -33,6 +34,7 @@
       - rsync
       - shellcheck
       - socat
+      - stow
       - tig
       - trash
       - tree

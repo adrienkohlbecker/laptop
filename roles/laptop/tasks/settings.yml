@@ -23,35 +23,9 @@
   tags:
     - settings
 
-- name: Set cron env var
-  cron:
-    name: SHELL
-    env: yes
-    job: /bin/zsh
-  tags:
-    - settings
-    - focus
-
-- name: Enable compta cron
-  cron:
-    name: daily compta
-    minute: "05"
-    hour: "11"
-    job: "cd {{ home }}/Work/compta && bin/daily &> daily.log && /opt/homebrew/opt/curl/bin/curl --request POST --location --fail --silent --show-error --connect-timeout 1 --max-time 5 -o /dev/null \"https://healthchecks.lab.fahm.fr/ping/4dcc7a44-e0c8-4a43-87a9-92eb09133e28\""
-  tags:
-    - settings
-
-- name: Enable backup cron
-  cron:
-    name: weekly backup
-    minute: "25"
-    hour: "11"
-    weekday: "1"
-    user: root
-    job: "cd {{ home }} && /usr/bin/python3 .backup.py &> .backup.log && /opt/homebrew/opt/curl/bin/curl --request POST --location --fail --silent --show-error --connect-timeout 1 --max-time 5 -o /dev/null \"https://healthchecks.lab.fahm.fr/ping/0bc911c1-f540-45c1-8e21-e58909519523\""
-  become: true
-  tags:
-    - settings
+# The compta (daily) and backup (weekly) jobs are no longer cron entries — they
+# are launchd agents/daemons managed by their own repos (~/Work/compta and
+# ~/Work/backup, installed via each repo's `mise install-launchd` task).
 
 - name: "Check for updates automatically"
   shell: softwareupdate --schedule on

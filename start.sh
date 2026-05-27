@@ -14,14 +14,14 @@ else
     git clone -q https://github.com/adrienkohlbecker/laptop.git $HOME/Desktop/laptop -b master
 fi
 
-if [ -d $HOME/.dotfiles ]; then
-    git --git-dir=$HOME/.dotfiles --work-tree=$HOME pull --ff-only
-    git --git-dir=$HOME/.dotfiles --work-tree=$HOME checkout master
+# Bootstrap clone of the dotfiles into ~/Desktop (a fresh machine has no SSH key
+# yet, hence https). The playbook's stow.yml deploys the symlinks from here, so
+# provisioning doesn't depend on ~/Work — the canonical working copies of
+# dotfiles, compta, backup, ... — being restored from backup first.
+if [ -d $HOME/Desktop/dotfiles ]; then
+    ( cd $HOME/Desktop/dotfiles && git pull --ff-only )
 else
-    git clone -q --separate-git-dir=$HOME/.dotfiles https://github.com/adrienkohlbecker/dotfiles.git $HOME/temp-dotfiles -b master
-    git --git-dir=$HOME/.dotfiles --work-tree=$HOME reset --hard
-    git --git-dir=$HOME/.dotfiles --work-tree=$HOME submodule update
-    rm -rf $HOME/temp-dotfiles
+    git clone -q https://github.com/adrienkohlbecker/dotfiles.git $HOME/Desktop/dotfiles -b master
 fi
 
 if ! which brew; then
@@ -33,7 +33,7 @@ if ! which ansible; then
 fi
 
 (
-    cd $HOME/Desktop/laptop || exit 1
+    cd $HOME/Desktop/laptop || exit 1
 
     ansible-playbook -i hosts.ini site.yml --ask-become-pass
 )
