@@ -95,11 +95,8 @@ bootstrap() {
   elif [ -n "${LAPTOP_VM:-}" ]; then
     info "Enabling FileVault (non-interactive)"
     # Feed the input plist on stdin so the password never lands on disk, and
-    # XML-escape the credentials so metacharacters can't corrupt or inject into
-    # it. -norecoverykey: this is a throwaway VM, don't mint a key into the logs.
-    # FileVault can't be enabled under virtualization (fdesetup returns -69556),
-    # so a failure here is expected in the VM — warn and keep going.
-    if sudo fdesetup enable -inputplist -norecoverykey <<PLIST
+    # XML-escape the credentials so metacharacters can't corrupt the plist.
+    sudo fdesetup enable -inputplist <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -111,11 +108,7 @@ bootstrap() {
 </dict>
 </plist>
 PLIST
-    then
-      ok "FileVault enabled"
-    else
-      warn "FileVault not enabled (expected under virtualization) — continuing"
-    fi
+    ok "FileVault enabled"
   else
     info "Enabling FileVault — enter your login password when prompted"
     # Capture the recovery key to a file instead of letting it scroll past — it
