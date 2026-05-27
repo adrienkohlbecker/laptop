@@ -8,12 +8,24 @@
 # canonical stow invocation lives in that repo's mise.toml (`mise run stow`);
 # kept in sync here as a plain stow call so a fresh machine needs no
 # mise-config trust step.
+
+- name: Check for the bootstrap dotfiles clone
+  stat:
+    path: "{{ ansible_user_dir }}/Desktop/dotfiles"
+  register: dotfiles_dir
+
+- name: Fail early if dotfiles have not been bootstrapped
+  assert:
+    that: dotfiles_dir.stat.exists and dotfiles_dir.stat.isdir
+    fail_msg: >-
+      {{ ansible_user_dir }}/Desktop/dotfiles is missing. Run ./start.sh first
+      (it bootstrap-clones the dotfiles repo there); stow and mise depend on it.
+
 - name: Stow dotfiles into $HOME
-  shell: stow --target="{{ ansible_user_dir }}" --no-folding --restow */
+  shell: stow --verbose --target="{{ ansible_user_dir }}" --no-folding --restow */
   args:
     chdir: "{{ ansible_user_dir }}/Desktop/dotfiles"
   environment:
     PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
-  changed_when: false
-  tags:
-    - stow
+  register: stow_result
+  changed_when: "'LINK: ' in stow_result.stderr or 'UNLINK: ' in stow_result.stderr"

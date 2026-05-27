@@ -5,12 +5,23 @@
 # (loaded via MISE_ENV=mac) adds the language runtimes (python, ruby, node, go)
 # and mac-only tools. A single `MISE_ENV=mac mise install` resolves both layers.
 # Runs after stow.yml, which provides those config files.
+
+# `mise install --dry-run-code` exits 1 when there are tools to install and 0
+# otherwise, giving a reliable change signal without parsing log output.
+- name: Detect whether any mise-managed tools are missing
+  command: mise install --dry-run-code
+  environment:
+    MISE_ENV: mac
+    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+  register: mise_missing
+  changed_when: false
+  failed_when: false
+  check_mode: false
+
 - name: Install mise-managed tools (CLI utilities + macOS language runtimes)
   command: mise install
   environment:
     MISE_ENV: mac
     PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
-  register: mise_install
-  changed_when: "'installing' in (mise_install.stderr | lower) or 'installing' in (mise_install.stdout | lower)"
-  tags:
-    - mise
+  when: mise_missing.rc != 0
+  changed_when: mise_missing.rc != 0
