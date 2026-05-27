@@ -41,7 +41,7 @@ step() { CURRENT_STEP="$*"; printf '\n%s==>%s %s%s%s\n' "$BLUE" "$RESET" "$BOLD"
 info() { printf '    %s%s%s\n' "$DIM" "$*" "$RESET"; }
 ok()   { printf '  %s✓%s %s\n' "$GREEN" "$RESET" "$*"; }
 warn() { printf '  %s⚠%s  %s\n' "$YELLOW" "$RESET" "$*" >&2; }
-die()  { printf '\n%s✗ %s%s\n' "$RED" "$*" "$RESET" >&2; exit 1; }
+die()  { DIE_CALLED=1; printf '\n%s✗ %s%s\n' "$RED" "$*" "$RESET" >&2; exit 1; }
 
 # Escape XML metacharacters so a value can be safely interpolated into a plist.
 xml_escape() { local s=$1; s=${s//&/&amp;}; s=${s//</&lt;}; s=${s//>/&gt;}; printf '%s' "$s"; }
@@ -50,10 +50,13 @@ xml_escape() { local s=$1; s=${s//&/&amp;}; s=${s//</&lt;}; s=${s//>/&gt;}; prin
 # `set -e` abort otherwise dies with only a numeric code.
 CURRENT_STEP="startup"
 INSTALL_DONE=""
+DIE_CALLED=""
 on_exit() {
   local rc=$?
   [ "$rc" -eq 0 ] && return
   [ -n "$INSTALL_DONE" ] && return
+  # die() already printed a specific message; only report bare set -e aborts.
+  [ -n "$DIE_CALLED" ] && return
   printf '\n%s✗ Failed during: %s (exit %d)%s\n' "$RED" "$CURRENT_STEP" "$rc" "$RESET" >&2
 }
 trap on_exit EXIT
@@ -183,7 +186,7 @@ packages() {
   # HOMEBREW_LAPTOP_VM (HOMEBREW_-prefixed so it survives brew's env scrub) lets
   # the Brewfile skip its App Store apps in the headless VM. --no-upgrade keeps
   # already-installed packages pinned.
-  HOMEBREW_LAPTOP_VM="${LAPTOP_VM:-}" brew bundle install --no-upgrade --file="$BREWFILE"
+  HOMEBREW_LAPTOP_VM="${LAPTOP_VM:-}" brew bundle install --no-upgrade --jobs=auto --file="$BREWFILE"
   ok "Packages installed"
 }
 
@@ -217,6 +220,7 @@ settings() {
   info "SSH config directories and Keychain stanza"
   mkdir -p "$HOME/.ssh/config.d"
   chmod 700 "$HOME/.ssh" "$HOME/.ssh/config.d"
+  # Script-managed drop-in: rewritten on every run, so hand-edits won't persist.
   printf 'Host *\n  UseKeychain yes\n' > "$HOME/.ssh/config.d/keychain"
   chmod 600 "$HOME/.ssh/config.d/keychain"
 
@@ -253,21 +257,41 @@ settings() {
 
 # --- main --------------------------------------------------------------------
 
+# Join array elements with a single space, independent of $IFS.
+join_spaces() { local IFS=' '; echo "$*"; }
+
+usage() {
+  cat <<EOF
+Usage: install.sh [section ...]
+
+Provisions an Apple Silicon macOS laptop. With no arguments, runs every
+section in order: $(join_spaces "${ALL_SECTIONS[@]}")
+Pass one or more section names to run only those.
+
+Environment:
+  LAPTOP_VM           non-interactive VM mode (credentials from the environment)
+  LAPTOP_BECOME_PASS  sudo/FileVault password, required in VM mode
+EOF
+}
+
 main() {
+  case "${1:-}" in
+    -h|--help) usage; exit 0 ;;
+  esac
+
   local sections=("$@")
   [ ${#sections[@]} -gt 0 ] || sections=("${ALL_SECTIONS[@]}")
 
   for s in "${sections[@]}"; do
-    case " ${ALL_SECTIONS[*]} " in
-      *" $s "*) ;;
-      *) die "Unknown section '$s' (valid: ${ALL_SECTIONS[*]})" ;;
-    esac
+    local known=""
+    for a in "${ALL_SECTIONS[@]}"; do [ "$s" = "$a" ] && { known=1; break; }; done
+    [ -n "$known" ] || die "Unknown section '$s' (valid: $(join_spaces "${ALL_SECTIONS[@]}"))"
   done
 
   [ "$(uname -m)" = "arm64" ] || die "This script targets Apple Silicon only."
 
   printf '%s%s━━ laptop install ━━%s\n' "$BOLD" "$BLUE" "$RESET"
-  info "sections: ${sections[*]}"
+  info "sections: $(join_spaces "${sections[@]}")"
   [ -n "${LAPTOP_VM:-}" ] && info "LAPTOP_VM set — non-interactive VM mode"
 
   establish_sudo
