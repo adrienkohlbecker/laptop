@@ -223,18 +223,74 @@ settings() {
   printf 'Host *\n  UseKeychain yes\n' > "$HOME/.ssh/config.d/keychain"
   chmod 600 "$HOME/.ssh/config.d/keychain"
 
+  # Touch ID for sudo. /etc/pam.d/sudo_local is the Apple-sanctioned drop-in
+  # (included from /etc/pam.d/sudo) that survives OS updates, unlike editing
+  # sudo directly. Harmless in the VM: with no biometric, the "sufficient" line
+  # just falls through to the password prompt.
+  info "Enable Touch ID for sudo"
+  if grep -qs 'pam_tid.so' /etc/pam.d/sudo_local; then
+    ok "Touch ID for sudo already enabled"
+  else
+    printf 'auth       sufficient     pam_tid.so\n' | sudo tee /etc/pam.d/sudo_local >/dev/null
+    ok "Touch ID for sudo enabled"
+  fi
+
+  # Application firewall (the System Settings → Network → Firewall toggle):
+  # blocks unsolicited incoming connections per-app. Stealth mode left off.
+  info "Enable the application firewall"
+  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on >/dev/null
+
   info "Enable automatic software-update checks"
   sudo softwareupdate --schedule on
 
   info "Unhide the ~/Library folder"
   chflags nohidden "$HOME/Library"
 
-  info "Preferences: screenshots, key repeat, dock, accented keys"
-  defaults write com.apple.screencapture location "$HOME/Downloads"
+  info "Preferences: appearance, keyboard, Finder, Dock, trackpad, clock"
+
+  # Appearance & keyboard (NSGlobalDomain). ApplePressAndHoldEnabled false swaps
+  # the accent popup for key repeat; these keyboard prefs apply on next login.
+  defaults write NSGlobalDomain AppleInterfaceStyle Dark
+  defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+  defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
+  defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+  defaults write NSGlobalDomain AppleShowScrollBars Always
+  defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+  defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
   defaults write NSGlobalDomain KeyRepeat -int 2
   defaults write NSGlobalDomain InitialKeyRepeat -int 15
-  defaults write com.apple.dock autohide-delay -float 0
-  defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
+  # Screenshots → ~/Downloads
+  defaults write com.apple.screencapture location "$HOME/Downloads"
+
+  # Finder: path/status bars, list view, search current folder, folders first,
+  # new windows open ~/Downloads.
+  defaults write com.apple.finder ShowPathbar -bool true
+  defaults write com.apple.finder ShowStatusBar -bool true
+  defaults write com.apple.finder FXPreferredViewStyle Nlsv
+  defaults write com.apple.finder FXDefaultSearchScope SCcf
+  defaults write com.apple.finder _FXSortFoldersFirst -bool true
+  defaults write com.apple.finder NewWindowTarget PfLo
+  defaults write com.apple.finder NewWindowTargetPath "file://$HOME/Downloads/"
+
+  # Dock: anchored right, small tiles, no recents; bottom-right hot corner (14)
+  # is Quick Note, with no modifier key required.
+  defaults write com.apple.dock orientation right
+  defaults write com.apple.dock tilesize -int 40
+  defaults write com.apple.dock show-recents -bool false
+  defaults write com.apple.dock wvous-br-corner -int 14
+  defaults write com.apple.dock wvous-br-modifier -int 0
+
+  # Trackpad tap-to-click. Both trackpad domains plus the per-host tapBehavior
+  # key are needed for it to stick across the login window and the desktop.
+  defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+  defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+  defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+  # Menu-bar clock: weekday + AM/PM, no date.
+  defaults write com.apple.menuextra.clock ShowDayOfWeek -bool true
+  defaults write com.apple.menuextra.clock ShowAMPM -bool true
+  defaults write com.apple.menuextra.clock ShowDate -int 0
 
   # tart recommends shortening the bootpd DHCP lease from 86400s to 600s so
   # running many VMs daily doesn't exhaust the lease pool.
@@ -242,11 +298,13 @@ settings() {
   sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.InternetSharing.default.plist \
     bootpd -dict DHCPLeaseTimeSecs -int 600
 
-  # Apply the prefs that have a live-reload path: Dock (autohide-delay) and
-  # SystemUIServer (screenshot location). The NSGlobalDomain keyboard prefs have
-  # none and take effect on next login. || true so a not-running process (e.g. in
-  # the headless VM) doesn't fail the run.
-  info "Restart Dock and SystemUIServer to apply prefs"
+  # Apply the prefs that have a live-reload path by restarting their owners:
+  # Finder (view/sidebar), Dock (orientation, hot corner), SystemUIServer
+  # (screenshot location, clock). The NSGlobalDomain keyboard prefs have none and
+  # take effect on next login. || true so a not-running process (e.g. in the
+  # headless VM) doesn't fail the run.
+  info "Restart Finder, Dock and SystemUIServer to apply prefs"
+  killall Finder 2>/dev/null || true
   killall Dock 2>/dev/null || true
   killall SystemUIServer 2>/dev/null || true
 
