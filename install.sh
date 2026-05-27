@@ -222,6 +222,7 @@ settings() {
   killall SystemUIServer 2>/dev/null || true
 
   ok "Settings applied"
+  warn "Log out and back in to apply the keyboard prefs (key repeat, accent popup)."
 }
 
 # --- main --------------------------------------------------------------------
