@@ -12,5 +12,7 @@ description = "Build a throwaway Tart macOS VM and run start.sh inside it"
 dir = "{{ config_root }}/packer"
 run = [
   "packer init laptop.pkr.hcl",
-  "packer build laptop.pkr.hcl",
+  # Extra args land before the template, as `packer build` requires, e.g.
+  # `mise run test-vm -- -var vm_base_name=tahoe-vanilla` or `-- -force`.
+  "packer build -on-error=ask {{arg(name='packer_args', var=true, default='')}} laptop.pkr.hcl",
 ]
