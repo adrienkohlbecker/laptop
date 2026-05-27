@@ -4,41 +4,41 @@
   file:
     path: "~/.ssh"
     state: directory
-    recurse: true
-  tags:
-    - settings
+    mode: "0700"
 
 - name: Create ssh config.d directory
   file:
     path: "~/.ssh/config.d"
     state: directory
-    recurse: true
-  tags:
-    - settings
+    mode: "0700"
 
-- name: Copy using inline content
+- name: Configure SSH to use the macOS Keychain
   copy:
     content: "Host *\n  UseKeychain yes\n"
     dest: "~/.ssh/config.d/keychain"
-  tags:
-    - settings
+    mode: "0600"
 
 # The compta (daily) and backup (weekly) jobs are no longer cron entries — they
 # are launchd agents/daemons managed by their own repos (~/Work/compta and
 # ~/Work/backup, installed via each repo's `mise install-launchd` task).
 
+# softwareupdate has no clean machine-readable signal for whether the schedule
+# was already on (its output wording is version-dependent), and re-running it is
+# a harmless no-op, so this is intentionally reported as unchanged.
 - name: "Check for updates automatically"
   shell: softwareupdate --schedule on
   changed_when: false
   become: true
-  tags:
-    - settings
+
+- name: Check whether ~/Library is hidden
+  command: stat -f "%Sf" {{ ansible_user_dir }}/Library
+  register: library_flags
+  changed_when: false
 
 - name: "Show the ~/Library folder"
-  shell: chflags nohidden ~/Library
-  changed_when: false
-  tags:
-    - settings
+  command: chflags nohidden {{ ansible_user_dir }}/Library
+  when: "'hidden' in library_flags.stdout"
+  changed_when: "'hidden' in library_flags.stdout"
 
 - name: "Save screenshots to ~/Downloads"
   osx_defaults:
@@ -48,14 +48,14 @@
     value: ~/Downloads
     state: present
 
-- name: Set faster key repeat
+- name: Set faster key repeat rate
   osx_defaults:
     key: KeyRepeat
     type: float
     value: 2
     state: present
 
-- name: Set faster key repeat
+- name: Set shorter initial key repeat delay
   osx_defaults:
     key: InitialKeyRepeat
     type: float
