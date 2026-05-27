@@ -1,11 +1,10 @@
 # Homebrew formulae, casks, and Mac App Store apps for this laptop.
-# Installed (idempotently) by `brew bundle`, driven by roles/laptop/tasks/packages.yml.
+# Installed (idempotently) by `brew bundle`, driven by install.sh's `packages` step.
 # `brew bundle` handles its own ordering (taps -> brews -> casks -> mas).
 
 tap "cirruslabs/cli"
 tap "gitlab/shared-runners", "https://gitlab.com/gitlab-org/ci-cd/shared-runners/homebrew.git"
 
-brew "ansible"
 brew "aws-vault"
 brew "awscli"
 brew "btop"
@@ -111,10 +110,10 @@ cask "windows-app"
 cask "zoom"
 
 # App Store apps need an interactive Apple ID sign-in, which can't be automated
-# in the headless test VM, so skip them when HOMEBREW_LAPTOP_VM is set (see
-# packages.yml, which bridges LAPTOP_VM -> HOMEBREW_LAPTOP_VM; Homebrew scrubs
-# non-HOMEBREW_* vars from the Brewfile's environment). The Brewfile is Ruby, so
-# this is a plain conditional; .to_s.empty? treats unset and empty as "not a VM".
+# in the headless test VM, so skip them when HOMEBREW_LAPTOP_VM is set (install.sh
+# bridges LAPTOP_VM -> HOMEBREW_LAPTOP_VM; the HOMEBREW_ prefix survives Homebrew
+# scrubbing non-HOMEBREW_* vars from the Brewfile's environment). The Brewfile is
+# Ruby, so this is a plain conditional; .to_s.empty? treats unset/empty as "not a VM".
 if ENV["HOMEBREW_LAPTOP_VM"].to_s.empty?
   mas "Amphetamine", id: 937984704
   mas "Discovery", id: 1381004916

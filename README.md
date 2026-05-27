@@ -1,6 +1,13 @@
 Laptop
 ======
 
-Download, review, then execute the script:
+Provisions a personal macOS laptop. Clone the repo, review `install.sh`, then run it:
 
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/adrienkohlbecker/laptop/master/start.sh)"
+```sh
+git clone https://github.com/adrienkohlbecker/laptop.git ~/Desktop/laptop
+cd ~/Desktop/laptop
+./install.sh
+```
+
+`./install.sh <section>` runs a single section (`bootstrap`, `packages`,
+`dotfiles`, `runtimes`, `settings`).
