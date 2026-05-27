@@ -2,8 +2,8 @@
 #
 # Provisions a personal macOS laptop: Homebrew packages, dotfiles, mise-managed
 # runtimes, and macOS preferences. This replaces the former Ansible playbook —
-# it targets a single machine set up once, and every step is individually
-# idempotent, so re-running it is safe.
+# it targets a single Apple Silicon machine set up once, and every step is
+# individually idempotent, so re-running it is safe.
 #
 # Usage:
 #   ./install.sh                  # run every section, in order
@@ -141,11 +141,9 @@ PLIST
     ok "Command Line Tools installed"
   fi
 
-  # Rosetta 2 — required to run x86_64 casks/binaries on Apple Silicon. Skipped
-  # on Intel (no Rosetta there); a no-op once oahd (the Rosetta daemon) is up.
-  if [ "$(uname -m)" != "arm64" ]; then
-    ok "Rosetta not needed (not Apple Silicon)"
-  elif /usr/bin/pgrep -q oahd; then
+  # Rosetta 2 — required to run x86_64 casks/binaries on Apple Silicon. A no-op
+  # once oahd (the Rosetta daemon) is up.
+  if /usr/bin/pgrep -q oahd; then
     ok "Rosetta already installed"
   else
     info "Installing Rosetta 2"
@@ -265,6 +263,8 @@ main() {
       *) die "Unknown section '$s' (valid: ${ALL_SECTIONS[*]})" ;;
     esac
   done
+
+  [ "$(uname -m)" = "arm64" ] || die "This script targets Apple Silicon only."
 
   printf '%s%s━━ laptop install ━━%s\n' "$BOLD" "$BLUE" "$RESET"
   info "sections: ${sections[*]}"
