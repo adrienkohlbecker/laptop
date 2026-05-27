@@ -6,15 +6,6 @@
   tags:
     - mas
 
-# Deprecated
-# - name: Get MAS account status
-#   shell: 'mas account'
-#   register: mas_account_result
-#   failed_when: mas_account_result.rc > 0
-#   changed_when: false
-#   tags:
-#     - mas
-
 - name: List installed MAS apps.
   command: mas list
   register: mas_list
@@ -23,22 +14,50 @@
   tags:
     - mas
 
+# App list audited against actually-installed App Store apps (App Store ID via
+# `mdls -name kMDItemAppStoreAdamID`, since `mas list` is unreliable here).
 - name: Ensure configured MAS apps are installed.
   command: mas install "{{ item }}"
   with_items:
-    - '413857545' # Divvy
-    - '525912054' # Wifi Signal
-    - '463362050' # Photosweeper
-    - '688211836' # EasyRes
-    - '937984704' # Amphetamine
-    - '904280696' # Things 3
-    - '975937182' # Fantastical 2
-    - '1289583905' # Pixelmator Pro
-    - '1292198261' # HEIC Converter
+    - '937984704'  # Amphetamine
+    - '1037126344' # Apple Configurator
+    - '611658502'  # Boxy SVG
+    - '424390742'  # Compressor
     - '1381004916' # Discovery / Bonjour Browser
-    - '1408727408' # Wifi Explorer Lite
-    - '1451685025' # Wireguard
-    - '1295203466' # Microsoft Remote Desktop 10
+    - '413857545'  # Divvy
+    - '688211836'  # EasyRes
+    - '424389933'  # Final Cut Pro
+    - '1554411065' # Focus
+    - '682658836'  # GarageBand
+    - '1292198261' # iMazing Converter (formerly HEIC Converter)
+    - '408981434'  # iMovie
+    - '288545208'  # Instapaper
+    - '414568915'  # Key Codes
+    - '634148309'  # Logic Pro
+    - '634159523'  # MainStage
+    - '1335639877' # Merlin Project
+    - '1274495053' # Microsoft To Do
+    - '434290957'  # Motion
+    - '514951692'  # NetSpot
+    - '360593530'  # Notability
+    - '1505432629' # NotePlan
+    - '1453365242' # P-touch Editor
+    - '1433648537' # Passepartout
+    - '463362050'  # PhotoSweeper
+    - '1289583905' # Pixelmator Pro
+    - '1594183810' # Shortery
+    - '1499198946' # Structured
+    - '669289700'  # Sweet Home 3D
+    - '6744716215' # TaskForge
+    - '1347447233' # TimeFinder
+    - '1627217996' # Transfer Express
+    - '6745342698' # uBlock Origin Lite
+    - '1538878817' # UTM
+    - '1479422551' # We Love Lights
+    - '1408727408' # WiFi Explorer Lite
+    - '525912054'  # WiFi Signal
+    - '1295203466' # Windows App (formerly Microsoft Remote Desktop)
+    - '1451685025' # WireGuard
   when: item not in mas_list.stdout
   tags:
     - mas

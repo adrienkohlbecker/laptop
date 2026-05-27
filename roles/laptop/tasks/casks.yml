@@ -1,54 +1,40 @@
 ---
 
-- name: Taps
-  homebrew_tap:
-    tap: "{{ item }}"
-  with_items:
-    - homebrew/cask-drivers
-    - homebrew/cask-versions
-  tags:
-    - casks
-
 - name: Install packages
   homebrew_cask:
     name: "{{ item }}"
   with_items:
-    - homebrew/cask/1password
-    - homebrew/cask/1password-cli
-    - homebrew/cask/arq
-    - homebrew/cask/aws-vault
-    - homebrew/cask/calibre
-    - homebrew/cask/dash
-    - homebrew/cask/db-browser-for-sqlite
-    - homebrew/cask/diffmerge
-    - homebrew/cask-versions/firefox-developer-edition
-    - homebrew/cask-drivers/elgato-wave-link
-    - homebrew/cask/flux
-    - homebrew/cask/gnucash
-    - homebrew/cask/google-chrome
-    - homebrew/cask/google-cloud-sdk
-    - homebrew/cask/hex-fiend
-    - homebrew/cask/istat-menus
-    - homebrew/cask-drivers/logitech-options
-    - homebrew/cask/losslesscut
-    - homebrew/cask/mailplane
-    - homebrew/cask/musicbrainz-picard
-    - homebrew/cask/omnidisksweeper
-    - homebrew/cask/portfolioperformance
-    - homebrew/cask/the-unarchiver
-    - homebrew/cask/slack
-    - homebrew/cask-drivers/sonos
-    - homebrew/cask/screenflow
-    - homebrew/cask/spotify
-    - homebrew/cask/steam
-    - homebrew/cask/superduper
-    - homebrew/cask/telegram
-    - homebrew/cask/transmission
-    - homebrew/cask/visual-studio-code
-    - homebrew/cask/vlc
-    - homebrew/cask/zoom
-    - homebrew/cask/whatsapp
-    - homebrew/cask/shifty
-    - homebrew/cask/lunar
+    - 1password
+    - 1password-cli
+    - arq
+    - calibre
+    - dash
+    - db-browser-for-sqlite
+    - diffmerge
+    - elgato-wave-link
+    - firefox@developer-edition
+    - flux-app
+    - gcloud-cli
+    - gnucash
+    - google-chrome
+    - hex-fiend
+    - istat-menus
+    - losslesscut
+    - musicbrainz-picard
+    - omnidisksweeper
+    - portfolioperformance
+    - screenflow
+    - slack
+    - sonos
+    - spotify
+    - steam
+    - superduper
+    - telegram
+    - the-unarchiver
+    - transmission
+    - visual-studio-code
+    - vlc
+    - whatsapp
+    - zoom
   tags:
     - casks

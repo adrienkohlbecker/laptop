@@ -9,28 +9,41 @@
 - name: Install brew packages
   homebrew:
     name:
-      - awscli
       - ansible
+      - aws-vault
+      - awscli
+      - btop
+      - cmake
       - colima
       - coreutils
+      - curl
+      - direnv
       - docker
       - exiftool
       - ffmpeg
       - findutils
+      - gh
       - git
+      - git-lfs
       - gitlab/shared-runners/sshpass
+      - glab
       - gnu-sed
       - gnu-tar
       - gnupg
       - grep
       - htop
-      - jq
+      - imagemagick
       - minipro
       - mise
       - moreutils
+      - mosh
+      - ncdu
       - nnn
+      - pandoc
+      - parallel
       - pinentry-mac
       - platformio
+      - pv
       - rsync
       - shellcheck
       - socat
@@ -39,9 +52,9 @@
       - trash
       - tree
       - vim
-      - watch
       - wakeonlan
+      - watch
       - wget
-      - youtube-dl
+      - yt-dlp
   tags:
     - packages
